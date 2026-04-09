@@ -1,205 +1,1129 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>קצובות לינה מעודכנות</title>
-  <style>
-    :root {
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --text: #102033;
-      --muted: #5d6b82;
-      --line: #d9e2ef;
-      --head: #17324d;
-      --accent: #2b6cb0;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(180deg, #eef4fb 0%, #f8fbff 100%);
-      color: var(--text);
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-    }
-    .hero {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(20,40,80,0.06);
-      margin-bottom: 18px;
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 30px;
-    }
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1fr 170px;
-      gap: 12px;
-      margin-top: 18px;
-    }
-    input, select {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 16px;
-      background: #fff;
-    }
-    .stats {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .table-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(20,40,80,0.06);
-    }
-    .table-wrap {
-      overflow: auto;
-      max-height: 72vh;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-    }
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: var(--head);
-      color: #fff;
-      font-size: 15px;
-      padding: 14px 12px;
-      text-align: center;
-    }
-    tbody td {
-      padding: 12px 10px;
-      border-bottom: 1px solid var(--line);
-      text-align: center;
-      font-size: 15px;
-    }
-    tbody tr:nth-child(even) {
-      background: #fafcff;
-    }
-    tbody tr:hover {
-      background: #eef6ff;
-    }
-    .footer-note {
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 13px;
-      text-align: center;
-    }
-    @media (max-width: 700px) {
-      h1 { font-size: 24px; }
-      .toolbar { grid-template-columns: 1fr; }
-      thead th, tbody td { font-size: 14px; padding: 10px 8px; }
-      .hero { padding: 18px; border-radius: 16px; }
-      .table-card { border-radius: 16px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קצובות לינה</title>
+<style>
+body {font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;margin:0;padding:20px;color:#1d2a3a;}
+.wrap {max-width:1200px;margin:0 auto;}
+.hero {background:white;border-radius:22px;padding:20px;box-shadow:0 8px 24px rgba(0,0,0,0.08);margin-bottom:18px;}
+h1 {text-align:center;margin:0 0 10px;font-size:32px;}
+.sub {text-align:center;color:#667085;margin:0 0 16px;}
+.search {width:100%;padding:14px 16px;font-size:16px;border-radius:14px;border:1px solid #d0d5dd;}
+.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
+.card {background:white;border-radius:18px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.08);border:1px solid #e6ebf2;}
+.country {font-weight:700;font-size:17px;margin-bottom:6px;line-height:1.35;}
+.city {color:#667085;font-size:14px;margin-bottom:12px;min-height:20px;}
+.price {font-size:24px;font-weight:800;color:#2b6cb0;}
+.empty {display:none;text-align:center;color:#667085;margin-top:18px;}
+@media (max-width:600px) {
+  body {padding:14px;}
+  h1 {font-size:26px;}
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <h1>קצובות לינה מעודכנות</h1>
-      <p class="sub">כל המדינות והערים מתוך הקובץ שהועלה. אפשר לחפש לפי מדינה, עיר או מטבע.</p>
-
-      <div class="toolbar">
-        <input id="searchInput" type="text" placeholder="חפש מדינה, עיר או מטבע..." />
-        <select id="currencyFilter">
-          <option value="">כל המטבעות</option>
-        </select>
-      </div>
-
-      <div class="stats">
-        מוצגים <span id="visibleCount">0</span> מתוך <span id="totalCount">179</span> יעדים
-      </div>
-    </div>
-
-    <div class="table-card">
-      <div class="table-wrap">
-        <table id="ratesTable">
-          <thead>
-            <tr>
-              <th>מדינה</th>
-              <th>עיר</th>
-              <th>מטבע לינה</th>
-              <th>קצובת לינה מעודכנת</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Albania</td><td>כל המדינה</td><td>EUR</td><td>150</td></tr><tr><td>Angola</td><td>כל המדינה</td><td>USD</td><td>325</td></tr><tr><td>Antigua and Barbuda</td><td>כל המדינה</td><td>USD</td><td>445</td></tr><tr><td>Argentina</td><td>כל המדינה</td><td>USD</td><td>205</td></tr><tr><td>Armenia</td><td>כל המדינה</td><td>USD</td><td>135</td></tr><tr><td>Australia</td><td>Sydney</td><td>AUD</td><td>345</td></tr><tr><td>Australia</td><td>יתר המדינה</td><td>AUD</td><td>250</td></tr><tr><td>Austria</td><td>כל המדינה</td><td>EUR</td><td>180</td></tr><tr><td>Azerbaijan</td><td>כל המדינה</td><td>USD</td><td>145</td></tr><tr><td>Bahamas</td><td>כל המדינה</td><td>USD</td><td>415</td></tr><tr><td>Bahrain</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Barbados</td><td>כל המדינה</td><td>USD</td><td>365</td></tr><tr><td>Belarus</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Belgium</td><td>כל המדינה</td><td>EUR</td><td>235</td></tr><tr><td>Belize</td><td>כל המדינה</td><td>USD</td><td>195</td></tr><tr><td>Benin</td><td>כל המדינה</td><td>USD</td><td>170</td></tr><tr><td>Bolivia</td><td>כל המדינה</td><td>USD</td><td>125</td></tr><tr><td>Bosnia</td><td>כל המדינה</td><td>USD</td><td>105</td></tr><tr><td>Botswana</td><td>כל המדינה</td><td>USD</td><td>135</td></tr><tr><td>Brazil</td><td>כל המדינה</td><td>USD</td><td>135</td></tr><tr><td>Brunei</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Bulgaria</td><td>כל המדינה</td><td>EUR</td><td>140</td></tr><tr><td>Burkina Faso</td><td>כל המדינה</td><td>USD</td><td>155</td></tr><tr><td>Burundi</td><td>כל המדינה</td><td>USD</td><td>145</td></tr><tr><td>Cambodia</td><td>כל המדינה</td><td>USD</td><td>120</td></tr><tr><td>Cameroon</td><td>כל המדינה</td><td>USD</td><td>200</td></tr><tr><td>Canada</td><td>כל המדינה</td><td>CAD</td><td>340</td></tr><tr><td>Central African Republic</td><td>כל המדינה</td><td>USD</td><td>125</td></tr><tr><td>Chad</td><td>כל המדינה</td><td>USD</td><td>230</td></tr><tr><td>Chile</td><td>כל המדינה</td><td>USD</td><td>185</td></tr><tr><td>China</td><td>כל המדינה</td><td>CNY</td><td>1065</td></tr><tr><td>Colombia</td><td>כל המדינה</td><td>USD</td><td>185</td></tr><tr><td>Congo</td><td>כל המדינה</td><td>USD</td><td>240</td></tr><tr><td>Cook Islands</td><td>כל המדינה</td><td>NZD</td><td>495</td></tr><tr><td>Costa Rica</td><td>כל המדינה</td><td>USD</td><td>195</td></tr><tr><td>Cote d&#x27;Ivoire</td><td>כל המדינה</td><td>EUR</td><td>185</td></tr><tr><td>Croatia</td><td>כל המדינה</td><td>EUR</td><td>120</td></tr><tr><td>Cuba</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Cyprus</td><td>כל המדינה</td><td>EUR</td><td>165</td></tr><tr><td>Czech Republic</td><td>כל המדינה</td><td>EUR</td><td>140</td></tr><tr><td>Democratic Republic of the Congo</td><td>כל המדינה</td><td>USD</td><td>225</td></tr><tr><td>Denmark</td><td>כל המדינה</td><td>DKK</td><td>1690</td></tr><tr><td>Djibouti</td><td>כל המדינה</td><td>USD</td><td>230</td></tr><tr><td>Dominican Republic</td><td>כל המדינה</td><td>USD</td><td>205</td></tr><tr><td>East Timor</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Ecuador</td><td>כל המדינה</td><td>USD</td><td>220</td></tr><tr><td>Egypt</td><td>כל המדינה</td><td>USD</td><td>190</td></tr><tr><td>El Salvador</td><td>כל המדינה</td><td>USD</td><td>185</td></tr><tr><td>Equatorial Guinea</td><td>כל המדינה</td><td>USD</td><td>195</td></tr><tr><td>Eritrea</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Estonia</td><td>כל המדינה</td><td>EUR</td><td>140</td></tr><tr><td>Ethiopia</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Fiji</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Finland</td><td>כל המדינה</td><td>EUR</td><td>175</td></tr><tr><td>France</td><td>Paris</td><td>EUR</td><td>320</td></tr><tr><td>France</td><td>יתר המדינה</td><td>EUR</td><td>220</td></tr><tr><td>Gabon</td><td>כל המדינה</td><td>USD</td><td>225</td></tr><tr><td>Georgia</td><td>כל המדינה</td><td>USD</td><td>175</td></tr><tr><td>Germany</td><td>כל המדינה</td><td>EUR</td><td>180</td></tr><tr><td>Ghana</td><td>כל המדינה</td><td>USD</td><td>225</td></tr><tr><td>Greece</td><td>כל המדינה</td><td>EUR</td><td>180</td></tr><tr><td>Guatemala</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Guinea</td><td>כל המדינה</td><td>EUR</td><td>160</td></tr><tr><td>Guyana</td><td>כל המדינה</td><td>USD</td><td>170</td></tr><tr><td>Haiti</td><td>כל המדינה</td><td>USD</td><td>185</td></tr><tr><td>Honduras</td><td>כל המדינה</td><td>USD</td><td>185</td></tr><tr><td>Hong Kong</td><td>כל המדינה</td><td>HKD</td><td>1815</td></tr><tr><td>Hungary</td><td>כל המדינה</td><td>EUR</td><td>150</td></tr><tr><td>Iceland</td><td>כל המדינה</td><td>USD</td><td>280</td></tr><tr><td>India</td><td>כל המדינה</td><td>USD</td><td>190</td></tr><tr><td>Indonesia</td><td>כל המדינה</td><td>USD</td><td>125</td></tr><tr><td>Irish Republic</td><td>כל המדינה</td><td>EUR</td><td>230</td></tr><tr><td>Italy</td><td>כל המדינה</td><td>EUR</td><td>295</td></tr><tr><td>Jamaica</td><td>כל המדינה</td><td>USD</td><td>280</td></tr><tr><td>Japan</td><td>Tokyo</td><td>JPY</td><td>37120</td></tr><tr><td>Japan</td><td>יתר המדינה</td><td>JPY</td><td>21025</td></tr><tr><td>Jordan</td><td>כל המדינה</td><td>JOD</td><td>90</td></tr><tr><td>Kazakhstan</td><td>כל המדינה</td><td>USD</td><td>130</td></tr><tr><td>Kenya</td><td>כל המדינה</td><td>USD</td><td>210</td></tr><tr><td>Korea Republic</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Kosovo</td><td>כל המדינה</td><td>EUR</td><td>95</td></tr><tr><td>Kyrgyzstan</td><td>כל המדינה</td><td>USD</td><td>130</td></tr><tr><td>Laos</td><td>כל המדינה</td><td>USD</td><td>120</td></tr><tr><td>Latvia</td><td>כל המדינה</td><td>EUR</td><td>95</td></tr><tr><td>Lesotho</td><td>כל המדינה</td><td>USD</td><td>110</td></tr><tr><td>Liberia</td><td>כל המדינה</td><td>USD</td><td>225</td></tr><tr><td>Lithuania</td><td>כל המדינה</td><td>EUR</td><td>105</td></tr><tr><td>Luxembourg</td><td>כל המדינה</td><td>EUR</td><td>235</td></tr><tr><td>Macau</td><td>כל המדינה</td><td>USD</td><td>190</td></tr><tr><td>Macedonia</td><td>כל המדינה</td><td>EUR</td><td>95</td></tr><tr><td>Madagascar</td><td>כל המדינה</td><td>EUR</td><td>120</td></tr><tr><td>Malawi</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Malaysia</td><td>כל המדינה</td><td>USD</td><td>110</td></tr><tr><td>Maldives</td><td>כל המדינה</td><td>USD</td><td>300</td></tr><tr><td>Mali</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Malta</td><td>כל המדינה</td><td>EUR</td><td>140</td></tr><tr><td>Mauritania</td><td>כל המדינה</td><td>EUR</td><td>135</td></tr><tr><td>Mauritius</td><td>כל המדינה</td><td>USD</td><td>315</td></tr><tr><td>Mexico</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Moldova</td><td>כל המדינה</td><td>EUR</td><td>150</td></tr><tr><td>Monaco</td><td>כל המדינה</td><td>EUR</td><td>325</td></tr><tr><td>Mongolia</td><td>כל המדינה</td><td>USD</td><td>135</td></tr><tr><td>Montenegro</td><td>כל המדינה</td><td>EUR</td><td>90</td></tr><tr><td>Morocco</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Mozambique</td><td>כל המדינה</td><td>USD</td><td>170</td></tr><tr><td>Myanmar</td><td>כל המדינה</td><td>USD</td><td>100</td></tr><tr><td>Namibia</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Nepal</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Netherlands</td><td>Amsterdam</td><td>EUR</td><td>260</td></tr><tr><td>Netherlands</td><td>יתר המדינה</td><td>EUR</td><td>155</td></tr><tr><td>New Zealand</td><td>Niue</td><td>USD</td><td>445</td></tr><tr><td>New Zealand</td><td>יתר המדינה</td><td>NZD</td><td>280</td></tr><tr><td>Nicaragua</td><td>כל המדינה</td><td>USD</td><td>155</td></tr><tr><td>Niger</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Nigeria</td><td>כל המדינה</td><td>USD</td><td>205</td></tr><tr><td>Norway</td><td>כל המדינה</td><td>NOK</td><td>1815</td></tr><tr><td>Oman</td><td>כל המדינה</td><td>USD</td><td>245</td></tr><tr><td>Panama</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Papua New Guinea</td><td>כל המדינה</td><td>USD</td><td>175</td></tr><tr><td>Paraguay</td><td>כל המדינה</td><td>USD</td><td>120</td></tr><tr><td>Peru</td><td>כל המדינה</td><td>USD</td><td>170</td></tr><tr><td>Philippines</td><td>כל המדינה</td><td>USD</td><td>155</td></tr><tr><td>Poland</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Portugal</td><td>כל המדינה</td><td>EUR</td><td>165</td></tr><tr><td>Puerto Rico</td><td>כל המדינה</td><td>USD</td><td>355</td></tr><tr><td>Qatar</td><td>כל המדינה</td><td>USD</td><td>155</td></tr><tr><td>Romania</td><td>כל המדינה</td><td>EUR</td><td>130</td></tr><tr><td>Russia</td><td>Moscow</td><td>RUB</td><td>17,500</td></tr><tr><td>Russia</td><td>יתר המדינה</td><td>RUB</td><td>15,300</td></tr><tr><td>Rwanda</td><td>כל המדינה</td><td>USD</td><td>155</td></tr><tr><td>Samoa</td><td>כל המדינה</td><td>USD</td><td>250</td></tr><tr><td>Saudi Arabia</td><td>כל המדינה</td><td>SAR</td><td>735</td></tr><tr><td>Senegal</td><td>כל המדינה</td><td>USD</td><td>210</td></tr><tr><td>Serbia</td><td>כל המדינה</td><td>EUR</td><td>125</td></tr><tr><td>Seychelles</td><td>כל המדינה</td><td>EUR</td><td>250</td></tr><tr><td>Sierra Leone</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Singapore</td><td>כל המדינה</td><td>SGD</td><td>410</td></tr><tr><td>Slovakia</td><td>כל המדינה</td><td>EUR</td><td>130</td></tr><tr><td>Slovenia</td><td>כל המדינה</td><td>EUR</td><td>135</td></tr><tr><td>South Africa</td><td>כל המדינה</td><td>USD</td><td>120</td></tr><tr><td>Spain</td><td>כל המדינה</td><td>EUR</td><td>270</td></tr><tr><td>Sri Lanka</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Sudan</td><td>כל המדינה</td><td>USD</td><td>215</td></tr><tr><td>Surinam</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Sweden</td><td>כל המדינה</td><td>SEK</td><td>1935</td></tr><tr><td>Switzerland</td><td>Geneva</td><td>CHF</td><td>300</td></tr><tr><td>Switzerland</td><td>Zurich</td><td>CHF</td><td>320</td></tr><tr><td>Switzerland</td><td>יתר המדינה</td><td>CHF</td><td>220</td></tr><tr><td>Taiwan</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Tajikistan</td><td>כל המדינה</td><td>USD</td><td>140</td></tr><tr><td>Tanzania</td><td>כל המדינה</td><td>USD</td><td>165</td></tr><tr><td>Thailand</td><td>כל המדינה</td><td>USD</td><td>130</td></tr><tr><td>Togo</td><td>כל המדינה</td><td>EUR</td><td>125</td></tr><tr><td>Tonga</td><td>כל המדינה</td><td>USD</td><td>160</td></tr><tr><td>Trinidad and Tobago</td><td>כל המדינה</td><td>USD</td><td>230</td></tr><tr><td>Tunisia</td><td>כל המדינה</td><td>EUR</td><td>115</td></tr><tr><td>Turkey</td><td>כל המדינה</td><td>EUR</td><td>150</td></tr><tr><td>Turkmenistan</td><td>כל המדינה</td><td>USD</td><td>180</td></tr><tr><td>Uganda</td><td>כל המדינה</td><td>USD</td><td>215</td></tr><tr><td>Ukraine</td><td>כל המדינה</td><td>USD</td><td>130</td></tr><tr><td>United Arab Emirates</td><td>כל המדינה</td><td>USD</td><td>235</td></tr><tr><td>United Kingdom</td><td>Central London</td><td>GBP</td><td>270</td></tr><tr><td>United Kingdom</td><td>יתר המדינה</td><td>GBP</td><td>145</td></tr><tr><td>United States of America</td><td>Atlanta GA</td><td>USD</td><td>255</td></tr><tr><td>United States of America</td><td>Boston MA</td><td>USD</td><td>300</td></tr><tr><td>United States of America</td><td>Chicago IL</td><td>USD</td><td>270</td></tr><tr><td>United States of America</td><td>Houston TX</td><td>USD</td><td>275</td></tr><tr><td>United States of America</td><td>Los Angeles CA</td><td>USD</td><td>290</td></tr><tr><td>United States of America</td><td>Miami FL</td><td>USD</td><td>255</td></tr><tr><td>United States of America</td><td>New York NY</td><td>USD</td><td>520</td></tr><tr><td>United States of America</td><td>San Francisco CA</td><td>USD</td><td>295</td></tr><tr><td>United States of America</td><td>Washington DC</td><td>USD</td><td>415</td></tr><tr><td>United States of America</td><td>יתר המדינה</td><td>USD</td><td>255</td></tr><tr><td>Uruguay</td><td>Montevideo</td><td>USD</td><td>180</td></tr><tr><td>Uzbekistan</td><td>Tashkent</td><td>USD</td><td>150</td></tr><tr><td>Venezuela</td><td>Caracas</td><td>USD</td><td>160</td></tr><tr><td>Vietnam</td><td>Hanoi</td><td>USD</td><td>150</td></tr><tr><td>Zambia</td><td>Lusaka</td><td>USD</td><td>205</td></tr><tr><td>Zimbabwe</td><td>Harare</td><td>USD</td><td>180</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="footer-note">
-      נבנה מתוך קובץ המקור המעודכן.
-    </div>
+<div class="wrap">
+  <div class="hero">
+    <h1>🌍 קצובות לינה</h1>
+    <p class="sub">גרסת כרטיסים עם דגלים אמיתיים ותיבת חיפוש</p>
+    <input type="text" id="search" class="search" placeholder="חפש יעד, עיר, מטבע או סכום..." onkeyup="filterCards()">
   </div>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const currencyFilter = document.getElementById('currencyFilter');
-    const table = document.getElementById('ratesTable');
-    const rows = Array.from(table.querySelectorAll('tbody tr'));
-    const visibleCount = document.getElementById('visibleCount');
+  <div class="grid" id="grid">
+    
+    <div class="card" data-search="albania כל המדינה eur 150">
+        <div class="country">🇦🇱 Albania</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 150</div>
+    </div>
+    
+    <div class="card" data-search="angola כל המדינה usd 325">
+        <div class="country">🇦🇴 Angola</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 325</div>
+    </div>
+    
+    <div class="card" data-search="antigua and barbuda כל המדינה usd 445">
+        <div class="country">🇦🇬 Antigua and Barbuda</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 445</div>
+    </div>
+    
+    <div class="card" data-search="argentina כל המדינה usd 205">
+        <div class="country">🇦🇷 Argentina</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 205</div>
+    </div>
+    
+    <div class="card" data-search="armenia כל המדינה usd 135">
+        <div class="country">🇦🇲 Armenia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 135</div>
+    </div>
+    
+    <div class="card" data-search="australia sydney aud 345">
+        <div class="country">🇦🇺 Australia</div>
+        <div class="city">Sydney</div>
+        <div class="price">AUD 345</div>
+    </div>
+    
+    <div class="card" data-search="australia יתר המדינה aud 250">
+        <div class="country">🇦🇺 Australia</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">AUD 250</div>
+    </div>
+    
+    <div class="card" data-search="austria כל המדינה eur 180">
+        <div class="country">🇦🇹 Austria</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 180</div>
+    </div>
+    
+    <div class="card" data-search="azerbaijan כל המדינה usd 145">
+        <div class="country">🇦🇿 Azerbaijan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 145</div>
+    </div>
+    
+    <div class="card" data-search="bahamas כל המדינה usd 415">
+        <div class="country">🇧🇸 Bahamas</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 415</div>
+    </div>
+    
+    <div class="card" data-search="bahrain כל המדינה usd 165">
+        <div class="country">🇧🇭 Bahrain</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="barbados כל המדינה usd 365">
+        <div class="country">🇧🇧 Barbados</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 365</div>
+    </div>
+    
+    <div class="card" data-search="belarus כל המדינה usd 140">
+        <div class="country">🇧🇾 Belarus</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="belgium כל המדינה eur 235">
+        <div class="country">🇧🇪 Belgium</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 235</div>
+    </div>
+    
+    <div class="card" data-search="belize כל המדינה usd 195">
+        <div class="country">🇧🇿 Belize</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 195</div>
+    </div>
+    
+    <div class="card" data-search="benin כל המדינה usd 170">
+        <div class="country">🇧🇯 Benin</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 170</div>
+    </div>
+    
+    <div class="card" data-search="bolivia כל המדינה usd 125">
+        <div class="country">🇧🇴 Bolivia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 125</div>
+    </div>
+    
+    <div class="card" data-search="bosnia כל המדינה usd 105">
+        <div class="country">🇧🇦 Bosnia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 105</div>
+    </div>
+    
+    <div class="card" data-search="botswana כל המדינה usd 135">
+        <div class="country">🇧🇼 Botswana</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 135</div>
+    </div>
+    
+    <div class="card" data-search="brazil כל המדינה usd 135">
+        <div class="country">🇧🇷 Brazil</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 135</div>
+    </div>
+    
+    <div class="card" data-search="brunei כל המדינה usd 140">
+        <div class="country">🇧🇳 Brunei</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="bulgaria כל המדינה eur 140">
+        <div class="country">🇧🇬 Bulgaria</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 140</div>
+    </div>
+    
+    <div class="card" data-search="burkina faso כל המדינה usd 155">
+        <div class="country">🇧🇫 Burkina Faso</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 155</div>
+    </div>
+    
+    <div class="card" data-search="burundi כל המדינה usd 145">
+        <div class="country">🇧🇮 Burundi</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 145</div>
+    </div>
+    
+    <div class="card" data-search="cambodia כל המדינה usd 120">
+        <div class="country">🇰🇭 Cambodia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 120</div>
+    </div>
+    
+    <div class="card" data-search="cameroon כל המדינה usd 200">
+        <div class="country">🇨🇲 Cameroon</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 200</div>
+    </div>
+    
+    <div class="card" data-search="canada כל המדינה cad 340">
+        <div class="country">🇨🇦 Canada</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">CAD 340</div>
+    </div>
+    
+    <div class="card" data-search="central african republic כל המדינה usd 125">
+        <div class="country">🇨🇫 Central African Republic</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 125</div>
+    </div>
+    
+    <div class="card" data-search="chad כל המדינה usd 230">
+        <div class="country">🇹🇩 Chad</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 230</div>
+    </div>
+    
+    <div class="card" data-search="chile כל המדינה usd 185">
+        <div class="country">🇨🇱 Chile</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 185</div>
+    </div>
+    
+    <div class="card" data-search="china כל המדינה cny 1065">
+        <div class="country">🇨🇳 China</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">CNY 1065</div>
+    </div>
+    
+    <div class="card" data-search="colombia כל המדינה usd 185">
+        <div class="country">🇨🇴 Colombia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 185</div>
+    </div>
+    
+    <div class="card" data-search="congo כל המדינה usd 240">
+        <div class="country">🇨🇬 Congo</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 240</div>
+    </div>
+    
+    <div class="card" data-search="cook islands כל המדינה nzd 495">
+        <div class="country">🇨🇰 Cook Islands</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">NZD 495</div>
+    </div>
+    
+    <div class="card" data-search="costa rica כל המדינה usd 195">
+        <div class="country">🇨🇷 Costa Rica</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 195</div>
+    </div>
+    
+    <div class="card" data-search="cote d&#x27;ivoire כל המדינה eur 185">
+        <div class="country">🇨🇮 Cote d&#x27;Ivoire</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 185</div>
+    </div>
+    
+    <div class="card" data-search="croatia כל המדינה eur 120">
+        <div class="country">🇭🇷 Croatia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 120</div>
+    </div>
+    
+    <div class="card" data-search="cuba כל המדינה usd 160">
+        <div class="country">🇨🇺 Cuba</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="cyprus כל המדינה eur 165">
+        <div class="country">🇨🇾 Cyprus</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 165</div>
+    </div>
+    
+    <div class="card" data-search="czech republic כל המדינה eur 140">
+        <div class="country">🇨🇿 Czech Republic</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 140</div>
+    </div>
+    
+    <div class="card" data-search="democratic republic of the congo כל המדינה usd 225">
+        <div class="country">🇨🇩 Democratic Republic of the Congo</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 225</div>
+    </div>
+    
+    <div class="card" data-search="denmark כל המדינה dkk 1690">
+        <div class="country">🇩🇰 Denmark</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">DKK 1690</div>
+    </div>
+    
+    <div class="card" data-search="djibouti כל המדינה usd 230">
+        <div class="country">🇩🇯 Djibouti</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 230</div>
+    </div>
+    
+    <div class="card" data-search="dominican republic כל המדינה usd 205">
+        <div class="country">🇩🇴 Dominican Republic</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 205</div>
+    </div>
+    
+    <div class="card" data-search="east timor כל המדינה usd 140">
+        <div class="country">🇹🇱 East Timor</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="ecuador כל המדינה usd 220">
+        <div class="country">🇪🇨 Ecuador</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 220</div>
+    </div>
+    
+    <div class="card" data-search="egypt כל המדינה usd 190">
+        <div class="country">🇪🇬 Egypt</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 190</div>
+    </div>
+    
+    <div class="card" data-search="el salvador כל המדינה usd 185">
+        <div class="country">🇸🇻 El Salvador</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 185</div>
+    </div>
+    
+    <div class="card" data-search="equatorial guinea כל המדינה usd 195">
+        <div class="country">🇬🇶 Equatorial Guinea</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 195</div>
+    </div>
+    
+    <div class="card" data-search="eritrea כל המדינה usd 165">
+        <div class="country">🇪🇷 Eritrea</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="estonia כל המדינה eur 140">
+        <div class="country">🇪🇪 Estonia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 140</div>
+    </div>
+    
+    <div class="card" data-search="ethiopia כל המדינה usd 140">
+        <div class="country">🇪🇹 Ethiopia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="fiji כל המדינה usd 160">
+        <div class="country">🇫🇯 Fiji</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="finland כל המדינה eur 175">
+        <div class="country">🇫🇮 Finland</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 175</div>
+    </div>
+    
+    <div class="card" data-search="france paris eur 320">
+        <div class="country">🇫🇷 France</div>
+        <div class="city">Paris</div>
+        <div class="price">EUR 320</div>
+    </div>
+    
+    <div class="card" data-search="france יתר המדינה eur 220">
+        <div class="country">🇫🇷 France</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">EUR 220</div>
+    </div>
+    
+    <div class="card" data-search="gabon כל המדינה usd 225">
+        <div class="country">🇬🇦 Gabon</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 225</div>
+    </div>
+    
+    <div class="card" data-search="georgia כל המדינה usd 175">
+        <div class="country">🇬🇪 Georgia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 175</div>
+    </div>
+    
+    <div class="card" data-search="germany כל המדינה eur 180">
+        <div class="country">🇩🇪 Germany</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 180</div>
+    </div>
+    
+    <div class="card" data-search="ghana כל המדינה usd 225">
+        <div class="country">🇬🇭 Ghana</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 225</div>
+    </div>
+    
+    <div class="card" data-search="greece כל המדינה eur 180">
+        <div class="country">🇬🇷 Greece</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 180</div>
+    </div>
+    
+    <div class="card" data-search="guatemala כל המדינה usd 160">
+        <div class="country">🇬🇹 Guatemala</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="guinea כל המדינה eur 160">
+        <div class="country">🇬🇳 Guinea</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 160</div>
+    </div>
+    
+    <div class="card" data-search="guyana כל המדינה usd 170">
+        <div class="country">🇬🇾 Guyana</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 170</div>
+    </div>
+    
+    <div class="card" data-search="haiti כל המדינה usd 185">
+        <div class="country">🇭🇹 Haiti</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 185</div>
+    </div>
+    
+    <div class="card" data-search="honduras כל המדינה usd 185">
+        <div class="country">🇭🇳 Honduras</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 185</div>
+    </div>
+    
+    <div class="card" data-search="hong kong כל המדינה hkd 1815">
+        <div class="country">🇭🇰 Hong Kong</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">HKD 1815</div>
+    </div>
+    
+    <div class="card" data-search="hungary כל המדינה eur 150">
+        <div class="country">🇭🇺 Hungary</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 150</div>
+    </div>
+    
+    <div class="card" data-search="iceland כל המדינה usd 280">
+        <div class="country">🇮🇸 Iceland</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 280</div>
+    </div>
+    
+    <div class="card" data-search="india כל המדינה usd 190">
+        <div class="country">🇮🇳 India</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 190</div>
+    </div>
+    
+    <div class="card" data-search="indonesia כל המדינה usd 125">
+        <div class="country">🇮🇩 Indonesia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 125</div>
+    </div>
+    
+    <div class="card" data-search="irish republic כל המדינה eur 230">
+        <div class="country">🇮🇪 Irish Republic</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 230</div>
+    </div>
+    
+    <div class="card" data-search="italy כל המדינה eur 295">
+        <div class="country">🇮🇹 Italy</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 295</div>
+    </div>
+    
+    <div class="card" data-search="jamaica כל המדינה usd 280">
+        <div class="country">🇯🇲 Jamaica</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 280</div>
+    </div>
+    
+    <div class="card" data-search="japan tokyo jpy 37120">
+        <div class="country">🇯🇵 Japan</div>
+        <div class="city">Tokyo</div>
+        <div class="price">JPY 37120</div>
+    </div>
+    
+    <div class="card" data-search="japan יתר המדינה jpy 21025">
+        <div class="country">🇯🇵 Japan</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">JPY 21025</div>
+    </div>
+    
+    <div class="card" data-search="jordan כל המדינה jod 90">
+        <div class="country">🇯🇴 Jordan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">JOD 90</div>
+    </div>
+    
+    <div class="card" data-search="kazakhstan כל המדינה usd 130">
+        <div class="country">🇰🇿 Kazakhstan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 130</div>
+    </div>
+    
+    <div class="card" data-search="kenya כל המדינה usd 210">
+        <div class="country">🇰🇪 Kenya</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 210</div>
+    </div>
+    
+    <div class="card" data-search="korea republic כל המדינה usd 180">
+        <div class="country">🇰🇷 Korea Republic</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="kosovo כל המדינה eur 95">
+        <div class="country">🇽🇰 Kosovo</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 95</div>
+    </div>
+    
+    <div class="card" data-search="kyrgyzstan כל המדינה usd 130">
+        <div class="country">🇰🇬 Kyrgyzstan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 130</div>
+    </div>
+    
+    <div class="card" data-search="laos כל המדינה usd 120">
+        <div class="country">🇱🇦 Laos</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 120</div>
+    </div>
+    
+    <div class="card" data-search="latvia כל המדינה eur 95">
+        <div class="country">🇱🇻 Latvia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 95</div>
+    </div>
+    
+    <div class="card" data-search="lesotho כל המדינה usd 110">
+        <div class="country">🇱🇸 Lesotho</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 110</div>
+    </div>
+    
+    <div class="card" data-search="liberia כל המדינה usd 225">
+        <div class="country">🇱🇷 Liberia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 225</div>
+    </div>
+    
+    <div class="card" data-search="lithuania כל המדינה eur 105">
+        <div class="country">🇱🇹 Lithuania</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 105</div>
+    </div>
+    
+    <div class="card" data-search="luxembourg כל המדינה eur 235">
+        <div class="country">🇱🇺 Luxembourg</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 235</div>
+    </div>
+    
+    <div class="card" data-search="macau כל המדינה usd 190">
+        <div class="country">🇲🇴 Macau</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 190</div>
+    </div>
+    
+    <div class="card" data-search="macedonia כל המדינה eur 95">
+        <div class="country">🇲🇰 Macedonia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 95</div>
+    </div>
+    
+    <div class="card" data-search="madagascar כל המדינה eur 120">
+        <div class="country">🇲🇬 Madagascar</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 120</div>
+    </div>
+    
+    <div class="card" data-search="malawi כל המדינה usd 165">
+        <div class="country">🇲🇼 Malawi</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="malaysia כל המדינה usd 110">
+        <div class="country">🇲🇾 Malaysia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 110</div>
+    </div>
+    
+    <div class="card" data-search="maldives כל המדינה usd 300">
+        <div class="country">🇲🇻 Maldives</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 300</div>
+    </div>
+    
+    <div class="card" data-search="mali כל המדינה usd 165">
+        <div class="country">🇲🇱 Mali</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="malta כל המדינה eur 140">
+        <div class="country">🇲🇹 Malta</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 140</div>
+    </div>
+    
+    <div class="card" data-search="mauritania כל המדינה eur 135">
+        <div class="country">🇲🇷 Mauritania</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 135</div>
+    </div>
+    
+    <div class="card" data-search="mauritius כל המדינה usd 315">
+        <div class="country">🇲🇺 Mauritius</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 315</div>
+    </div>
+    
+    <div class="card" data-search="mexico כל המדינה usd 165">
+        <div class="country">🇲🇽 Mexico</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="moldova כל המדינה eur 150">
+        <div class="country">🇲🇩 Moldova</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 150</div>
+    </div>
+    
+    <div class="card" data-search="monaco כל המדינה eur 325">
+        <div class="country">🇲🇨 Monaco</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 325</div>
+    </div>
+    
+    <div class="card" data-search="mongolia כל המדינה usd 135">
+        <div class="country">🇲🇳 Mongolia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 135</div>
+    </div>
+    
+    <div class="card" data-search="montenegro כל המדינה eur 90">
+        <div class="country">🇲🇪 Montenegro</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 90</div>
+    </div>
+    
+    <div class="card" data-search="morocco כל המדינה usd 180">
+        <div class="country">🇲🇦 Morocco</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="mozambique כל המדינה usd 170">
+        <div class="country">🇲🇿 Mozambique</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 170</div>
+    </div>
+    
+    <div class="card" data-search="myanmar כל המדינה usd 100">
+        <div class="country">🇲🇲 Myanmar</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 100</div>
+    </div>
+    
+    <div class="card" data-search="namibia כל המדינה usd 140">
+        <div class="country">🇳🇦 Namibia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="nepal כל המדינה usd 180">
+        <div class="country">🇳🇵 Nepal</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="netherlands amsterdam eur 260">
+        <div class="country">🇳🇱 Netherlands</div>
+        <div class="city">Amsterdam</div>
+        <div class="price">EUR 260</div>
+    </div>
+    
+    <div class="card" data-search="netherlands יתר המדינה eur 155">
+        <div class="country">🇳🇱 Netherlands</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">EUR 155</div>
+    </div>
+    
+    <div class="card" data-search="new zealand niue usd 445">
+        <div class="country">🇳🇿 New Zealand</div>
+        <div class="city">Niue</div>
+        <div class="price">USD 445</div>
+    </div>
+    
+    <div class="card" data-search="new zealand יתר המדינה nzd 280">
+        <div class="country">🇳🇿 New Zealand</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">NZD 280</div>
+    </div>
+    
+    <div class="card" data-search="nicaragua כל המדינה usd 155">
+        <div class="country">🇳🇮 Nicaragua</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 155</div>
+    </div>
+    
+    <div class="card" data-search="niger כל המדינה usd 160">
+        <div class="country">🇳🇪 Niger</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="nigeria כל המדינה usd 205">
+        <div class="country">🇳🇬 Nigeria</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 205</div>
+    </div>
+    
+    <div class="card" data-search="norway כל המדינה nok 1815">
+        <div class="country">🇳🇴 Norway</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">NOK 1815</div>
+    </div>
+    
+    <div class="card" data-search="oman כל המדינה usd 245">
+        <div class="country">🇴🇲 Oman</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 245</div>
+    </div>
+    
+    <div class="card" data-search="panama כל המדינה usd 160">
+        <div class="country">🇵🇦 Panama</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="papua new guinea כל המדינה usd 175">
+        <div class="country">🇵🇬 Papua New Guinea</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 175</div>
+    </div>
+    
+    <div class="card" data-search="paraguay כל המדינה usd 120">
+        <div class="country">🇵🇾 Paraguay</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 120</div>
+    </div>
+    
+    <div class="card" data-search="peru כל המדינה usd 170">
+        <div class="country">🇵🇪 Peru</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 170</div>
+    </div>
+    
+    <div class="card" data-search="philippines כל המדינה usd 155">
+        <div class="country">🇵🇭 Philippines</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 155</div>
+    </div>
+    
+    <div class="card" data-search="poland כל המדינה usd 160">
+        <div class="country">🇵🇱 Poland</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="portugal כל המדינה eur 165">
+        <div class="country">🇵🇹 Portugal</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 165</div>
+    </div>
+    
+    <div class="card" data-search="puerto rico כל המדינה usd 355">
+        <div class="country">🇵🇷 Puerto Rico</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 355</div>
+    </div>
+    
+    <div class="card" data-search="qatar כל המדינה usd 155">
+        <div class="country">🇶🇦 Qatar</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 155</div>
+    </div>
+    
+    <div class="card" data-search="romania כל המדינה eur 130">
+        <div class="country">🇷🇴 Romania</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 130</div>
+    </div>
+    
+    <div class="card" data-search="russia moscow rub 17,500">
+        <div class="country">🇷🇺 Russia</div>
+        <div class="city">Moscow</div>
+        <div class="price">RUB 17,500</div>
+    </div>
+    
+    <div class="card" data-search="russia יתר המדינה rub 15,300">
+        <div class="country">🇷🇺 Russia</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">RUB 15,300</div>
+    </div>
+    
+    <div class="card" data-search="rwanda כל המדינה usd 155">
+        <div class="country">🇷🇼 Rwanda</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 155</div>
+    </div>
+    
+    <div class="card" data-search="samoa כל המדינה usd 250">
+        <div class="country">🇼🇸 Samoa</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 250</div>
+    </div>
+    
+    <div class="card" data-search="saudi arabia כל המדינה sar 735">
+        <div class="country">🇸🇦 Saudi Arabia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">SAR 735</div>
+    </div>
+    
+    <div class="card" data-search="senegal כל המדינה usd 210">
+        <div class="country">🇸🇳 Senegal</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 210</div>
+    </div>
+    
+    <div class="card" data-search="serbia כל המדינה eur 125">
+        <div class="country">🇷🇸 Serbia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 125</div>
+    </div>
+    
+    <div class="card" data-search="seychelles כל המדינה eur 250">
+        <div class="country">🇸🇨 Seychelles</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 250</div>
+    </div>
+    
+    <div class="card" data-search="sierra leone כל המדינה usd 180">
+        <div class="country">🇸🇱 Sierra Leone</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="singapore כל המדינה sgd 410">
+        <div class="country">🇸🇬 Singapore</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">SGD 410</div>
+    </div>
+    
+    <div class="card" data-search="slovakia כל המדינה eur 130">
+        <div class="country">🇸🇰 Slovakia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 130</div>
+    </div>
+    
+    <div class="card" data-search="slovenia כל המדינה eur 135">
+        <div class="country">🇸🇮 Slovenia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 135</div>
+    </div>
+    
+    <div class="card" data-search="south africa כל המדינה usd 120">
+        <div class="country">🇿🇦 South Africa</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 120</div>
+    </div>
+    
+    <div class="card" data-search="spain כל המדינה eur 270">
+        <div class="country">🇪🇸 Spain</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 270</div>
+    </div>
+    
+    <div class="card" data-search="sri lanka כל המדינה usd 180">
+        <div class="country">🇱🇰 Sri Lanka</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="sudan כל המדינה usd 215">
+        <div class="country">🇸🇩 Sudan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 215</div>
+    </div>
+    
+    <div class="card" data-search="surinam כל המדינה usd 160">
+        <div class="country">🇸🇷 Surinam</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="sweden כל המדינה sek 1935">
+        <div class="country">🇸🇪 Sweden</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">SEK 1935</div>
+    </div>
+    
+    <div class="card" data-search="switzerland geneva chf 300">
+        <div class="country">🇨🇭 Switzerland</div>
+        <div class="city">Geneva</div>
+        <div class="price">CHF 300</div>
+    </div>
+    
+    <div class="card" data-search="switzerland zurich chf 320">
+        <div class="country">🇨🇭 Switzerland</div>
+        <div class="city">Zurich</div>
+        <div class="price">CHF 320</div>
+    </div>
+    
+    <div class="card" data-search="switzerland יתר המדינה chf 220">
+        <div class="country">🇨🇭 Switzerland</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">CHF 220</div>
+    </div>
+    
+    <div class="card" data-search="taiwan כל המדינה usd 165">
+        <div class="country">🇹🇼 Taiwan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="tajikistan כל המדינה usd 140">
+        <div class="country">🇹🇯 Tajikistan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 140</div>
+    </div>
+    
+    <div class="card" data-search="tanzania כל המדינה usd 165">
+        <div class="country">🇹🇿 Tanzania</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 165</div>
+    </div>
+    
+    <div class="card" data-search="thailand כל המדינה usd 130">
+        <div class="country">🇹🇭 Thailand</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 130</div>
+    </div>
+    
+    <div class="card" data-search="togo כל המדינה eur 125">
+        <div class="country">🇹🇬 Togo</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 125</div>
+    </div>
+    
+    <div class="card" data-search="tonga כל המדינה usd 160">
+        <div class="country">🇹🇴 Tonga</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="trinidad and tobago כל המדינה usd 230">
+        <div class="country">🇹🇹 Trinidad and Tobago</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 230</div>
+    </div>
+    
+    <div class="card" data-search="tunisia כל המדינה eur 115">
+        <div class="country">🇹🇳 Tunisia</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 115</div>
+    </div>
+    
+    <div class="card" data-search="turkey כל המדינה eur 150">
+        <div class="country">🇹🇷 Turkey</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">EUR 150</div>
+    </div>
+    
+    <div class="card" data-search="turkmenistan כל המדינה usd 180">
+        <div class="country">🇹🇲 Turkmenistan</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="uganda כל המדינה usd 215">
+        <div class="country">🇺🇬 Uganda</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 215</div>
+    </div>
+    
+    <div class="card" data-search="ukraine כל המדינה usd 130">
+        <div class="country">🇺🇦 Ukraine</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 130</div>
+    </div>
+    
+    <div class="card" data-search="united arab emirates כל המדינה usd 235">
+        <div class="country">🇦🇪 United Arab Emirates</div>
+        <div class="city">כל המדינה</div>
+        <div class="price">USD 235</div>
+    </div>
+    
+    <div class="card" data-search="united kingdom central london gbp 270">
+        <div class="country">🇬🇧 United Kingdom</div>
+        <div class="city">Central London</div>
+        <div class="price">GBP 270</div>
+    </div>
+    
+    <div class="card" data-search="united kingdom יתר המדינה gbp 145">
+        <div class="country">🇬🇧 United Kingdom</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">GBP 145</div>
+    </div>
+    
+    <div class="card" data-search="united states of america atlanta ga usd 255">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Atlanta GA</div>
+        <div class="price">USD 255</div>
+    </div>
+    
+    <div class="card" data-search="united states of america boston ma usd 300">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Boston MA</div>
+        <div class="price">USD 300</div>
+    </div>
+    
+    <div class="card" data-search="united states of america chicago il usd 270">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Chicago IL</div>
+        <div class="price">USD 270</div>
+    </div>
+    
+    <div class="card" data-search="united states of america houston tx usd 275">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Houston TX</div>
+        <div class="price">USD 275</div>
+    </div>
+    
+    <div class="card" data-search="united states of america los angeles ca usd 290">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Los Angeles CA</div>
+        <div class="price">USD 290</div>
+    </div>
+    
+    <div class="card" data-search="united states of america miami fl usd 255">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Miami FL</div>
+        <div class="price">USD 255</div>
+    </div>
+    
+    <div class="card" data-search="united states of america new york ny usd 520">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">New York NY</div>
+        <div class="price">USD 520</div>
+    </div>
+    
+    <div class="card" data-search="united states of america san francisco ca usd 295">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">San Francisco CA</div>
+        <div class="price">USD 295</div>
+    </div>
+    
+    <div class="card" data-search="united states of america washington dc usd 415">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">Washington DC</div>
+        <div class="price">USD 415</div>
+    </div>
+    
+    <div class="card" data-search="united states of america יתר המדינה usd 255">
+        <div class="country">🇺🇸 United States of America</div>
+        <div class="city">יתר המדינה</div>
+        <div class="price">USD 255</div>
+    </div>
+    
+    <div class="card" data-search="uruguay montevideo usd 180">
+        <div class="country">🇺🇾 Uruguay</div>
+        <div class="city">Montevideo</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+    <div class="card" data-search="uzbekistan tashkent usd 150">
+        <div class="country">🇺🇿 Uzbekistan</div>
+        <div class="city">Tashkent</div>
+        <div class="price">USD 150</div>
+    </div>
+    
+    <div class="card" data-search="venezuela caracas usd 160">
+        <div class="country">🇻🇪 Venezuela</div>
+        <div class="city">Caracas</div>
+        <div class="price">USD 160</div>
+    </div>
+    
+    <div class="card" data-search="vietnam hanoi usd 150">
+        <div class="country">🇻🇳 Vietnam</div>
+        <div class="city">Hanoi</div>
+        <div class="price">USD 150</div>
+    </div>
+    
+    <div class="card" data-search="zambia lusaka usd 205">
+        <div class="country">🇿🇲 Zambia</div>
+        <div class="city">Lusaka</div>
+        <div class="price">USD 205</div>
+    </div>
+    
+    <div class="card" data-search="zimbabwe harare usd 180">
+        <div class="country">🇿🇼 Zimbabwe</div>
+        <div class="city">Harare</div>
+        <div class="price">USD 180</div>
+    </div>
+    
+  </div>
 
-    function populateCurrencies() {
-      const currencies = [...new Set(rows.map(row => row.children[2].textContent.trim()))].sort();
-      currencies.forEach(currency => {
-        const option = document.createElement('option');
-        option.value = currency;
-        option.textContent = currency;
-        currencyFilter.appendChild(option);
-      });
-    }
+  <div id="empty" class="empty">לא נמצאו תוצאות.</div>
+</div>
 
-    function applyFilters() {
-      const q = searchInput.value.trim().toLowerCase();
-      const currency = currencyFilter.value;
-
-      let shown = 0;
-
-      rows.forEach(row => {
-        const country = row.children[0].textContent.toLowerCase();
-        const city = row.children[1].textContent.toLowerCase();
-        const curr = row.children[2].textContent.trim();
-
-        const matchesText = !q || country.includes(q) || city.includes(q) || curr.toLowerCase().includes(q);
-        const matchesCurrency = !currency || curr === currency;
-
-        const show = matchesText && matchesCurrency;
-        row.style.display = show ? '' : 'none';
-        if (show) shown += 1;
-      });
-
-      visibleCount.textContent = shown;
-    }
-
-    populateCurrencies();
-    applyFilters();
-
-    searchInput.addEventListener('input', applyFilters);
-    currencyFilter.addEventListener('change', applyFilters);
-  </script>
+<script>
+function filterCards() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let shown = 0;
+    cards.forEach(card => {
+        const match = card.dataset.search.includes(input);
+        card.style.display = match ? "block" : "none";
+        if (match) shown++;
+    });
+    document.getElementById("empty").style.display = shown ? "none" : "block";
+}
+</script>
 </body>
 </html>
