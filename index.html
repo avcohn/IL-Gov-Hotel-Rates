@@ -1,93 +1,338 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>רשימת יעדים</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קצובות לינה</title>
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
       padding: 20px;
-      direction: rtl;
     }
-
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
     h1 {
       text-align: center;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-
-    .card {
-      background: white;
-      padding: 15px;
       margin-bottom: 10px;
+    }
+    p.subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid #d1d5db;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      outline: none;
     }
-
-    .city {
+    .search-box input:focus {
+      border-color: #2563eb;
+    }
+    .stats {
+      margin-bottom: 16px;
+      color: #4b5563;
+      font-size: 14px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+    thead {
+      background: #111827;
+      color: white;
+    }
+    th, td {
+      padding: 14px 12px;
+      text-align: right;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+    tbody tr:hover {
+      background: #f9fafb;
+    }
+    .amount {
       font-weight: bold;
-      font-size: 18px;
+      color: #047857;
     }
-
-    .price {
-      color: green;
-      margin-top: 5px;
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: #6b7280;
+    }
+    @media (max-width: 640px) {
+      body { padding: 12px; }
+      h1 { font-size: 24px; }
+      th, td { padding: 10px 8px; font-size: 14px; }
     }
   </style>
 </head>
-
 <body>
+  <div class="container">
+    <h1>קצובות לינה</h1>
+    <p class="subtitle">חיפוש לפי מדינה, עיר, מטבע או סכום</p>
 
-<h1>✈️ רשימת יעדים</h1>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="חפש מדינה / עיר / מטבע..." onkeyup="filterTable()">
+    </div>
 
-<input type="text" id="search" placeholder="חפש יעד..." onkeyup="filterList()">
+    <div class="stats" id="stats"></div>
 
-<div id="list">
-
-  <div class="card">
-    <div class="city">ברצלונה</div>
-    <div class="price">החל מ-€350</div>
+    <div class="table-wrap">
+      <table id="allowanceTable">
+        <thead>
+          <tr>
+            <th>מדינה</th>
+            <th>עיר</th>
+            <th>מטבע</th>
+            <th>קצובת לינה</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">לא נמצאו תוצאות</div>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="city">רומא</div>
-    <div class="price">החל מ-€280</div>
-  </div>
+  <script>
+    const data = [
+      { country: "Albania", city: "כל המדינה", currency: "EUR", amount: "150" },
+      { country: "Angola", city: "כל המדינה", currency: "USD", amount: "325" },
+      { country: "Antigua and Barbuda", city: "כל המדינה", currency: "USD", amount: "445" },
+      { country: "Argentina", city: "כל המדינה", currency: "USD", amount: "205" },
+      { country: "Armenia", city: "כל המדינה", currency: "USD", amount: "135" },
+      { country: "Australia", city: "Sydney", currency: "AUD", amount: "345" },
+      { country: "Australia", city: "יתר המדינה", currency: "AUD", amount: "250" },
+      { country: "Austria", city: "כל המדינה", currency: "EUR", amount: "180" },
+      { country: "Azerbaijan", city: "כל המדינה", currency: "USD", amount: "145" },
+      { country: "Bahamas", city: "כל המדינה", currency: "USD", amount: "415" },
+      { country: "Bahrain", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Barbados", city: "כל המדינה", currency: "USD", amount: "365" },
+      { country: "Belarus", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Belgium", city: "כל המדינה", currency: "EUR", amount: "235" },
+      { country: "Belize", city: "כל המדינה", currency: "USD", amount: "195" },
+      { country: "Benin", city: "כל המדינה", currency: "USD", amount: "170" },
+      { country: "Bolivia", city: "כל המדינה", currency: "USD", amount: "125" },
+      { country: "Bosnia", city: "כל המדינה", currency: "USD", amount: "105" },
+      { country: "Botswana", city: "כל המדינה", currency: "USD", amount: "135" },
+      { country: "Brazil", city: "כל המדינה", currency: "USD", amount: "135" },
+      { country: "Brunei", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Bulgaria", city: "כל המדינה", currency: "EUR", amount: "140" },
+      { country: "Burkina Faso", city: "כל המדינה", currency: "USD", amount: "155" },
+      { country: "Burundi", city: "כל המדינה", currency: "USD", amount: "145" },
+      { country: "Cambodia", city: "כל המדינה", currency: "USD", amount: "120" },
+      { country: "Cameroon", city: "כל המדינה", currency: "USD", amount: "200" },
+      { country: "Canada", city: "כל המדינה", currency: "CAD", amount: "340" },
+      { country: "Central African Republic", city: "כל המדינה", currency: "USD", amount: "125" },
+      { country: "Chad", city: "כל המדינה", currency: "USD", amount: "230" },
+      { country: "Chile", city: "כל המדינה", currency: "USD", amount: "185" },
+      { country: "China", city: "כל המדינה", currency: "CNY", amount: "1065" },
+      { country: "Colombia", city: "כל המדינה", currency: "USD", amount: "185" },
+      { country: "Congo", city: "כל המדינה", currency: "USD", amount: "240" },
+      { country: "Cook Islands", city: "כל המדינה", currency: "NZD", amount: "495" },
+      { country: "Costa Rica", city: "כל המדינה", currency: "USD", amount: "195" },
+      { country: "Cote d'Ivoire", city: "כל המדינה", currency: "EUR", amount: "185" },
+      { country: "Croatia", city: "כל המדינה", currency: "EUR", amount: "120" },
+      { country: "Cuba", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Cyprus", city: "כל המדינה", currency: "EUR", amount: "165" },
+      { country: "Czech Republic", city: "כל המדינה", currency: "EUR", amount: "140" },
+      { country: "Democratic Republic of the Congo", city: "כל המדינה", currency: "USD", amount: "225" },
+      { country: "Denmark", city: "כל המדינה", currency: "DKK", amount: "1690" },
+      { country: "Djibouti", city: "כל המדינה", currency: "USD", amount: "230" },
+      { country: "Dominican Republic", city: "כל המדינה", currency: "USD", amount: "205" },
+      { country: "East Timor", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Ecuador", city: "כל המדינה", currency: "USD", amount: "220" },
+      { country: "Egypt", city: "כל המדינה", currency: "USD", amount: "190" },
+      { country: "El Salvador", city: "כל המדינה", currency: "USD", amount: "185" },
+      { country: "Equatorial Guinea", city: "כל המדינה", currency: "USD", amount: "195" },
+      { country: "Eritrea", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Estonia", city: "כל המדינה", currency: "EUR", amount: "140" },
+      { country: "Ethiopia", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Fiji", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Finland", city: "כל המדינה", currency: "EUR", amount: "175" },
+      { country: "France", city: "Paris", currency: "EUR", amount: "320" },
+      { country: "France", city: "יתר המדינה", currency: "EUR", amount: "220" },
+      { country: "Gabon", city: "כל המדינה", currency: "USD", amount: "225" },
+      { country: "Georgia", city: "כל המדינה", currency: "USD", amount: "175" },
+      { country: "Germany", city: "כל המדינה", currency: "EUR", amount: "180" },
+      { country: "Ghana", city: "כל המדינה", currency: "USD", amount: "225" },
+      { country: "Greece", city: "כל המדינה", currency: "EUR", amount: "180" },
+      { country: "Guatemala", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Guinea", city: "כל המדינה", currency: "EUR", amount: "160" },
+      { country: "Guyana", city: "כל המדינה", currency: "USD", amount: "170" },
+      { country: "Haiti", city: "כל המדינה", currency: "USD", amount: "185" },
+      { country: "Honduras", city: "כל המדינה", currency: "USD", amount: "185" },
+      { country: "Hong Kong", city: "כל המדינה", currency: "HKD", amount: "1815" },
+      { country: "Hungary", city: "כל המדינה", currency: "EUR", amount: "150" },
+      { country: "Iceland", city: "כל המדינה", currency: "USD", amount: "280" },
+      { country: "India", city: "כל המדינה", currency: "USD", amount: "190" },
+      { country: "Indonesia", city: "כל המדינה", currency: "USD", amount: "125" },
+      { country: "Irish Republic", city: "כל המדינה", currency: "EUR", amount: "230" },
+      { country: "Italy", city: "כל המדינה", currency: "EUR", amount: "295" },
+      { country: "Jamaica", city: "כל המדינה", currency: "USD", amount: "280" },
+      { country: "Japan", city: "Tokyo", currency: "JPY", amount: "37120" },
+      { country: "Japan", city: "יתר המדינה", currency: "JPY", amount: "21025" },
+      { country: "Jordan", city: "כל המדינה", currency: "JOD", amount: "90" },
+      { country: "Kazakhstan", city: "כל המדינה", currency: "USD", amount: "130" },
+      { country: "Kenya", city: "כל המדינה", currency: "USD", amount: "210" },
+      { country: "Korea Republic", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Kosovo", city: "כל המדינה", currency: "EUR", amount: "95" },
+      { country: "Kyrgyzstan", city: "כל המדינה", currency: "USD", amount: "130" },
+      { country: "Laos", city: "כל המדינה", currency: "USD", amount: "120" },
+      { country: "Latvia", city: "כל המדינה", currency: "EUR", amount: "95" },
+      { country: "Lesotho", city: "כל המדינה", currency: "USD", amount: "110" },
+      { country: "Liberia", city: "כל המדינה", currency: "USD", amount: "225" },
+      { country: "Lithuania", city: "כל המדינה", currency: "EUR", amount: "105" },
+      { country: "Luxembourg", city: "כל המדינה", currency: "EUR", amount: "235" },
+      { country: "Macau", city: "כל המדינה", currency: "USD", amount: "190" },
+      { country: "Macedonia", city: "כל המדינה", currency: "EUR", amount: "95" },
+      { country: "Madagascar", city: "כל המדינה", currency: "EUR", amount: "120" },
+      { country: "Malawi", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Malaysia", city: "כל המדינה", currency: "USD", amount: "110" },
+      { country: "Maldives", city: "כל המדינה", currency: "USD", amount: "300" },
+      { country: "Mali", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Malta", city: "כל המדינה", currency: "EUR", amount: "140" },
+      { country: "Mauritania", city: "כל המדינה", currency: "EUR", amount: "135" },
+      { country: "Mauritius", city: "כל המדינה", currency: "USD", amount: "315" },
+      { country: "Mexico", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Moldova", city: "כל המדינה", currency: "EUR", amount: "150" },
+      { country: "Monaco", city: "כל המדינה", currency: "EUR", amount: "325" },
+      { country: "Mongolia", city: "כל המדינה", currency: "USD", amount: "135" },
+      { country: "Montenegro", city: "כל המדינה", currency: "EUR", amount: "90" },
+      { country: "Morocco", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Mozambique", city: "כל המדינה", currency: "USD", amount: "170" },
+      { country: "Myanmar", city: "כל המדינה", currency: "USD", amount: "100" },
+      { country: "Namibia", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Nepal", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Netherlands", city: "Amsterdam", currency: "EUR", amount: "260" },
+      { country: "Netherlands", city: "יתר המדינה", currency: "EUR", amount: "155" },
+      { country: "New Zealand", city: "Niue", currency: "USD", amount: "445" },
+      { country: "New Zealand", city: "יתר המדינה", currency: "NZD", amount: "280" },
+      { country: "Nicaragua", city: "כל המדינה", currency: "USD", amount: "155" },
+      { country: "Niger", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Nigeria", city: "כל המדינה", currency: "USD", amount: "205" },
+      { country: "Norway", city: "כל המדינה", currency: "NOK", amount: "1815" },
+      { country: "Oman", city: "כל המדינה", currency: "USD", amount: "245" },
+      { country: "Panama", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Papua New Guinea", city: "כל המדינה", currency: "USD", amount: "175" },
+      { country: "Paraguay", city: "כל המדינה", currency: "USD", amount: "120" },
+      { country: "Peru", city: "כל המדינה", currency: "USD", amount: "170" },
+      { country: "Philippines", city: "כל המדינה", currency: "USD", amount: "155" },
+      { country: "Poland", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Portugal", city: "כל המדינה", currency: "EUR", amount: "165" },
+      { country: "Puerto Rico", city: "כל המדינה", currency: "USD", amount: "355" },
+      { country: "Qatar", city: "כל המדינה", currency: "USD", amount: "155" },
+      { country: "Romania", city: "כל המדינה", currency: "EUR", amount: "130" },
+      { country: "Russia", city: "Moscow", currency: "RUB", amount: "17,500" },
+      { country: "Russia", city: "יתר המדינה", currency: "RUB", amount: "15,300" },
+      { country: "Rwanda", city: "כל המדינה", currency: "USD", amount: "155" },
+      { country: "Samoa", city: "כל המדינה", currency: "USD", amount: "250" },
+      { country: "Saudi Arabia", city: "כל המדינה", currency: "SAR", amount: "735" },
+      { country: "Senegal", city: "כל המדינה", currency: "USD", amount: "210" },
+      { country: "Serbia", city: "כל המדינה", currency: "EUR", amount: "125" },
+      { country: "Seychelles", city: "כל המדינה", currency: "EUR", amount: "250" },
+      { country: "Sierra Leone", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Singapore", city: "כל המדינה", currency: "SGD", amount: "410" },
+      { country: "Slovakia", city: "כל המדינה", currency: "EUR", amount: "130" },
+      { country: "Slovenia", city: "כל המדינה", currency: "EUR", amount: "135" },
+      { country: "South Africa", city: "כל המדינה", currency: "USD", amount: "120" },
+      { country: "Spain", city: "כל המדינה", currency: "EUR", amount: "270" },
+      { country: "Sri Lanka", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Sudan", city: "כל המדינה", currency: "USD", amount: "215" },
+      { country: "Surinam", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Sweden", city: "כל המדינה", currency: "SEK", amount: "1935" },
+      { country: "Switzerland", city: "Geneva", currency: "CHF", amount: "300" },
+      { country: "Switzerland", city: "Zurich", currency: "CHF", amount: "320" },
+      { country: "Switzerland", city: "יתר המדינה", currency: "CHF", amount: "220" },
+      { country: "Taiwan", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Tajikistan", city: "כל המדינה", currency: "USD", amount: "140" },
+      { country: "Tanzania", city: "כל המדינה", currency: "USD", amount: "165" },
+      { country: "Thailand", city: "כל המדינה", currency: "USD", amount: "130" },
+      { country: "Togo", city: "כל המדינה", currency: "EUR", amount: "125" },
+      { country: "Tonga", city: "כל המדינה", currency: "USD", amount: "160" },
+      { country: "Trinidad and Tobago", city: "כל המדינה", currency: "USD", amount: "230" },
+      { country: "Tunisia", city: "כל המדינה", currency: "EUR", amount: "115" },
+      { country: "Turkey", city: "כל המדינה", currency: "EUR", amount: "150" },
+      { country: "Turkmenistan", city: "כל המדינה", currency: "USD", amount: "180" },
+      { country: "Uganda", city: "כל המדינה", currency: "USD", amount: "215" },
+      { country: "Ukraine", city: "כל המדינה", currency: "USD", amount: "130" },
+      { country: "United Arab Emirates", city: "כל המדינה", currency: "USD", amount: "235" },
+      { country: "United Kingdom", city: "Central London", currency: "GBP", amount: "270" },
+      { country: "United Kingdom", city: "יתר המדינה", currency: "GBP", amount: "145" },
+      { country: "United States of America", city: "Atlanta GA", currency: "USD", amount: "255" },
+      { country: "United States of America", city: "Boston MA", currency: "USD", amount: "300" },
+      { country: "United States of America", city: "Chicago IL", currency: "USD", amount: "270" },
+      { country: "United States of America", city: "Houston TX", currency: "USD", amount: "275" },
+      { country: "United States of America", city: "Los Angeles CA", currency: "USD", amount: "290" },
+      { country: "United States of America", city: "Miami FL", currency: "USD", amount: "255" },
+      { country: "United States of America", city: "New York NY", currency: "USD", amount: "520" },
+      { country: "United States of America", city: "San Francisco CA", currency: "USD", amount: "295" },
+      { country: "United States of America", city: "Washington DC", currency: "USD", amount: "415" },
+      { country: "United States of America", city: "יתר המדינה", currency: "USD", amount: "255" },
+      { country: "Uruguay", city: "Montevideo", currency: "USD", amount: "180" },
+      { country: "Uzbekistan", city: "Tashkent", currency: "USD", amount: "150" },
+      { country: "Venezuela", city: "Caracas", currency: "USD", amount: "160" },
+      { country: "Vietnam", city: "Hanoi", currency: "USD", amount: "150" },
+      { country: "Zambia", city: "Lusaka", currency: "USD", amount: "205" },
+      { country: "Zimbabwe", city: "Harare", currency: "USD", amount: "180" }
+    ];
 
-  <div class="card">
-    <div class="city">פריז</div>
-    <div class="price">החל מ-€420</div>
-  </div>
+    const tableBody = document.getElementById("tableBody");
+    const stats = document.getElementById("stats");
+    const noResults = document.getElementById("noResults");
 
-  <div class="card">
-    <div class="city">לונדון</div>
-    <div class="price">החל מ-€390</div>
-  </div>
+    function renderTable(rows) {
+      tableBody.innerHTML = "";
 
-</div>
+      rows.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.country}</td>
+          <td>${item.city}</td>
+          <td>${item.currency}</td>
+          <td class="amount">${item.amount}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
 
-<script>
-function filterList() {
-  let input = document.getElementById("search").value.toLowerCase();
-  let cards = document.getElementsByClassName("card");
+      stats.textContent = `סה״כ תוצאות: ${rows.length}`;
+      noResults.style.display = rows.length === 0 ? "block" : "none";
+    }
 
-  for (let i = 0; i < cards.length; i++) {
-    let city = cards[i].innerText.toLowerCase();
-    cards[i].style.display = city.includes(input) ? "block" : "none";
-  }
-}
-</script>
+    function filterTable() {
+      const value = document.getElementById("searchInput").value.trim().toLowerCase();
 
+      const filtered = data.filter(item =>
+        item.country.toLowerCase().includes(value) ||
+        item.city.toLowerCase().includes(value) ||
+        item.currency.toLowerCase().includes(value) ||
+        item.amount.toLowerCase().includes(value)
+      );
+
+      renderTable(filtered);
+    }
+
+    renderTable(data);
+  </script>
 </body>
 </html>
