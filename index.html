@@ -3,336 +3,867 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>קצובות לינה</title>
+  <title>קיץ 2026 | וינה ובודפשט</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: rgba(255,255,255,0.92);
+      --text: #172033;
+      --muted: #5f6b85;
+      --primary: #2952cc;
+      --primary-2: #5b7cff;
+      --accent: #16a34a;
+      --gold: #f6c453;
+      --shadow: 0 16px 40px rgba(23,32,51,0.12);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
     * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
-      padding: 20px;
+      font-family: "Heebo", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(91,124,255,0.18), transparent 24%),
+        radial-gradient(circle at top left, rgba(246,196,83,0.18), transparent 20%),
+        linear-gradient(180deg, #eef3ff 0%, #f7f9fc 38%, #f6f8fb 100%);
+      color: var(--text);
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     .container {
-      max-width: 1100px;
+      width: min(var(--max), calc(100% - 32px));
       margin: 0 auto;
     }
+
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      background:
+        linear-gradient(180deg, rgba(15,23,42,0.22), rgba(15,23,42,0.56)),
+        url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.45) 100%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 72px 0 56px;
+    }
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
     h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 7vw, 74px);
+      line-height: 0.96;
+      font-weight: 800;
+      letter-spacing: -1px;
+      max-width: 760px;
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+      font-size: clamp(18px, 2.5vw, 24px);
+      line-height: 1.7;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 28px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #172033;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+    .floating-summary {
+      position: relative;
+      z-index: 2;
+      margin-top: -52px;
+    }
+
+    .summary-card {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .summary-item {
+      background: rgba(255,255,255,0.65);
+      border-radius: 18px;
+      padding: 18px;
       text-align: center;
+    }
+
+    .summary-item .label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .summary-item .value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    section {
+      padding: 68px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-weight: 700;
       margin-bottom: 10px;
+      letter-spacing: 0.2px;
     }
-    p.subtitle {
-      text-align: center;
-      color: #6b7280;
-      margin-top: 0;
-      margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.05;
+      color: var(--text);
     }
-    .search-box {
-      margin-bottom: 20px;
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.8;
+      font-size: 17px;
     }
-    .search-box input {
-      width: 100%;
-      padding: 14px 16px;
-      font-size: 16px;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      outline: none;
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
     }
-    .search-box input:focus {
-      border-color: #2563eb;
+
+    .day-card {
+      background: var(--card);
+      border: 1px solid rgba(41,82,204,0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.28s ease;
     }
-    .stats {
-      margin-bottom: 16px;
-      color: #4b5563;
+
+    .day-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 46px rgba(23,32,51,0.16);
+    }
+
+    .day-image {
+      height: 270px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .day-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.28));
+    }
+
+    .day-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 1;
+      background: rgba(255,255,255,0.9);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .day-content {
+      padding: 22px;
+    }
+
+    .day-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .day-title h3 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.2;
+    }
+
+    .city-chip {
+      background: rgba(41,82,204,0.08);
+      color: var(--primary);
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 999px;
       font-size: 14px;
     }
-    .table-wrap {
-      overflow-x: auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+    .day-text {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 16px;
+      font-size: 16px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 700px;
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 16px;
     }
-    thead {
-      background: #111827;
+
+    .timeline-item {
+      display: flex;
+      align-items: start;
+      gap: 10px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15.5px;
+    }
+
+    .timeline-item .dot {
+      flex: 0 0 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      margin-top: 10px;
+      box-shadow: 0 0 0 5px rgba(41,82,204,0.08);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(22,163,74,0.09), rgba(246,196,83,0.12));
+      border: 1px solid rgba(22,163,74,0.1);
+      border-radius: 18px;
+      padding: 14px 16px;
+      font-weight: 700;
+      color: #1d4d2c;
+      line-height: 1.7;
+    }
+
+    .transfer-card {
+      background: linear-gradient(135deg, #243b82, #2f5bff);
       color: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
     }
-    th, td {
-      padding: 14px 12px;
-      text-align: right;
-      border-bottom: 1px solid #e5e7eb;
-      white-space: nowrap;
+
+    .transfer-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: -60px;
+      left: -60px;
     }
-    tbody tr:hover {
-      background: #f9fafb;
+
+    .transfer-left, .transfer-right {
+      position: relative;
+      z-index: 1;
     }
-    .amount {
-      font-weight: bold;
-      color: #047857;
+
+    .transfer-title {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.1;
     }
-    .no-results {
-      display: none;
+
+    .transfer-text {
+      color: rgba(255,255,255,0.9);
+      line-height: 1.8;
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    .transfer-points {
+      display: grid;
+      gap: 10px;
+    }
+
+    .transfer-points div {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+    }
+
+    .route-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 22px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .route-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .route-meta {
+      color: rgba(255,255,255,0.88);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .tip-card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(41,82,204,0.06);
+    }
+
+    .tip-card h4 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .tip-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 36px 0 60px;
       text-align: center;
-      padding: 24px;
-      color: #6b7280;
+      color: var(--muted);
+      font-size: 15px;
     }
+
+    .credit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.72);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: 0 10px 24px rgba(23,32,51,0.08);
+    }
+
+    @media (max-width: 980px) {
+      .summary-card,
+      .cards-grid,
+      .tips-grid,
+      .transfer-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 78vh;
+      }
+
+      .day-image {
+        height: 230px;
+      }
+    }
+
     @media (max-width: 640px) {
-      body { padding: 12px; }
-      h1 { font-size: 24px; }
-      th, td { padding: 10px 8px; font-size: 14px; }
+      .container {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .hero-content {
+        padding-top: 58px;
+      }
+
+      .summary-card {
+        padding: 14px;
+        gap: 12px;
+      }
+
+      .summary-item {
+        padding: 16px 14px;
+      }
+
+      .section-desc {
+        font-size: 15.5px;
+      }
+
+      .day-content {
+        padding: 18px;
+      }
+
+      .transfer-title {
+        font-size: 28px;
+      }
+
+      .route-line {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>קצובות לינה</h1>
-    <p class="subtitle">חיפוש לפי מדינה, עיר, מטבע או סכום</p>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="חפש מדינה / עיר / מטבע..." onkeyup="filterTable()">
+  <header class="hero">
+    <div class="container hero-content">
+      <div class="top-badge">☀️ קיץ 2026 · טיול משפחתי לארבעה</div>
+      <h1>וינה & בודפשט<br>חופשה משפחתית מושלמת</h1>
+      <div class="hero-subtitle">
+        20–27 באוגוסט 2026 · אבי, אלינור, אלמה ואליאנה · שילוב מדויק של אירופה קלאסית,
+        גן חיות, שופינג, שיט ערב וסיור EZRider בבודפשט.
+      </div>
+
+      <div class="hero-pills">
+        <div class="pill">✈️ 20.8 טיסה לוינה</div>
+        <div class="pill">🚄 24.8 רכבת לוינה–בודפשט 11:40</div>
+        <div class="pill">✈️ 27.8 חזרה מבודפשט 09:20</div>
+        <div class="pill">🦁 23.8 גן חיות בוינה</div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#itinerary" class="btn btn-primary">לתוכנית המלאה</a>
+        <a href="#tips" class="btn btn-secondary">טיפים חשובים</a>
+      </div>
     </div>
+  </header>
 
-    <div class="stats" id="stats"></div>
-
-    <div class="table-wrap">
-      <table id="allowanceTable">
-        <thead>
-          <tr>
-            <th>מדינה</th>
-            <th>עיר</th>
-            <th>מטבע</th>
-            <th>קצובת לינה</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-      <div class="no-results" id="noResults">לא נמצאו תוצאות</div>
+  <div class="container floating-summary">
+    <div class="summary-card">
+      <div class="summary-item">
+        <div class="label">יעדים</div>
+        <div class="value">2 ערים</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">לילות</div>
+        <div class="value">7</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">הרכב</div>
+        <div class="value">4 נפשות</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">סגנון</div>
+        <div class="value">רגוע + כיפי</div>
+      </div>
     </div>
   </div>
 
-  <script>
-    const data = [
-      { country: "Albania", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Angola", city: "כל המדינה", currency: "USD", amount: "325" },
-      { country: "Antigua and Barbuda", city: "כל המדינה", currency: "USD", amount: "445" },
-      { country: "Argentina", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "Armenia", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Australia", city: "Sydney", currency: "AUD", amount: "345" },
-      { country: "Australia", city: "יתר המדינה", currency: "AUD", amount: "250" },
-      { country: "Austria", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Azerbaijan", city: "כל המדינה", currency: "USD", amount: "145" },
-      { country: "Bahamas", city: "כל המדינה", currency: "USD", amount: "415" },
-      { country: "Bahrain", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Barbados", city: "כל המדינה", currency: "USD", amount: "365" },
-      { country: "Belarus", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Belgium", city: "כל המדינה", currency: "EUR", amount: "235" },
-      { country: "Belize", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Benin", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Bolivia", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Bosnia", city: "כל המדינה", currency: "USD", amount: "105" },
-      { country: "Botswana", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Brazil", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Brunei", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Bulgaria", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Burkina Faso", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Burundi", city: "כל המדינה", currency: "USD", amount: "145" },
-      { country: "Cambodia", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Cameroon", city: "כל המדינה", currency: "USD", amount: "200" },
-      { country: "Canada", city: "כל המדינה", currency: "CAD", amount: "340" },
-      { country: "Central African Republic", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Chad", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Chile", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "China", city: "כל המדינה", currency: "CNY", amount: "1065" },
-      { country: "Colombia", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Congo", city: "כל המדינה", currency: "USD", amount: "240" },
-      { country: "Cook Islands", city: "כל המדינה", currency: "NZD", amount: "495" },
-      { country: "Costa Rica", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Cote d'Ivoire", city: "כל המדינה", currency: "EUR", amount: "185" },
-      { country: "Croatia", city: "כל המדינה", currency: "EUR", amount: "120" },
-      { country: "Cuba", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Cyprus", city: "כל המדינה", currency: "EUR", amount: "165" },
-      { country: "Czech Republic", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Democratic Republic of the Congo", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Denmark", city: "כל המדינה", currency: "DKK", amount: "1690" },
-      { country: "Djibouti", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Dominican Republic", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "East Timor", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Ecuador", city: "כל המדינה", currency: "USD", amount: "220" },
-      { country: "Egypt", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "El Salvador", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Equatorial Guinea", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Eritrea", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Estonia", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Ethiopia", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Fiji", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Finland", city: "כל המדינה", currency: "EUR", amount: "175" },
-      { country: "France", city: "Paris", currency: "EUR", amount: "320" },
-      { country: "France", city: "יתר המדינה", currency: "EUR", amount: "220" },
-      { country: "Gabon", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Georgia", city: "כל המדינה", currency: "USD", amount: "175" },
-      { country: "Germany", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Ghana", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Greece", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Guatemala", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Guinea", city: "כל המדינה", currency: "EUR", amount: "160" },
-      { country: "Guyana", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Haiti", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Honduras", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Hong Kong", city: "כל המדינה", currency: "HKD", amount: "1815" },
-      { country: "Hungary", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Iceland", city: "כל המדינה", currency: "USD", amount: "280" },
-      { country: "India", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "Indonesia", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Irish Republic", city: "כל המדינה", currency: "EUR", amount: "230" },
-      { country: "Italy", city: "כל המדינה", currency: "EUR", amount: "295" },
-      { country: "Jamaica", city: "כל המדינה", currency: "USD", amount: "280" },
-      { country: "Japan", city: "Tokyo", currency: "JPY", amount: "37120" },
-      { country: "Japan", city: "יתר המדינה", currency: "JPY", amount: "21025" },
-      { country: "Jordan", city: "כל המדינה", currency: "JOD", amount: "90" },
-      { country: "Kazakhstan", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Kenya", city: "כל המדינה", currency: "USD", amount: "210" },
-      { country: "Korea Republic", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Kosovo", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Kyrgyzstan", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Laos", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Latvia", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Lesotho", city: "כל המדינה", currency: "USD", amount: "110" },
-      { country: "Liberia", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Lithuania", city: "כל המדינה", currency: "EUR", amount: "105" },
-      { country: "Luxembourg", city: "כל המדינה", currency: "EUR", amount: "235" },
-      { country: "Macau", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "Macedonia", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Madagascar", city: "כל המדינה", currency: "EUR", amount: "120" },
-      { country: "Malawi", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Malaysia", city: "כל המדינה", currency: "USD", amount: "110" },
-      { country: "Maldives", city: "כל המדינה", currency: "USD", amount: "300" },
-      { country: "Mali", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Malta", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Mauritania", city: "כל המדינה", currency: "EUR", amount: "135" },
-      { country: "Mauritius", city: "כל המדינה", currency: "USD", amount: "315" },
-      { country: "Mexico", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Moldova", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Monaco", city: "כל המדינה", currency: "EUR", amount: "325" },
-      { country: "Mongolia", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Montenegro", city: "כל המדינה", currency: "EUR", amount: "90" },
-      { country: "Morocco", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Mozambique", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Myanmar", city: "כל המדינה", currency: "USD", amount: "100" },
-      { country: "Namibia", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Nepal", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Netherlands", city: "Amsterdam", currency: "EUR", amount: "260" },
-      { country: "Netherlands", city: "יתר המדינה", currency: "EUR", amount: "155" },
-      { country: "New Zealand", city: "Niue", currency: "USD", amount: "445" },
-      { country: "New Zealand", city: "יתר המדינה", currency: "NZD", amount: "280" },
-      { country: "Nicaragua", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Niger", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Nigeria", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "Norway", city: "כל המדינה", currency: "NOK", amount: "1815" },
-      { country: "Oman", city: "כל המדינה", currency: "USD", amount: "245" },
-      { country: "Panama", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Papua New Guinea", city: "כל המדינה", currency: "USD", amount: "175" },
-      { country: "Paraguay", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Peru", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Philippines", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Poland", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Portugal", city: "כל המדינה", currency: "EUR", amount: "165" },
-      { country: "Puerto Rico", city: "כל המדינה", currency: "USD", amount: "355" },
-      { country: "Qatar", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Romania", city: "כל המדינה", currency: "EUR", amount: "130" },
-      { country: "Russia", city: "Moscow", currency: "RUB", amount: "17,500" },
-      { country: "Russia", city: "יתר המדינה", currency: "RUB", amount: "15,300" },
-      { country: "Rwanda", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Samoa", city: "כל המדינה", currency: "USD", amount: "250" },
-      { country: "Saudi Arabia", city: "כל המדינה", currency: "SAR", amount: "735" },
-      { country: "Senegal", city: "כל המדינה", currency: "USD", amount: "210" },
-      { country: "Serbia", city: "כל המדינה", currency: "EUR", amount: "125" },
-      { country: "Seychelles", city: "כל המדינה", currency: "EUR", amount: "250" },
-      { country: "Sierra Leone", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Singapore", city: "כל המדינה", currency: "SGD", amount: "410" },
-      { country: "Slovakia", city: "כל המדינה", currency: "EUR", amount: "130" },
-      { country: "Slovenia", city: "כל המדינה", currency: "EUR", amount: "135" },
-      { country: "South Africa", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Spain", city: "כל המדינה", currency: "EUR", amount: "270" },
-      { country: "Sri Lanka", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Sudan", city: "כל המדינה", currency: "USD", amount: "215" },
-      { country: "Surinam", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Sweden", city: "כל המדינה", currency: "SEK", amount: "1935" },
-      { country: "Switzerland", city: "Geneva", currency: "CHF", amount: "300" },
-      { country: "Switzerland", city: "Zurich", currency: "CHF", amount: "320" },
-      { country: "Switzerland", city: "יתר המדינה", currency: "CHF", amount: "220" },
-      { country: "Taiwan", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Tajikistan", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Tanzania", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Thailand", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Togo", city: "כל המדינה", currency: "EUR", amount: "125" },
-      { country: "Tonga", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Trinidad and Tobago", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Tunisia", city: "כל המדינה", currency: "EUR", amount: "115" },
-      { country: "Turkey", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Turkmenistan", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Uganda", city: "כל המדינה", currency: "USD", amount: "215" },
-      { country: "Ukraine", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "United Arab Emirates", city: "כל המדינה", currency: "USD", amount: "235" },
-      { country: "United Kingdom", city: "Central London", currency: "GBP", amount: "270" },
-      { country: "United Kingdom", city: "יתר המדינה", currency: "GBP", amount: "145" },
-      { country: "United States of America", city: "Atlanta GA", currency: "USD", amount: "255" },
-      { country: "United States of America", city: "Boston MA", currency: "USD", amount: "300" },
-      { country: "United States of America", city: "Chicago IL", currency: "USD", amount: "270" },
-      { country: "United States of America", city: "Houston TX", currency: "USD", amount: "275" },
-      { country: "United States of America", city: "Los Angeles CA", currency: "USD", amount: "290" },
-      { country: "United States of America", city: "Miami FL", currency: "USD", amount: "255" },
-      { country: "United States of America", city: "New York NY", currency: "USD", amount: "520" },
-      { country: "United States of America", city: "San Francisco CA", currency: "USD", amount: "295" },
-      { country: "United States of America", city: "Washington DC", currency: "USD", amount: "415" },
-      { country: "United States of America", city: "יתר המדינה", currency: "USD", amount: "255" },
-      { country: "Uruguay", city: "Montevideo", currency: "USD", amount: "180" },
-      { country: "Uzbekistan", city: "Tashkent", currency: "USD", amount: "150" },
-      { country: "Venezuela", city: "Caracas", currency: "USD", amount: "160" },
-      { country: "Vietnam", city: "Hanoi", currency: "USD", amount: "150" },
-      { country: "Zambia", city: "Lusaka", currency: "USD", amount: "205" },
-      { country: "Zimbabwe", city: "Harare", currency: "USD", amount: "180" }
-    ];
+  <section id="itinerary">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">המסלול</div>
+          <h2>הלוז המשפחתי</h2>
+        </div>
+        <div class="section-desc">
+          בנוי בקצב נעים, בלי להעמיס מדי, עם איזון בין חוויות לילדות, נופים אורבניים,
+          זמן איכות משפחתי ורגעים של “וואו” בכל עיר.
+        </div>
+      </div>
 
-    const tableBody = document.getElementById("tableBody");
-    const stats = document.getElementById("stats");
-    const noResults = document.getElementById("noResults");
+      <div class="cards-grid">
 
-    function renderTable(rows) {
-      tableBody.innerHTML = "";
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">20.8 · יום 1</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>נחיתה והתאקלמות בוינה</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              מתחילים רגוע: נחיתה מוקדמת, הגעה למלון, אוויר ראשון של אירופה, וסיבוב פתיחה קליל
+              במרכז העיר בלי לרוץ ובלי להעמיס.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>טיסה ב־06:20 והגעה לוינה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צ'ק־אין / השארת מזוודות ומנוחה קלה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיבוב ראשון באזור Stephansplatz והרחובות היפים של המרכז</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ארוחת ערב רגועה וסיום מוקדם</span></div>
+            </div>
+            <div class="highlight-box">✨ היילייט: פתיחה אלגנטית ונעימה, בדיוק בקצב הנכון ליום טיסה.</div>
+          </div>
+        </article>
 
-      rows.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${item.country}</td>
-          <td>${item.city}</td>
-          <td>${item.currency}</td>
-          <td class="amount">${item.amount}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">21.8 · יום 2</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>שנברון + פראטר</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              יום וינאי קלאסי עם תמהיל מושלם: גנים מרשימים, מרחבים יפים לילדות,
+              ובערב אווירה כיפית וקלילה בפראטר.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר בארמון וגני Schönbrunn</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>זמן חופשי בגנים, תמונות והפסקת קפה/גלידה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>אחה"צ/ערב בפראטר ובאזור הגלגל הענק</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה רגועה למלון</span></div>
+            </div>
+            <div class="highlight-box">🎡 היילייט: שילוב מושלם של אירופה קלאסית עם כיף אמיתי למשפחה.</div>
+          </div>
+        </article>
 
-      stats.textContent = `סה״כ תוצאות: ${rows.length}`;
-      noResults.style.display = rows.length === 0 ? "block" : "none";
-    }
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">22.8 · יום 3</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>יום חווייתי וגמיש</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              היום הזה נשאר חכם וגמיש: אפשר ללכת על פארק, מוזיאון אינטראקטיבי, סיבוב קינוחים,
+              או פשוט ליהנות מוינה בלי לחץ.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר קליל עם קפה ומאפה טוב</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>בחירה לפי מצב רוח: פארק / מוזיאון / קינוחים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צהריים בעיר בקצב נעים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ערב פתוח למנוחה או עוד סיבוב נעים</span></div>
+            </div>
+            <div class="highlight-box">🍰 היילייט: יום שנותן מרחב להרגיש את העיר באמת, בלי שעון על הראש.</div>
+          </div>
+        </article>
 
-    function filterTable() {
-      const value = document.getElementById("searchInput").value.trim().toLowerCase();
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">23.8 · יום 4</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>יום גן חיות</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              העוגן הרשמי של חלק וינה: יום מלא בגן החיות של Schönbrunn,
+              אחד מגני החיות הידועים והמרשימים באירופה.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>יציאה נוחה בבוקר לגן החיות</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>מסלול רגוע בין המתחמים המרכזיים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ארוחת צהריים קלילה במקום</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה מוקדמת יחסית למנוחה וערב רגוע</span></div>
+            </div>
+            <div class="highlight-box">🦁 היילייט: יום משפחתי קלאסי שכנראה יהיה אחד הזיכרונות הכי טובים של הטיול.</div>
+          </div>
+        </article>
 
-      const filtered = data.filter(item =>
-        item.country.toLowerCase().includes(value) ||
-        item.city.toLowerCase().includes(value) ||
-        item.currency.toLowerCase().includes(value) ||
-        item.amount.toLowerCase().includes(value)
-      );
+      </div>
+    </div>
+  </section>
 
-      renderTable(filtered);
-    }
+  <section>
+    <div class="container">
+      <div class="transfer-card">
+        <div class="transfer-left">
+          <div class="eyebrow" style="color:#d9e4ff;">מעבר בין ערים</div>
+          <h2 class="transfer-title">מרכבת מלכותית לוייב אחר לגמרי</h2>
+          <div class="transfer-text">
+            ב־24.8 עוברים מוינה האלגנטית לבודפשט התוססת. זה מעבר מושלם:
+            בלי לחץ, בלי ריצות, ועם נסיעה נוחה שמרגישה חלק מהחוויה.
+          </div>
+          <div class="transfer-points">
+            <div>🚄 יציאה מוינה: 11:40</div>
+            <div>⏱ נסיעה נוחה של בערך 2:40 שעות</div>
+            <div>🌇 הגעה לבודפשט אחר הצהריים והתחלה רכה של החלק השני</div>
+          </div>
+        </div>
+        <div class="transfer-right">
+          <div class="route-box">
+            <div class="route-line">
+              <span>וינה</span>
+              <span>→</span>
+              <span>בודפשט</span>
+            </div>
+            <div class="route-meta">
+              יום מעבר רגוע עם זמן להתארגן בבוקר, להגיע בנחת לתחנה,
+              ולעבור לעיר שמרגישה צעירה, יפה ומלאת אנרגיה.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    renderTable(data);
-  </script>
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">בודפשט</div>
+          <h2>החלק השני של הטיול</h2>
+        </div>
+        <div class="section-desc">
+          כאן נכנסים לאווירה קצת אחרת: פחות ארמונות ויותר נהר, תאורה, שופינג,
+          שיט ערב, נקודות תצפית וסיום חכם עם חוויית EZRider.
+        </div>
+      </div>
+
+      <div class="cards-grid">
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">24.8 · יום 5</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>הגעה לבודפשט וערב ראשון</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              אחרי הרכבת מגיעים למלון, מתארגנים, ואז יוצאים לסיבוב ערב ראשון
+              כדי להרגיש את הקסם של בודפשט ליד הדנובה.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>הגעה למלון וצ'ק־אין</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>הליכה קלילה במרכז / באזור הנהר</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ארוחת ערב נעימה עם וייב של תחילת פרק חדש</span></div>
+            </div>
+            <div class="highlight-box">🌉 היילייט: בודפשט בערב הראשון תמיד מרגישה יפה מהצפוי.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">25.8 · יום 6</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>בודפשט הקלאסית + שיט ערב</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              היום של כל המקומות האייקוניים: הפרלמנט, מצודת הדייגים, הגשרים
+              והאורות של הדנובה בערב.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>אזור הפרלמנט והטיילת</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>עלייה לאזור Buda / Fisherman’s Bastion</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>תצפיות ותמונות משפחתיות</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>שיט ערב בדנובה</span></div>
+            </div>
+            <div class="highlight-box">🚤 היילייט: יום פוטוגני בטירוף, עם שיט ערב שהוא חובה.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">26.8 · יום 7</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>חצי יום שופינג + EZRider בלילה</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              הבוקר מוקדש לשופינג נוח וחכם, אחר כך מנוחה, ובערב —
+              אחת החוויות הכי מגניבות של הטיול: סיור EZRider בעיר המוארת.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר שופינג ב־WestEnd או Váci Street</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צהריים רגועים / בריכה / מנוחה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיור EZRider ערב במרכז בודפשט</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיום חגיגי של הטיול</span></div>
+            </div>
+            <div class="highlight-box">🛴 היילייט: שופינג בבוקר, אקשן בלילה — שילוב מושלם ליום האחרון המלא.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">27.8 · יום 8</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>בוקר חזרה הביתה</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              קמים מוקדם, יוצאים לשדה, ומסיימים טיול קיץ אירופי עם טעם של עוד.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>טיסה חזרה ב־09:20</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>יציאה מוקדמת מהמלון לשדה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה עם מלא תמונות, זיכרונות וחשק לעוד</span></div>
+            </div>
+            <div class="highlight-box">✈️ היילייט: סוף מדויק, בלי לחץ מיותר ביום האחרון.</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">מה חשוב לזכור</div>
+          <h2>טיפים קטנים שעושים הבדל גדול</h2>
+        </div>
+        <div class="section-desc">
+          כמה דגשים שיעזרו להפוך את הטיול הזה לנעים, חלק ומדויק יותר למשפחה.
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h4>🎒 קצב משפחתי</h4>
+          <p>
+            לא לדחוס יותר מדי בכל יום. דווקא השילוב של בוקר טוב, צהריים רגועים
+            וערב יפה נותן לטיול להרגיש יוקרתי ונעים יותר.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🚄 מעבר חכם</h4>
+          <p>
+            ביום הרכבת לא לקבוע יותר מדי. להגיע בנחת לתחנה, לעלות רגועים,
+            ולשמור את הערב הראשון בבודפשט קליל ופשוט.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🛍️ שופינג נכון</h4>
+          <p>
+            בודפשט מתאימה יותר לחצי יום קניות מאשר וינה. בבוקר קונים, בצהריים נחים,
+            ובערב נהנים מעוד חוויה בלי עומס.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="credit">❤️ קיץ 2026 · Vienna & Budapest Family Escape</div>
+    </div>
+  </footer>
+
 </body>
 </html>
