@@ -1,957 +1,287 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>קצובות לינה בעולם</title>
-  <meta name="description" content="מיני־סייט פרימיום מלא לקצובות לינה בעולם" />
-  <style>
-    :root {
-      --bg1: #07111f;
-      --bg2: #0b1628;
-      --panel: rgba(255,255,255,0.08);
-      --panel-2: rgba(255,255,255,0.05);
-      --line: rgba(255,255,255,0.12);
-      --text: #f4f7fb;
-      --muted: #b8c2d3;
-      --success: #8ff0b3;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top right, rgba(110,168,255,0.2), transparent 30%),
-        radial-gradient(circle at top left, rgba(173,216,255,0.12), transparent 22%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 48%, #09111c 100%);
-      min-height: 100vh;
-    }
-
-    .shell {
-      width: min(1380px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 24px 0 48px;
-    }
-
-    .hero {
-      border: 1px solid var(--line);
-      border-radius: 32px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)),
-        linear-gradient(135deg, #0c1830, #12233d 55%, #0b1829);
-      box-shadow: var(--shadow);
-      padding: 30px;
-      margin-bottom: 22px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #d9efff;
-      font-size: 13px;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(32px, 5vw, 56px);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-      text-align: center;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-      margin: 14px auto 0;
-      max-width: 840px;
-      text-align: center;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .stat {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.11);
-      border-radius: 18px;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .stat .label {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
-
-    .stat .value {
-      display: block;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .toolbar {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(4, minmax(0, 0.6fr));
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .control {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 0 16px;
-      min-height: 58px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-
-    .control span {
-      font-size: 18px;
-      opacity: 0.9;
-    }
-
-    .control input, .control select {
-      width: 100%;
-      background: transparent;
-      border: 0;
-      outline: none;
-      color: var(--text);
-      font-size: 15px;
-      font-family: inherit;
-    }
-
-    .control input::placeholder { color: #b9c3d4; }
-    .control select option { color: #111827; }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 390px 1fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .panel, .table-panel {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .panel-head, .table-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .panel-head h3, .table-head h3 {
-      margin: 0;
-      font-size: 18px;
-    }
-
-    .panel-head small, .table-head small {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .cards {
-      padding: 14px;
-      display: grid;
-      gap: 14px;
-      max-height: 980px;
-      overflow: auto;
-    }
-
-    .city-card {
-      overflow: hidden;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: transform 0.18s ease, border-color 0.18s ease;
-      cursor: pointer;
-    }
-
-    .city-card:hover, .city-card.active {
-      transform: translateY(-2px);
-      border-color: rgba(142,197,255,0.45);
-    }
-
-    .city-media {
-      position: relative;
-      height: 180px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #23395d, #101c2f 55%, #0f172a);
-    }
-
-    .city-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .city-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.45));
-    }
-
-    .city-flag {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(7,17,31,0.72);
-      display: grid;
-      place-items: center;
-      font-size: 24px;
-      border: 1px solid rgba(255,255,255,0.18);
-      z-index: 1;
-    }
-
-    .city-badge {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(7,17,31,0.78);
-      border: 1px solid rgba(255,255,255,0.16);
-      font-size: 12px;
-      color: #eff6ff;
-      z-index: 1;
-    }
-
-    .city-caption {
-      position: absolute;
-      right: 16px;
-      bottom: 14px;
-      z-index: 1;
-      font-size: 22px;
-      font-weight: 700;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.55);
-    }
-
-    .city-body { padding: 16px; }
-
-    .city-title {
-      display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .city-title h4 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .city-title small {
-      display: block;
-      color: var(--muted);
-      margin-top: 4px;
-      font-size: 13px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 70px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(143,240,179,0.12);
-      color: var(--success);
-      border: 1px solid rgba(143,240,179,0.2);
-      font-weight: 700;
-      font-size: 13px;
-      white-space: nowrap;
-    }
-
-    .city-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .city-meta span {
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      font-size: 12px;
-      color: #e2e8f0;
-    }
-
-    .table-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 20px 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .table-wrap {
-      padding: 14px 14px 18px;
-      overflow: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 960px;
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: rgba(11,22,40,0.96);
-      color: #f4f7fb;
-      font-weight: 700;
-      font-size: 13px;
-      padding: 16px 14px;
-      text-align: right;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-    }
-
-    tbody td {
-      padding: 16px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      color: #edf3fb;
-      font-size: 14px;
-    }
-
-    tbody tr:hover {
-      background: rgba(255,255,255,0.05);
-    }
-
-    .country-cell {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-    }
-
-    .flag-chip {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 17px;
-      flex: 0 0 auto;
-    }
-
-    .amount {
-      font-weight: 800;
-      color: #9df5c6;
-      letter-spacing: 0.01em;
-    }
-
-    .no-results {
-      display: none;
-      padding: 46px 24px 54px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .no-results strong {
-      display: block;
-      font-size: 22px;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .footer-note {
-      color: #9eb0c9;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 18px;
-      opacity: 0.9;
-    }
-
-    @media (max-width: 1180px) {
-      .layout { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: repeat(2, minmax(0,1fr)); max-height: none; }
-    }
-
-    @media (max-width: 980px) {
-      .toolbar { grid-template-columns: 1fr 1fr; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 760px) {
-      .shell { width: min(100% - 18px, 100%); padding-top: 14px; }
-      .hero { padding: 22px; border-radius: 26px; }
-      .hero-stats { grid-template-columns: 1fr 1fr; }
-      .cards { grid-template-columns: 1fr; }
-      .panel, .table-panel { border-radius: 22px; }
-      .toolbar { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>קצובות לינה בעולם</title>
+<style>
+:root{--bg:#08111e;--bg2:#0c1830;--panel:rgba(255,255,255,.08);--panel2:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);--text:#f4f7fb;--muted:#b8c2d3;--green:#8ff0b3;--shadow:0 18px 50px rgba(0,0,0,.35)}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at top right, rgba(110,168,255,.18), transparent 28%),radial-gradient(circle at top left, rgba(173,216,255,.10), transparent 18%),linear-gradient(180deg,var(--bg) 0%, var(--bg2) 55%, #09111c 100%);min-height:100vh}
+.wrap{width:min(1380px,calc(100% - 24px));margin:0 auto;padding:16px 0 40px}
+.hero{border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.04)),linear-gradient(135deg, #0c1830, #12233d 55%, #0b1829);box-shadow:var(--shadow);padding:24px 18px;margin-bottom:16px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);color:#d9efff;font-size:12px;margin-bottom:12px}
+h1{margin:0;font-size:clamp(28px, 5vw, 52px);line-height:1.02;letter-spacing:-.03em}
+.hero p{color:var(--muted);font-size:15px;line-height:1.7;margin:12px auto 0;max-width:780px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:14px 10px;text-align:center}
+.stat .label{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+.stat .value{display:block;font-size:24px;font-weight:700}
+.toolbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:linear-gradient(180deg, rgba(8,17,30,.92), rgba(8,17,30,.74));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:12px;margin-bottom:16px}
+.toolbar-grid{display:grid;grid-template-columns:1.4fr repeat(4,minmax(0,.65fr));gap:10px}
+.control{display:flex;align-items:center;gap:10px;min-height:54px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid var(--line);padding:0 14px}
+.control span{font-size:18px;flex:0 0 auto}
+.control input,.control select{width:100%;border:0;outline:none;background:transparent;color:var(--text);font-size:15px;font-family:inherit;min-width:0}
+.control input::placeholder{color:#b9c3d4}.control select option{color:#111827}
+.layout{display:grid;grid-template-columns:390px 1fr;gap:16px;align-items:start}
+.panel{background:var(--panel2);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.04)}
+.panel-head h2{margin:0;font-size:18px}.panel-head small{color:var(--muted);font-size:12px}
+.cards{display:grid;gap:12px;padding:12px;max-height:920px;overflow:auto}
+.card{overflow:hidden;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);cursor:pointer;transition:transform .18s ease,border-color .18s ease}
+.card:hover,.card.active{transform:translateY(-2px);border-color:rgba(142,197,255,.5)}
+.media{position:relative;height:170px;overflow:hidden;background:linear-gradient(135deg,#23395d,#101c2f 55%,#0f172a)}
+.media img{width:100%;height:100%;object-fit:cover;display:block}
+.media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.48))}
+.flag{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;background:rgba(7,17,31,.74);border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;font-size:22px;z-index:1}
+.badge{position:absolute;left:10px;top:10px;z-index:1;padding:8px 10px;border-radius:999px;background:rgba(7,17,31,.78);border:1px solid rgba(255,255,255,.16);font-size:12px;color:#eff6ff}
+.caption{position:absolute;right:14px;bottom:12px;z-index:1;font-size:22px;font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.55);max-width:72%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-body{padding:14px}.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.card-top h3{margin:0;font-size:19px}.card-top small{display:block;color:var(--muted);margin-top:4px;font-size:12px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-width:72px;padding:8px 12px;border-radius:999px;background:rgba(143,240,179,.12);color:var(--green);border:1px solid rgba(143,240,179,.2);font-weight:700;font-size:13px;white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:8px}.meta span{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:12px;color:#e2e8f0}
+.summary-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px 0;color:var(--muted);font-size:13px}
+.table-wrap{padding:12px;overflow:auto} table{width:100%;border-collapse:collapse;min-width:920px}
+thead th{position:sticky;top:0;z-index:2;background:rgba(11,22,40,.97);color:#f4f7fb;font-size:13px;font-weight:700;padding:14px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,.12)}
+tbody td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:#edf3fb}
+tbody tr:hover{background:rgba(255,255,255,.05)}
+.country-cell{display:flex;align-items:center;gap:10px;font-weight:700}
+.flag-chip{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:16px;flex:0 0 auto}
+.amount{color:#9df5c6;font-weight:800}
+.no-results{display:none;padding:40px 20px 48px;text-align:center;color:var(--muted)}
+.no-results strong{display:block;font-size:20px;color:var(--text);margin-bottom:8px}
+.mobile-list{display:none;padding:12px;gap:12px}
+.mobile-row{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:18px;padding:14px}
+.mobile-row-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:8px}
+.mobile-row h4{margin:0;font-size:17px}.mobile-row small{color:var(--muted);display:block;margin-top:4px;font-size:12px}
+.mobile-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mobile-tags span{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:12px;color:#e2e8f0}
+.footer-note{color:#9eb0c9;text-align:center;font-size:12px;margin-top:16px}
+@media (max-width:1180px){.layout{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none}}
+@media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.toolbar-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:680px){.wrap{width:min(100% - 14px,100%);padding-top:10px}.hero{padding:18px 14px;border-radius:22px}.stats{grid-template-columns:repeat(2,1fr);gap:8px}.stat{padding:12px 8px}.stat .value{font-size:21px}.toolbar{top:8px;border-radius:20px;padding:10px}.toolbar-grid{grid-template-columns:1fr}.control{min-height:52px;border-radius:16px}.panel{border-radius:22px}.cards{grid-template-columns:1fr}.summary-bar{font-size:12px;flex-direction:column;align-items:flex-start}.desktop-table{display:none}.mobile-list{display:grid}.cards-panel{display:none}.hero p{font-size:14px}}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <section class="hero">
-      <div class="eyebrow">✦ גרסת פרימיום מלאה · כל הרשימה בפנים</div>
-      <h1>קצובות לינה ברחבי העולם</h1>
-      <p>
-        כל היעדים, חיפוש חכם, סינון לפי מדינה ומטבע, מיון לפי סכום, דגלים לכל מדינה
-        וכרטיסי יעד עם תמונות חיות. מוכן ל־GitHub Pages.
-      </p>
+<div class="wrap">
+<section class="hero">
+<div class="eyebrow">✦ גרסת פרימיום מלאה · מותאמת לפלאפון</div>
+<h1>קצובות לינה ברחבי העולם</h1>
+<p></p>
+<div class="stats">
+<div class="stat"><span class="label">סה״כ יעדים</span><span class="value" id="totalDestinations">0</span></div>
+<div class="stat"><span class="label">מדינות</span><span class="value" id="totalCountries">0</span></div>
+<div class="stat"><span class="label">מטבעות</span><span class="value" id="totalCurrencies">0</span></div>
+<div class="stat"><span class="label">תוצאות</span><span class="value" id="visibleResults">0</span></div>
+</div>
+</section>
 
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="label">סה״כ יעדים</span>
-          <span class="value" id="totalDestinations">0</span>
+<section class="toolbar">
+<div class="toolbar-grid">
+<label class="control"><span>🔎</span><input type="text" id="searchInput" placeholder="חפש מדינה, עיר, מטבע או סכום..." /></label>
+<label class="control"><span>🌍</span><select id="countryFilter"><option value="">כל המדינות</option></select></label>
+<label class="control"><span>💱</span><select id="currencyFilter"><option value="">כל המטבעות</option></select></label>
+<label class="control"><span>↕️</span><select id="sortFilter"><option value="default">מיון ברירת מחדל</option><option value="amount-desc">קצובה מהגבוה לנמוך</option><option value="amount-asc">קצובה מהנמוך לגבוה</option><option value="country-asc">מדינה א׳-ת׳</option><option value="city-asc">עיר א׳-ת׳</option></select></label>
+<label class="control"><span>🖼️</span><select id="cardLimit"><option value="18">18 כרטיסים</option><option value="30">30 כרטיסים</option><option value="50">50 כרטיסים</option></select></label>
+</div>
+</section>
+
+<section class="layout">
+<aside class="panel cards-panel">
+<div class="panel-head"><div><h2>יעדים מודגשים</h2><small>כרטיסים עם תמונות</small></div><small id="cardCount">0 תוצאות</small></div>
+<div class="cards" id="cardsContainer"></div>
+</aside>
+
+<section class="panel">
+<div class="panel-head"><div><h2>קצובות לינה</h2><small>חיפוש מהיר גם בפלאפון</small></div><small id="statsText">טוען נתונים...</small></div>
+<div class="summary-bar"><div id="summaryText">המערכת מציגה את כל היעדים כרגע</div><div id="selectedText">לא נבחר יעד ספציפי</div></div>
+
+<div class="table-wrap desktop-table">
+<table>
+<thead><tr><th>מדינה</th><th>עיר</th><th>מטבע</th><th>קצובת לינה</th></tr></thead>
+<tbody id="tableBody"></tbody>
+</table>
+<div class="no-results" id="noResults"><strong>לא נמצאו תוצאות</strong>נסה לשנות את החיפוש או לבחור מסננים אחרים.</div>
+</div>
+
+<div class="mobile-list" id="mobileList"></div>
+</section>
+</section>
+
+<p class="footer-note">קובץ פרימיום מלא, עם כל היעדים וביצועי מובייל משופרים.</p>
+</div>
+
+<script>
+const data = [{"country": "Albania", "city": "כל המדינה", "currency": "EUR", "amount": "150"}, {"country": "Angola", "city": "כל המדינה", "currency": "USD", "amount": "325"}, {"country": "Antigua and Barbuda", "city": "כל המדינה", "currency": "USD", "amount": "445"}, {"country": "Argentina", "city": "כל המדינה", "currency": "USD", "amount": "205"}, {"country": "Armenia", "city": "כל המדינה", "currency": "USD", "amount": "135"}, {"country": "Australia", "city": "Sydney", "currency": "AUD", "amount": "345"}, {"country": "Australia", "city": "יתר המדינה", "currency": "AUD", "amount": "250"}, {"country": "Austria", "city": "כל המדינה", "currency": "EUR", "amount": "180"}, {"country": "Azerbaijan", "city": "כל המדינה", "currency": "USD", "amount": "145"}, {"country": "Bahamas", "city": "כל המדינה", "currency": "USD", "amount": "415"}, {"country": "Bahrain", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Barbados", "city": "כל המדינה", "currency": "USD", "amount": "365"}, {"country": "Belarus", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Belgium", "city": "כל המדינה", "currency": "EUR", "amount": "235"}, {"country": "Belize", "city": "כל המדינה", "currency": "USD", "amount": "195"}, {"country": "Benin", "city": "כל המדינה", "currency": "USD", "amount": "170"}, {"country": "Bolivia", "city": "כל המדינה", "currency": "USD", "amount": "125"}, {"country": "Bosnia", "city": "כל המדינה", "currency": "USD", "amount": "105"}, {"country": "Botswana", "city": "כל המדינה", "currency": "USD", "amount": "135"}, {"country": "Brazil", "city": "כל המדינה", "currency": "USD", "amount": "135"}, {"country": "Brunei", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Bulgaria", "city": "כל המדינה", "currency": "EUR", "amount": "140"}, {"country": "Burkina Faso", "city": "כל המדינה", "currency": "USD", "amount": "155"}, {"country": "Burundi", "city": "כל המדינה", "currency": "USD", "amount": "145"}, {"country": "Cambodia", "city": "כל המדינה", "currency": "USD", "amount": "120"}, {"country": "Cameroon", "city": "כל המדינה", "currency": "USD", "amount": "200"}, {"country": "Canada", "city": "כל המדינה", "currency": "CAD", "amount": "340"}, {"country": "Central African Republic", "city": "כל המדינה", "currency": "USD", "amount": "125"}, {"country": "Chad", "city": "כל המדינה", "currency": "USD", "amount": "230"}, {"country": "Chile", "city": "כל המדינה", "currency": "USD", "amount": "185"}, {"country": "China", "city": "כל המדינה", "currency": "CNY", "amount": "1065"}, {"country": "Colombia", "city": "כל המדינה", "currency": "USD", "amount": "185"}, {"country": "Congo", "city": "כל המדינה", "currency": "USD", "amount": "240"}, {"country": "Cook Islands", "city": "כל המדינה", "currency": "NZD", "amount": "495"}, {"country": "Costa Rica", "city": "כל המדינה", "currency": "USD", "amount": "195"}, {"country": "Cote d'Ivoire", "city": "כל המדינה", "currency": "EUR", "amount": "185"}, {"country": "Croatia", "city": "כל המדינה", "currency": "EUR", "amount": "120"}, {"country": "Cuba", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Cyprus", "city": "כל המדינה", "currency": "EUR", "amount": "165"}, {"country": "Czech Republic", "city": "כל המדינה", "currency": "EUR", "amount": "140"}, {"country": "Democratic Republic of the Congo", "city": "כל המדינה", "currency": "USD", "amount": "225"}, {"country": "Denmark", "city": "כל המדינה", "currency": "DKK", "amount": "1690"}, {"country": "Djibouti", "city": "כל המדינה", "currency": "USD", "amount": "230"}, {"country": "Dominican Republic", "city": "כל המדינה", "currency": "USD", "amount": "205"}, {"country": "East Timor", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Ecuador", "city": "כל המדינה", "currency": "USD", "amount": "220"}, {"country": "Egypt", "city": "כל המדינה", "currency": "USD", "amount": "190"}, {"country": "El Salvador", "city": "כל המדינה", "currency": "USD", "amount": "185"}, {"country": "Equatorial Guinea", "city": "כל המדינה", "currency": "USD", "amount": "195"}, {"country": "Eritrea", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Estonia", "city": "כל המדינה", "currency": "EUR", "amount": "140"}, {"country": "Ethiopia", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Fiji", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Finland", "city": "כל המדינה", "currency": "EUR", "amount": "175"}, {"country": "France", "city": "Paris", "currency": "EUR", "amount": "320"}, {"country": "France", "city": "יתר המדינה", "currency": "EUR", "amount": "220"}, {"country": "Gabon", "city": "כל המדינה", "currency": "USD", "amount": "225"}, {"country": "Georgia", "city": "כל המדינה", "currency": "USD", "amount": "175"}, {"country": "Germany", "city": "כל המדינה", "currency": "EUR", "amount": "180"}, {"country": "Ghana", "city": "כל המדינה", "currency": "USD", "amount": "225"}, {"country": "Greece", "city": "כל המדינה", "currency": "EUR", "amount": "180"}, {"country": "Guatemala", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Guinea", "city": "כל המדינה", "currency": "EUR", "amount": "160"}, {"country": "Guyana", "city": "כל המדינה", "currency": "USD", "amount": "170"}, {"country": "Haiti", "city": "כל המדינה", "currency": "USD", "amount": "185"}, {"country": "Honduras", "city": "כל המדינה", "currency": "USD", "amount": "185"}, {"country": "Hong Kong", "city": "כל המדינה", "currency": "HKD", "amount": "1815"}, {"country": "Hungary", "city": "כל המדינה", "currency": "EUR", "amount": "150"}, {"country": "Iceland", "city": "כל המדינה", "currency": "USD", "amount": "280"}, {"country": "India", "city": "כל המדינה", "currency": "USD", "amount": "190"}, {"country": "Indonesia", "city": "כל המדינה", "currency": "USD", "amount": "125"}, {"country": "Irish Republic", "city": "כל המדינה", "currency": "EUR", "amount": "230"}, {"country": "Italy", "city": "כל המדינה", "currency": "EUR", "amount": "295"}, {"country": "Jamaica", "city": "כל המדינה", "currency": "USD", "amount": "280"}, {"country": "Japan", "city": "Tokyo", "currency": "JPY", "amount": "37120"}, {"country": "Japan", "city": "יתר המדינה", "currency": "JPY", "amount": "21025"}, {"country": "Jordan", "city": "כל המדינה", "currency": "JOD", "amount": "90"}, {"country": "Kazakhstan", "city": "כל המדינה", "currency": "USD", "amount": "130"}, {"country": "Kenya", "city": "כל המדינה", "currency": "USD", "amount": "210"}, {"country": "Korea Republic", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Kosovo", "city": "כל המדינה", "currency": "EUR", "amount": "95"}, {"country": "Kyrgyzstan", "city": "כל המדינה", "currency": "USD", "amount": "130"}, {"country": "Laos", "city": "כל המדינה", "currency": "USD", "amount": "120"}, {"country": "Latvia", "city": "כל המדינה", "currency": "EUR", "amount": "95"}, {"country": "Lesotho", "city": "כל המדינה", "currency": "USD", "amount": "110"}, {"country": "Liberia", "city": "כל המדינה", "currency": "USD", "amount": "225"}, {"country": "Lithuania", "city": "כל המדינה", "currency": "EUR", "amount": "105"}, {"country": "Luxembourg", "city": "כל המדינה", "currency": "EUR", "amount": "235"}, {"country": "Macau", "city": "כל המדינה", "currency": "USD", "amount": "190"}, {"country": "Macedonia", "city": "כל המדינה", "currency": "EUR", "amount": "95"}, {"country": "Madagascar", "city": "כל המדינה", "currency": "EUR", "amount": "120"}, {"country": "Malawi", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Malaysia", "city": "כל המדינה", "currency": "USD", "amount": "110"}, {"country": "Maldives", "city": "כל המדינה", "currency": "USD", "amount": "300"}, {"country": "Mali", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Malta", "city": "כל המדינה", "currency": "EUR", "amount": "140"}, {"country": "Mauritania", "city": "כל המדינה", "currency": "EUR", "amount": "135"}, {"country": "Mauritius", "city": "כל המדינה", "currency": "USD", "amount": "315"}, {"country": "Mexico", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Moldova", "city": "כל המדינה", "currency": "EUR", "amount": "150"}, {"country": "Monaco", "city": "כל המדינה", "currency": "EUR", "amount": "325"}, {"country": "Mongolia", "city": "כל המדינה", "currency": "USD", "amount": "135"}, {"country": "Montenegro", "city": "כל המדינה", "currency": "EUR", "amount": "90"}, {"country": "Morocco", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Mozambique", "city": "כל המדינה", "currency": "USD", "amount": "170"}, {"country": "Myanmar", "city": "כל המדינה", "currency": "USD", "amount": "100"}, {"country": "Namibia", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Nepal", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Netherlands", "city": "Amsterdam", "currency": "EUR", "amount": "260"}, {"country": "Netherlands", "city": "יתר המדינה", "currency": "EUR", "amount": "155"}, {"country": "New Zealand", "city": "Niue", "currency": "USD", "amount": "445"}, {"country": "New Zealand", "city": "יתר המדינה", "currency": "NZD", "amount": "280"}, {"country": "Nicaragua", "city": "כל המדינה", "currency": "USD", "amount": "155"}, {"country": "Niger", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Nigeria", "city": "כל המדינה", "currency": "USD", "amount": "205"}, {"country": "Norway", "city": "כל המדינה", "currency": "NOK", "amount": "1815"}, {"country": "Oman", "city": "כל המדינה", "currency": "USD", "amount": "245"}, {"country": "Panama", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Papua New Guinea", "city": "כל המדינה", "currency": "USD", "amount": "175"}, {"country": "Paraguay", "city": "כל המדינה", "currency": "USD", "amount": "120"}, {"country": "Peru", "city": "כל המדינה", "currency": "USD", "amount": "170"}, {"country": "Philippines", "city": "כל המדינה", "currency": "USD", "amount": "155"}, {"country": "Poland", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Portugal", "city": "כל המדינה", "currency": "EUR", "amount": "165"}, {"country": "Puerto Rico", "city": "כל המדינה", "currency": "USD", "amount": "355"}, {"country": "Qatar", "city": "כל המדינה", "currency": "USD", "amount": "155"}, {"country": "Romania", "city": "כל המדינה", "currency": "EUR", "amount": "130"}, {"country": "Russia", "city": "Moscow", "currency": "RUB", "amount": "17,500"}, {"country": "Russia", "city": "יתר המדינה", "currency": "RUB", "amount": "15,300"}, {"country": "Rwanda", "city": "כל המדינה", "currency": "USD", "amount": "155"}, {"country": "Samoa", "city": "כל המדינה", "currency": "USD", "amount": "250"}, {"country": "Saudi Arabia", "city": "כל המדינה", "currency": "SAR", "amount": "735"}, {"country": "Senegal", "city": "כל המדינה", "currency": "USD", "amount": "210"}, {"country": "Serbia", "city": "כל המדינה", "currency": "EUR", "amount": "125"}, {"country": "Seychelles", "city": "כל המדינה", "currency": "EUR", "amount": "250"}, {"country": "Sierra Leone", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Singapore", "city": "כל המדינה", "currency": "SGD", "amount": "410"}, {"country": "Slovakia", "city": "כל המדינה", "currency": "EUR", "amount": "130"}, {"country": "Slovenia", "city": "כל המדינה", "currency": "EUR", "amount": "135"}, {"country": "South Africa", "city": "כל המדינה", "currency": "USD", "amount": "120"}, {"country": "Spain", "city": "כל המדינה", "currency": "EUR", "amount": "270"}, {"country": "Sri Lanka", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Sudan", "city": "כל המדינה", "currency": "USD", "amount": "215"}, {"country": "Surinam", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Sweden", "city": "כל המדינה", "currency": "SEK", "amount": "1935"}, {"country": "Switzerland", "city": "Geneva", "currency": "CHF", "amount": "300"}, {"country": "Switzerland", "city": "Zurich", "currency": "CHF", "amount": "320"}, {"country": "Switzerland", "city": "יתר המדינה", "currency": "CHF", "amount": "220"}, {"country": "Taiwan", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Tajikistan", "city": "כל המדינה", "currency": "USD", "amount": "140"}, {"country": "Tanzania", "city": "כל המדינה", "currency": "USD", "amount": "165"}, {"country": "Thailand", "city": "כל המדינה", "currency": "USD", "amount": "130"}, {"country": "Togo", "city": "כל המדינה", "currency": "EUR", "amount": "125"}, {"country": "Tonga", "city": "כל המדינה", "currency": "USD", "amount": "160"}, {"country": "Trinidad and Tobago", "city": "כל המדינה", "currency": "USD", "amount": "230"}, {"country": "Tunisia", "city": "כל המדינה", "currency": "EUR", "amount": "115"}, {"country": "Turkey", "city": "כל המדינה", "currency": "EUR", "amount": "150"}, {"country": "Turkmenistan", "city": "כל המדינה", "currency": "USD", "amount": "180"}, {"country": "Uganda", "city": "כל המדינה", "currency": "USD", "amount": "215"}, {"country": "Ukraine", "city": "כל המדינה", "currency": "USD", "amount": "130"}, {"country": "United Arab Emirates", "city": "כל המדינה", "currency": "USD", "amount": "235"}, {"country": "United Kingdom", "city": "Central London", "currency": "GBP", "amount": "270"}, {"country": "United Kingdom", "city": "יתר המדינה", "currency": "GBP", "amount": "145"}, {"country": "United States of America", "city": "Atlanta GA", "currency": "USD", "amount": "255"}, {"country": "United States of America", "city": "Boston MA", "currency": "USD", "amount": "300"}, {"country": "United States of America", "city": "Chicago IL", "currency": "USD", "amount": "270"}, {"country": "United States of America", "city": "Houston TX", "currency": "USD", "amount": "275"}, {"country": "United States of America", "city": "Los Angeles CA", "currency": "USD", "amount": "290"}, {"country": "United States of America", "city": "Miami FL", "currency": "USD", "amount": "255"}, {"country": "United States of America", "city": "New York NY", "currency": "USD", "amount": "520"}, {"country": "United States of America", "city": "San Francisco CA", "currency": "USD", "amount": "295"}, {"country": "United States of America", "city": "Washington DC", "currency": "USD", "amount": "415"}, {"country": "United States of America", "city": "יתר המדינה", "currency": "USD", "amount": "255"}, {"country": "Uruguay", "city": "Montevideo", "currency": "USD", "amount": "180"}, {"country": "Uzbekistan", "city": "Tashkent", "currency": "USD", "amount": "150"}, {"country": "Venezuela", "city": "Caracas", "currency": "USD", "amount": "160"}, {"country": "Vietnam", "city": "Hanoi", "currency": "USD", "amount": "150"}, {"country": "Zambia", "city": "Lusaka", "currency": "USD", "amount": "205"}, {"country": "Zimbabwe", "city": "Harare", "currency": "USD", "amount": "180"}];
+const flagMap = {"Albania": "🇦🇱", "Angola": "🇦🇴", "Antigua and Barbuda": "🇦🇬", "Argentina": "🇦🇷", "Armenia": "🇦🇲", "Australia": "🇦🇺", "Austria": "🇦🇹", "Azerbaijan": "🇦🇿", "Bahamas": "🇧🇸", "Bahrain": "🇧🇭", "Barbados": "🇧🇧", "Belarus": "🇧🇾", "Belgium": "🇧🇪", "Belize": "🇧🇿", "Benin": "🇧🇯", "Bolivia": "🇧🇴", "Bosnia": "🇧🇦", "Botswana": "🇧🇼", "Brazil": "🇧🇷", "Brunei": "🇧🇳", "Bulgaria": "🇧🇬", "Burkina Faso": "🇧🇫", "Burundi": "🇧🇮", "Cambodia": "🇰🇭", "Cameroon": "🇨🇲", "Canada": "🇨🇦", "Central African Republic": "🇨🇫", "Chad": "🇹🇩", "Chile": "🇨🇱", "China": "🇨🇳", "Colombia": "🇨🇴", "Congo": "🇨🇬", "Cook Islands": "🇨🇰", "Costa Rica": "🇨🇷", "Cote d'Ivoire": "🇨🇮", "Croatia": "🇭🇷", "Cuba": "🇨🇺", "Cyprus": "🇨🇾", "Czech Republic": "🇨🇿", "Democratic Republic of the Congo": "🇨🇩", "Denmark": "🇩🇰", "Djibouti": "🇩🇯", "Dominican Republic": "🇩🇴", "East Timor": "🇹🇱", "Ecuador": "🇪🇨", "Egypt": "🇪🇬", "El Salvador": "🇸🇻", "Equatorial Guinea": "🇬🇶", "Eritrea": "🇪🇷", "Estonia": "🇪🇪", "Ethiopia": "🇪🇹", "Fiji": "🇫🇯", "Finland": "🇫🇮", "France": "🇫🇷", "Gabon": "🇬🇦", "Georgia": "🇬🇪", "Germany": "🇩🇪", "Ghana": "🇬🇭", "Greece": "🇬🇷", "Guatemala": "🇬🇹", "Guinea": "🇬🇳", "Guyana": "🇬🇾", "Haiti": "🇭🇹", "Honduras": "🇭🇳", "Hong Kong": "🇭🇰", "Hungary": "🇭🇺", "Iceland": "🇮🇸", "India": "🇮🇳", "Indonesia": "🇮🇩", "Irish Republic": "🇮🇪", "Italy": "🇮🇹", "Jamaica": "🇯🇲", "Japan": "🇯🇵", "Jordan": "🇯🇴", "Kazakhstan": "🇰🇿", "Kenya": "🇰🇪", "Korea Republic": "🇰🇷", "Kosovo": "🇽🇰", "Kyrgyzstan": "🇰🇬", "Laos": "🇱🇦", "Latvia": "🇱🇻", "Lesotho": "🇱🇸", "Liberia": "🇱🇷", "Lithuania": "🇱🇹", "Luxembourg": "🇱🇺", "Macau": "🇲🇴", "Macedonia": "🇲🇰", "Madagascar": "🇲🇬", "Malawi": "🇲🇼", "Malaysia": "🇲🇾", "Maldives": "🇲🇻", "Mali": "🇲🇱", "Malta": "🇲🇹", "Mauritania": "🇲🇷", "Mauritius": "🇲🇺", "Mexico": "🇲🇽", "Moldova": "🇲🇩", "Monaco": "🇲🇨", "Mongolia": "🇲🇳", "Montenegro": "🇲🇪", "Morocco": "🇲🇦", "Mozambique": "🇲🇿", "Myanmar": "🇲🇲", "Namibia": "🇳🇦", "Nepal": "🇳🇵", "Netherlands": "🇳🇱", "New Zealand": "🇳🇿", "Nicaragua": "🇳🇮", "Niger": "🇳🇪", "Nigeria": "🇳🇬", "Norway": "🇳🇴", "Oman": "🇴🇲", "Panama": "🇵🇦", "Papua New Guinea": "🇵🇬", "Paraguay": "🇵🇾", "Peru": "🇵🇪", "Philippines": "🇵🇭", "Poland": "🇵🇱", "Portugal": "🇵🇹", "Puerto Rico": "🇵🇷", "Qatar": "🇶🇦", "Romania": "🇷🇴", "Russia": "🇷🇺", "Rwanda": "🇷🇼", "Samoa": "🇼🇸", "Saudi Arabia": "🇸🇦", "Senegal": "🇸🇳", "Serbia": "🇷🇸", "Seychelles": "🇸🇨", "Sierra Leone": "🇸🇱", "Singapore": "🇸🇬", "Slovakia": "🇸🇰", "Slovenia": "🇸🇮", "South Africa": "🇿🇦", "Spain": "🇪🇸", "Sri Lanka": "🇱🇰", "Sudan": "🇸🇩", "Surinam": "🇸🇷", "Sweden": "🇸🇪", "Switzerland": "🇨🇭", "Taiwan": "🇹🇼", "Tajikistan": "🇹🇯", "Tanzania": "🇹🇿", "Thailand": "🇹🇭", "Togo": "🇹🇬", "Tonga": "🇹🇴", "Trinidad and Tobago": "🇹🇹", "Tunisia": "🇹🇳", "Turkey": "🇹🇷", "Turkmenistan": "🇹🇲", "Uganda": "🇺🇬", "Ukraine": "🇺🇦", "United Arab Emirates": "🇦🇪", "United Kingdom": "🇬🇧", "United States of America": "🇺🇸", "Uruguay": "🇺🇾", "Uzbekistan": "🇺🇿", "Venezuela": "🇻🇪", "Vietnam": "🇻🇳", "Zambia": "🇿🇲", "Zimbabwe": "🇿🇼"};
+
+const tableBody = document.getElementById("tableBody");
+const mobileList = document.getElementById("mobileList");
+const cardsContainer = document.getElementById("cardsContainer");
+const statsText = document.getElementById("statsText");
+const summaryText = document.getElementById("summaryText");
+const selectedText = document.getElementById("selectedText");
+const cardCount = document.getElementById("cardCount");
+const noResults = document.getElementById("noResults");
+const visibleResults = document.getElementById("visibleResults");
+
+const searchInput = document.getElementById("searchInput");
+const countryFilter = document.getElementById("countryFilter");
+const currencyFilter = document.getElementById("currencyFilter");
+const sortFilter = document.getElementById("sortFilter");
+const cardLimit = document.getElementById("cardLimit");
+
+let selectedKey = "";
+
+function normalizeAmount(value){return Number(String(value).replace(/,/g,""))}
+function getFlag(country){return flagMap[country] || "🌍"}
+function getCountryList(){return [...new Set(data.map(item => item.country))].sort((a,b)=>a.localeCompare(b))}
+function getCurrencyList(){return [...new Set(data.map(item => item.currency))].sort((a,b)=>a.localeCompare(b))}
+function getImageUrl(item){
+  const location = (item.city === "כל המדינה" || item.city === "יתר המדינה") ? item.country : `${item.city} ${item.country}`;
+  return `https://source.unsplash.com/800x500/?${encodeURIComponent(location + " travel skyline")}`;
+}
+
+function populateFilters(){
+  getCountryList().forEach(country=>{
+    const option=document.createElement("option");
+    option.value=country;
+    option.textContent=`${getFlag(country)} ${country}`;
+    countryFilter.appendChild(option);
+  });
+  getCurrencyList().forEach(currency=>{
+    const option=document.createElement("option");
+    option.value=currency;
+    option.textContent=currency;
+    currencyFilter.appendChild(option);
+  });
+}
+
+function updateHeroStats(){
+  document.getElementById("totalDestinations").textContent=data.length;
+  document.getElementById("totalCountries").textContent=getCountryList().length;
+  document.getElementById("totalCurrencies").textContent=getCurrencyList().length;
+}
+
+function getBaseFilteredRows(){
+  const value=searchInput.value.trim().toLowerCase();
+  const selectedCountry=countryFilter.value;
+  const selectedCurrency=currencyFilter.value;
+  const sortValue=sortFilter.value;
+
+  let filtered=data.filter(item=>{
+    const matchesSearch=
+      item.country.toLowerCase().includes(value) ||
+      item.city.toLowerCase().includes(value) ||
+      item.currency.toLowerCase().includes(value) ||
+      String(item.amount).toLowerCase().includes(value);
+
+    const matchesCountry=!selectedCountry || item.country===selectedCountry;
+    const matchesCurrency=!selectedCurrency || item.currency===selectedCurrency;
+    return matchesSearch && matchesCountry && matchesCurrency;
+  });
+
+  if(sortValue==="amount-desc"){filtered.sort((a,b)=>normalizeAmount(b.amount)-normalizeAmount(a.amount))}
+  else if(sortValue==="amount-asc"){filtered.sort((a,b)=>normalizeAmount(a.amount)-normalizeAmount(b.amount))}
+  else if(sortValue==="country-asc"){filtered.sort((a,b)=>a.country.localeCompare(b.country))}
+  else if(sortValue==="city-asc"){filtered.sort((a,b)=>a.city.localeCompare(b.city))}
+
+  return filtered;
+}
+
+function renderCards(rows){
+  cardsContainer.innerHTML="";
+  const limit=Number(cardLimit.value || 18);
+  const cardsData=rows.slice(0,limit);
+  cardCount.textContent=`${rows.length} תוצאות`;
+
+  cardsData.forEach(item=>{
+    const key=`${item.country}__${item.city}`;
+    const card=document.createElement("article");
+    card.className=`card ${selectedKey===key ? "active" : ""}`;
+    card.innerHTML=`
+      <div class="media">
+        <img src="${getImageUrl(item)}" alt="${item.city} ${item.country}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80';" />
+        <div class="flag">${getFlag(item.country)}</div>
+        <div class="badge">${item.currency} · ${item.amount}</div>
+        <div class="caption">${item.city}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <div><h3>${item.city}</h3><small>${item.country}</small></div>
+          <span class="pill">${item.amount}</span>
         </div>
-        <div class="stat">
-          <span class="label">מדינות במאגר</span>
-          <span class="value" id="totalCountries">0</span>
-        </div>
-        <div class="stat">
-          <span class="label">מטבעות שונים</span>
-          <span class="value" id="totalCurrencies">0</span>
-        </div>
-        <div class="stat">
-          <span class="label">תוצאות מוצגות</span>
-          <span class="value" id="visibleResults">0</span>
+        <div class="meta">
+          <span>מטבע: ${item.currency}</span>
+          <span>דגל: ${getFlag(item.country)}</span>
+          <span>${item.country}</span>
         </div>
       </div>
-    </section>
+    `;
+    card.addEventListener("click",()=>{selectedKey=selectedKey===key ? "" : key; renderAll()});
+    cardsContainer.appendChild(card);
+  });
+}
 
-    <section class="toolbar">
-      <label class="control">
-        <span>🔎</span>
-        <input type="text" id="searchInput" placeholder="חפש מדינה, עיר, מטבע או סכום..." />
-      </label>
-      <label class="control">
-        <span>🌍</span>
-        <select id="countryFilter">
-          <option value="">כל המדינות</option>
-        </select>
-      </label>
-      <label class="control">
-        <span>💱</span>
-        <select id="currencyFilter">
-          <option value="">כל המטבעות</option>
-        </select>
-      </label>
-      <label class="control">
-        <span>↕️</span>
-        <select id="sortFilter">
-          <option value="default">מיון ברירת מחדל</option>
-          <option value="amount-desc">קצובה מהגבוה לנמוך</option>
-          <option value="amount-asc">קצובה מהנמוך לגבוה</option>
-          <option value="country-asc">מדינה א׳-ת׳</option>
-          <option value="city-asc">עיר א׳-ת׳</option>
-        </select>
-      </label>
-      <label class="control">
-        <span>🖼️</span>
-        <select id="cardLimit">
-          <option value="18">18 כרטיסים</option>
-          <option value="30">30 כרטיסים</option>
-          <option value="50">50 כרטיסים</option>
-        </select>
-      </label>
-    </section>
+function renderTable(rows){
+  tableBody.innerHTML="";
+  mobileList.innerHTML="";
 
-    <section class="layout">
-      <aside class="panel">
-        <div class="panel-head">
-          <div>
-            <h3>יעדים מודגשים</h3>
-            <small>עם תמונה ודגל</small>
-          </div>
-          <small id="cardCount">0 תוצאות</small>
-        </div>
-        <div class="cards" id="cardsContainer"></div>
-      </aside>
+  rows.forEach(item=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td><div class="country-cell"><span class="flag-chip">${getFlag(item.country)}</span><span>${item.country}</span></div></td>
+      <td>${item.city}</td>
+      <td>${item.currency}</td>
+      <td class="amount">${item.amount}</td>
+    `;
+    tableBody.appendChild(tr);
 
-      <section class="table-panel">
-        <div class="table-head">
-          <div>
-            <h3>טבלת קצובות</h3>
-            <small>אפשר לחפש לפי מדינה, עיר, מטבע או סכום</small>
-          </div>
-          <small id="statsText">טוען נתונים...</small>
-        </div>
+    const mobileRow=document.createElement("div");
+    mobileRow.className="mobile-row";
+    mobileRow.innerHTML=`
+      <div class="mobile-row-top">
+        <div><h4>${getFlag(item.country)} ${item.city}</h4><small>${item.country}</small></div>
+        <div class="pill">${item.amount}</div>
+      </div>
+      <div class="mobile-tags">
+        <span>מטבע: ${item.currency}</span>
+        <span>מדינה: ${item.country}</span>
+      </div>
+    `;
+    mobileList.appendChild(mobileRow);
+  });
 
-        <div class="table-topbar">
-          <div id="summaryText">המערכת מציגה את כל היעדים כרגע</div>
-          <div id="selectedText">לא נבחר יעד ספציפי</div>
-        </div>
+  statsText.textContent=`סה״כ תוצאות: ${rows.length}`;
+  visibleResults.textContent=rows.length;
+  summaryText.textContent=rows.length===data.length ? "המערכת מציגה את כל היעדים כרגע" : `מוצגות ${rows.length} תוצאות לאחר סינון`;
 
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>מדינה</th>
-                <th>עיר</th>
-                <th>מטבע</th>
-                <th>קצובת לינה</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-          </table>
-          <div class="no-results" id="noResults">
-            <strong>לא נמצאו תוצאות</strong>
-            נסה לשנות את החיפוש או לבחור מסננים אחרים.
-          </div>
-        </div>
-      </section>
-    </section>
+  if(selectedKey){
+    const [country,city]=selectedKey.split("__");
+    selectedText.textContent=`נבחר יעד: ${country} / ${city}`;
+  } else {
+    selectedText.textContent="לא נבחר יעד ספציפי";
+  }
 
-    <p class="footer-note">גרסה מלאה עם כל הרשימה שהעברת.</p>
-  </div>
+  noResults.style.display=rows.length ? "none" : "block";
+}
 
-  <script>
-    const data = [
-      { country: "Albania", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Angola", city: "כל המדינה", currency: "USD", amount: "325" },
-      { country: "Antigua and Barbuda", city: "כל המדינה", currency: "USD", amount: "445" },
-      { country: "Argentina", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "Armenia", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Australia", city: "Sydney", currency: "AUD", amount: "345" },
-      { country: "Australia", city: "יתר המדינה", currency: "AUD", amount: "250" },
-      { country: "Austria", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Azerbaijan", city: "כל המדינה", currency: "USD", amount: "145" },
-      { country: "Bahamas", city: "כל המדינה", currency: "USD", amount: "415" },
-      { country: "Bahrain", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Barbados", city: "כל המדינה", currency: "USD", amount: "365" },
-      { country: "Belarus", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Belgium", city: "כל המדינה", currency: "EUR", amount: "235" },
-      { country: "Belize", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Benin", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Bolivia", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Bosnia", city: "כל המדינה", currency: "USD", amount: "105" },
-      { country: "Botswana", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Brazil", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Brunei", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Bulgaria", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Burkina Faso", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Burundi", city: "כל המדינה", currency: "USD", amount: "145" },
-      { country: "Cambodia", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Cameroon", city: "כל המדינה", currency: "USD", amount: "200" },
-      { country: "Canada", city: "כל המדינה", currency: "CAD", amount: "340" },
-      { country: "Central African Republic", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Chad", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Chile", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "China", city: "כל המדינה", currency: "CNY", amount: "1065" },
-      { country: "Colombia", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Congo", city: "כל המדינה", currency: "USD", amount: "240" },
-      { country: "Cook Islands", city: "כל המדינה", currency: "NZD", amount: "495" },
-      { country: "Costa Rica", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Cote d'Ivoire", city: "כל המדינה", currency: "EUR", amount: "185" },
-      { country: "Croatia", city: "כל המדינה", currency: "EUR", amount: "120" },
-      { country: "Cuba", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Cyprus", city: "כל המדינה", currency: "EUR", amount: "165" },
-      { country: "Czech Republic", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Democratic Republic of the Congo", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Denmark", city: "כל המדינה", currency: "DKK", amount: "1690" },
-      { country: "Djibouti", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Dominican Republic", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "East Timor", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Ecuador", city: "כל המדינה", currency: "USD", amount: "220" },
-      { country: "Egypt", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "El Salvador", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Equatorial Guinea", city: "כל המדינה", currency: "USD", amount: "195" },
-      { country: "Eritrea", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Estonia", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Ethiopia", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Fiji", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Finland", city: "כל המדינה", currency: "EUR", amount: "175" },
-      { country: "France", city: "Paris", currency: "EUR", amount: "320" },
-      { country: "France", city: "יתר המדינה", currency: "EUR", amount: "220" },
-      { country: "Gabon", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Georgia", city: "כל המדינה", currency: "USD", amount: "175" },
-      { country: "Germany", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Ghana", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Greece", city: "כל המדינה", currency: "EUR", amount: "180" },
-      { country: "Guatemala", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Guinea", city: "כל המדינה", currency: "EUR", amount: "160" },
-      { country: "Guyana", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Haiti", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Honduras", city: "כל המדינה", currency: "USD", amount: "185" },
-      { country: "Hong Kong", city: "כל המדינה", currency: "HKD", amount: "1815" },
-      { country: "Hungary", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Iceland", city: "כל המדינה", currency: "USD", amount: "280" },
-      { country: "India", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "Indonesia", city: "כל המדינה", currency: "USD", amount: "125" },
-      { country: "Irish Republic", city: "כל המדינה", currency: "EUR", amount: "230" },
-      { country: "Italy", city: "כל המדינה", currency: "EUR", amount: "295" },
-      { country: "Jamaica", city: "כל המדינה", currency: "USD", amount: "280" },
-      { country: "Japan", city: "Tokyo", currency: "JPY", amount: "37120" },
-      { country: "Japan", city: "יתר המדינה", currency: "JPY", amount: "21025" },
-      { country: "Jordan", city: "כל המדינה", currency: "JOD", amount: "90" },
-      { country: "Kazakhstan", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Kenya", city: "כל המדינה", currency: "USD", amount: "210" },
-      { country: "Korea Republic", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Kosovo", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Kyrgyzstan", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Laos", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Latvia", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Lesotho", city: "כל המדינה", currency: "USD", amount: "110" },
-      { country: "Liberia", city: "כל המדינה", currency: "USD", amount: "225" },
-      { country: "Lithuania", city: "כל המדינה", currency: "EUR", amount: "105" },
-      { country: "Luxembourg", city: "כל המדינה", currency: "EUR", amount: "235" },
-      { country: "Macau", city: "כל המדינה", currency: "USD", amount: "190" },
-      { country: "Macedonia", city: "כל המדינה", currency: "EUR", amount: "95" },
-      { country: "Madagascar", city: "כל המדינה", currency: "EUR", amount: "120" },
-      { country: "Malawi", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Malaysia", city: "כל המדינה", currency: "USD", amount: "110" },
-      { country: "Maldives", city: "כל המדינה", currency: "USD", amount: "300" },
-      { country: "Mali", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Malta", city: "כל המדינה", currency: "EUR", amount: "140" },
-      { country: "Mauritania", city: "כל המדינה", currency: "EUR", amount: "135" },
-      { country: "Mauritius", city: "כל המדינה", currency: "USD", amount: "315" },
-      { country: "Mexico", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Moldova", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Monaco", city: "כל המדינה", currency: "EUR", amount: "325" },
-      { country: "Mongolia", city: "כל המדינה", currency: "USD", amount: "135" },
-      { country: "Montenegro", city: "כל המדינה", currency: "EUR", amount: "90" },
-      { country: "Morocco", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Mozambique", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Myanmar", city: "כל המדינה", currency: "USD", amount: "100" },
-      { country: "Namibia", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Nepal", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Netherlands", city: "Amsterdam", currency: "EUR", amount: "260" },
-      { country: "Netherlands", city: "יתר המדינה", currency: "EUR", amount: "155" },
-      { country: "New Zealand", city: "Niue", currency: "USD", amount: "445" },
-      { country: "New Zealand", city: "יתר המדינה", currency: "NZD", amount: "280" },
-      { country: "Nicaragua", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Niger", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Nigeria", city: "כל המדינה", currency: "USD", amount: "205" },
-      { country: "Norway", city: "כל המדינה", currency: "NOK", amount: "1815" },
-      { country: "Oman", city: "כל המדינה", currency: "USD", amount: "245" },
-      { country: "Panama", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Papua New Guinea", city: "כל המדינה", currency: "USD", amount: "175" },
-      { country: "Paraguay", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Peru", city: "כל המדינה", currency: "USD", amount: "170" },
-      { country: "Philippines", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Poland", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Portugal", city: "כל המדינה", currency: "EUR", amount: "165" },
-      { country: "Puerto Rico", city: "כל המדינה", currency: "USD", amount: "355" },
-      { country: "Qatar", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Romania", city: "כל המדינה", currency: "EUR", amount: "130" },
-      { country: "Russia", city: "Moscow", currency: "RUB", amount: "17,500" },
-      { country: "Russia", city: "יתר המדינה", currency: "RUB", amount: "15,300" },
-      { country: "Rwanda", city: "כל המדינה", currency: "USD", amount: "155" },
-      { country: "Samoa", city: "כל המדינה", currency: "USD", amount: "250" },
-      { country: "Saudi Arabia", city: "כל המדינה", currency: "SAR", amount: "735" },
-      { country: "Senegal", city: "כל המדינה", currency: "USD", amount: "210" },
-      { country: "Serbia", city: "כל המדינה", currency: "EUR", amount: "125" },
-      { country: "Seychelles", city: "כל המדינה", currency: "EUR", amount: "250" },
-      { country: "Sierra Leone", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Singapore", city: "כל המדינה", currency: "SGD", amount: "410" },
-      { country: "Slovakia", city: "כל המדינה", currency: "EUR", amount: "130" },
-      { country: "Slovenia", city: "כל המדינה", currency: "EUR", amount: "135" },
-      { country: "South Africa", city: "כל המדינה", currency: "USD", amount: "120" },
-      { country: "Spain", city: "כל המדינה", currency: "EUR", amount: "270" },
-      { country: "Sri Lanka", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Sudan", city: "כל המדינה", currency: "USD", amount: "215" },
-      { country: "Surinam", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Sweden", city: "כל המדינה", currency: "SEK", amount: "1935" },
-      { country: "Switzerland", city: "Geneva", currency: "CHF", amount: "300" },
-      { country: "Switzerland", city: "Zurich", currency: "CHF", amount: "320" },
-      { country: "Switzerland", city: "יתר המדינה", currency: "CHF", amount: "220" },
-      { country: "Taiwan", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Tajikistan", city: "כל המדינה", currency: "USD", amount: "140" },
-      { country: "Tanzania", city: "כל המדינה", currency: "USD", amount: "165" },
-      { country: "Thailand", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "Togo", city: "כל המדינה", currency: "EUR", amount: "125" },
-      { country: "Tonga", city: "כל המדינה", currency: "USD", amount: "160" },
-      { country: "Trinidad and Tobago", city: "כל המדינה", currency: "USD", amount: "230" },
-      { country: "Tunisia", city: "כל המדינה", currency: "EUR", amount: "115" },
-      { country: "Turkey", city: "כל המדינה", currency: "EUR", amount: "150" },
-      { country: "Turkmenistan", city: "כל המדינה", currency: "USD", amount: "180" },
-      { country: "Uganda", city: "כל המדינה", currency: "USD", amount: "215" },
-      { country: "Ukraine", city: "כל המדינה", currency: "USD", amount: "130" },
-      { country: "United Arab Emirates", city: "כל המדינה", currency: "USD", amount: "235" },
-      { country: "United Kingdom", city: "Central London", currency: "GBP", amount: "270" },
-      { country: "United Kingdom", city: "יתר המדינה", currency: "GBP", amount: "145" },
-      { country: "United States of America", city: "Atlanta GA", currency: "USD", amount: "255" },
-      { country: "United States of America", city: "Boston MA", currency: "USD", amount: "300" },
-      { country: "United States of America", city: "Chicago IL", currency: "USD", amount: "270" },
-      { country: "United States of America", city: "Houston TX", currency: "USD", amount: "275" },
-      { country: "United States of America", city: "Los Angeles CA", currency: "USD", amount: "290" },
-      { country: "United States of America", city: "Miami FL", currency: "USD", amount: "255" },
-      { country: "United States of America", city: "New York NY", currency: "USD", amount: "520" },
-      { country: "United States of America", city: "San Francisco CA", currency: "USD", amount: "295" },
-      { country: "United States of America", city: "Washington DC", currency: "USD", amount: "415" },
-      { country: "United States of America", city: "יתר המדינה", currency: "USD", amount: "255" },
-      { country: "Uruguay", city: "Montevideo", currency: "USD", amount: "180" },
-      { country: "Uzbekistan", city: "Tashkent", currency: "USD", amount: "150" },
-      { country: "Venezuela", city: "Caracas", currency: "USD", amount: "160" },
-      { country: "Vietnam", city: "Hanoi", currency: "USD", amount: "150" },
-      { country: "Zambia", city: "Lusaka", currency: "USD", amount: "205" },
-      { country: "Zimbabwe", city: "Harare", currency: "USD", amount: "180" }
-    ];
+function renderAll(){
+  const baseRows=getBaseFilteredRows();
+  renderCards(baseRows);
+  let tableRows=baseRows;
+  if(selectedKey){tableRows=baseRows.filter(item => `${item.country}__${item.city}`===selectedKey)}
+  renderTable(tableRows);
+}
 
-    const flagMap = {
-      "Albania":"🇦🇱","Angola":"🇦🇴","Antigua and Barbuda":"🇦🇬","Argentina":"🇦🇷","Armenia":"🇦🇲",
-      "Australia":"🇦🇺","Austria":"🇦🇹","Azerbaijan":"🇦🇿","Bahamas":"🇧🇸","Bahrain":"🇧🇭",
-      "Barbados":"🇧🇧","Belarus":"🇧🇾","Belgium":"🇧🇪","Belize":"🇧🇿","Benin":"🇧🇯",
-      "Bolivia":"🇧🇴","Bosnia":"🇧🇦","Botswana":"🇧🇼","Brazil":"🇧🇷","Brunei":"🇧🇳",
-      "Bulgaria":"🇧🇬","Burkina Faso":"🇧🇫","Burundi":"🇧🇮","Cambodia":"🇰🇭","Cameroon":"🇨🇲",
-      "Canada":"🇨🇦","Central African Republic":"🇨🇫","Chad":"🇹🇩","Chile":"🇨🇱","China":"🇨🇳",
-      "Colombia":"🇨🇴","Congo":"🇨🇬","Cook Islands":"🇨🇰","Costa Rica":"🇨🇷","Cote d'Ivoire":"🇨🇮",
-      "Croatia":"🇭🇷","Cuba":"🇨🇺","Cyprus":"🇨🇾","Czech Republic":"🇨🇿","Democratic Republic of the Congo":"🇨🇩",
-      "Denmark":"🇩🇰","Djibouti":"🇩🇯","Dominican Republic":"🇩🇴","East Timor":"🇹🇱","Ecuador":"🇪🇨",
-      "Egypt":"🇪🇬","El Salvador":"🇸🇻","Equatorial Guinea":"🇬🇶","Eritrea":"🇪🇷","Estonia":"🇪🇪",
-      "Ethiopia":"🇪🇹","Fiji":"🇫🇯","Finland":"🇫🇮","France":"🇫🇷","Gabon":"🇬🇦",
-      "Georgia":"🇬🇪","Germany":"🇩🇪","Ghana":"🇬🇭","Greece":"🇬🇷","Guatemala":"🇬🇹",
-      "Guinea":"🇬🇳","Guyana":"🇬🇾","Haiti":"🇭🇹","Honduras":"🇭🇳","Hong Kong":"🇭🇰",
-      "Hungary":"🇭🇺","Iceland":"🇮🇸","India":"🇮🇳","Indonesia":"🇮🇩","Irish Republic":"🇮🇪",
-      "Italy":"🇮🇹","Jamaica":"🇯🇲","Japan":"🇯🇵","Jordan":"🇯🇴","Kazakhstan":"🇰🇿",
-      "Kenya":"🇰🇪","Korea Republic":"🇰🇷","Kosovo":"🇽🇰","Kyrgyzstan":"🇰🇬","Laos":"🇱🇦",
-      "Latvia":"🇱🇻","Lesotho":"🇱🇸","Liberia":"🇱🇷","Lithuania":"🇱🇹","Luxembourg":"🇱🇺",
-      "Macau":"🇲🇴","Macedonia":"🇲🇰","Madagascar":"🇲🇬","Malawi":"🇲🇼","Malaysia":"🇲🇾",
-      "Maldives":"🇲🇻","Mali":"🇲🇱","Malta":"🇲🇹","Mauritania":"🇲🇷","Mauritius":"🇲🇺",
-      "Mexico":"🇲🇽","Moldova":"🇲🇩","Monaco":"🇲🇨","Mongolia":"🇲🇳","Montenegro":"🇲🇪",
-      "Morocco":"🇲🇦","Mozambique":"🇲🇿","Myanmar":"🇲🇲","Namibia":"🇳🇦","Nepal":"🇳🇵",
-      "Netherlands":"🇳🇱","New Zealand":"🇳🇿","Nicaragua":"🇳🇮","Niger":"🇳🇪","Nigeria":"🇳🇬",
-      "Norway":"🇳🇴","Oman":"🇴🇲","Panama":"🇵🇦","Papua New Guinea":"🇵🇬","Paraguay":"🇵🇾",
-      "Peru":"🇵🇪","Philippines":"🇵🇭","Poland":"🇵🇱","Portugal":"🇵🇹","Puerto Rico":"🇵🇷",
-      "Qatar":"🇶🇦","Romania":"🇷🇴","Russia":"🇷🇺","Rwanda":"🇷🇼","Samoa":"🇼🇸",
-      "Saudi Arabia":"🇸🇦","Senegal":"🇸🇳","Serbia":"🇷🇸","Seychelles":"🇸🇨","Sierra Leone":"🇸🇱",
-      "Singapore":"🇸🇬","Slovakia":"🇸🇰","Slovenia":"🇸🇮","South Africa":"🇿🇦","Spain":"🇪🇸",
-      "Sri Lanka":"🇱🇰","Sudan":"🇸🇩","Surinam":"🇸🇷","Sweden":"🇸🇪","Switzerland":"🇨🇭",
-      "Taiwan":"🇹🇼","Tajikistan":"🇹🇯","Tanzania":"🇹🇿","Thailand":"🇹🇭","Togo":"🇹🇬",
-      "Tonga":"🇹🇴","Trinidad and Tobago":"🇹🇹","Tunisia":"🇹🇳","Turkey":"🇹🇷","Turkmenistan":"🇹🇲",
-      "Uganda":"🇺🇬","Ukraine":"🇺🇦","United Arab Emirates":"🇦🇪","United Kingdom":"🇬🇧","United States of America":"🇺🇸",
-      "Uruguay":"🇺🇾","Uzbekistan":"🇺🇿","Venezuela":"🇻🇪","Vietnam":"🇻🇳","Zambia":"🇿🇲","Zimbabwe":"🇿🇼"
-    };
+[searchInput,countryFilter,currencyFilter,sortFilter,cardLimit].forEach(control=>{
+  control.addEventListener("input",renderAll);
+  control.addEventListener("change",renderAll);
+});
 
-    const tableBody = document.getElementById("tableBody");
-    const cardsContainer = document.getElementById("cardsContainer");
-    const statsText = document.getElementById("statsText");
-    const summaryText = document.getElementById("summaryText");
-    const selectedText = document.getElementById("selectedText");
-    const cardCount = document.getElementById("cardCount");
-    const noResults = document.getElementById("noResults");
-    const visibleResults = document.getElementById("visibleResults");
-
-    const searchInput = document.getElementById("searchInput");
-    const countryFilter = document.getElementById("countryFilter");
-    const currencyFilter = document.getElementById("currencyFilter");
-    const sortFilter = document.getElementById("sortFilter");
-    const cardLimit = document.getElementById("cardLimit");
-
-    let selectedKey = "";
-
-    function normalizeAmount(value) {
-      return Number(String(value).replace(/,/g, ""));
-    }
-
-    function getFlag(country) {
-      return flagMap[country] || "🌍";
-    }
-
-    function getCountryList() {
-      return [...new Set(data.map(item => item.country))].sort((a, b) => a.localeCompare(b));
-    }
-
-    function getCurrencyList() {
-      return [...new Set(data.map(item => item.currency))].sort((a, b) => a.localeCompare(b));
-    }
-
-    function getImageUrl(item) {
-      const location = (item.city === "כל המדינה" || item.city === "יתר המדינה")
-        ? item.country
-        : `${item.city} ${item.country}`;
-      return `https://source.unsplash.com/800x500/?${encodeURIComponent(location + " city skyline travel")}`;
-    }
-
-    function populateFilters() {
-      getCountryList().forEach(country => {
-        const option = document.createElement("option");
-        option.value = country;
-        option.textContent = `${getFlag(country)} ${country}`;
-        countryFilter.appendChild(option);
-      });
-
-      getCurrencyList().forEach(currency => {
-        const option = document.createElement("option");
-        option.value = currency;
-        option.textContent = currency;
-        currencyFilter.appendChild(option);
-      });
-    }
-
-    function updateHeroStats() {
-      document.getElementById("totalDestinations").textContent = data.length;
-      document.getElementById("totalCountries").textContent = getCountryList().length;
-      document.getElementById("totalCurrencies").textContent = getCurrencyList().length;
-    }
-
-    function getBaseFilteredRows() {
-      const value = searchInput.value.trim().toLowerCase();
-      const selectedCountry = countryFilter.value;
-      const selectedCurrency = currencyFilter.value;
-      const sortValue = sortFilter.value;
-
-      let filtered = data.filter(item => {
-        const matchesSearch =
-          item.country.toLowerCase().includes(value) ||
-          item.city.toLowerCase().includes(value) ||
-          item.currency.toLowerCase().includes(value) ||
-          String(item.amount).toLowerCase().includes(value);
-
-        const matchesCountry = !selectedCountry || item.country === selectedCountry;
-        const matchesCurrency = !selectedCurrency || item.currency === selectedCurrency;
-        return matchesSearch && matchesCountry && matchesCurrency;
-      });
-
-      if (sortValue === "amount-desc") {
-        filtered.sort((a, b) => normalizeAmount(b.amount) - normalizeAmount(a.amount));
-      } else if (sortValue === "amount-asc") {
-        filtered.sort((a, b) => normalizeAmount(a.amount) - normalizeAmount(b.amount));
-      } else if (sortValue === "country-asc") {
-        filtered.sort((a, b) => a.country.localeCompare(b.country));
-      } else if (sortValue === "city-asc") {
-        filtered.sort((a, b) => a.city.localeCompare(b.city));
-      }
-
-      return filtered;
-    }
-
-    function renderCards(rows) {
-      cardsContainer.innerHTML = "";
-      const limit = Number(cardLimit.value || 18);
-      const cardsData = rows.slice(0, limit);
-      cardCount.textContent = `${rows.length} תוצאות`;
-
-      cardsData.forEach(item => {
-        const key = `${item.country}__${item.city}`;
-        const card = document.createElement("article");
-        card.className = `city-card ${selectedKey === key ? "active" : ""}`;
-        card.innerHTML = `
-          <div class="city-media">
-            <img src="${getImageUrl(item)}" alt="${item.city} ${item.country}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80';">
-            <div class="city-flag">${getFlag(item.country)}</div>
-            <div class="city-badge">${item.currency} · ${item.amount}</div>
-            <div class="city-caption">${item.city}</div>
-          </div>
-          <div class="city-body">
-            <div class="city-title">
-              <div>
-                <h4>${item.city}</h4>
-                <small>${item.country}</small>
-              </div>
-              <span class="pill">${item.amount}</span>
-            </div>
-            <div class="city-meta">
-              <span>מטבע: ${item.currency}</span>
-              <span>דגל: ${getFlag(item.country)}</span>
-              <span>${item.country}</span>
-            </div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => {
-          selectedKey = selectedKey === key ? "" : key;
-          renderAll();
-        });
-
-        cardsContainer.appendChild(card);
-      });
-    }
-
-    function renderTable(rows) {
-      tableBody.innerHTML = "";
-
-      rows.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>
-            <div class="country-cell">
-              <span class="flag-chip">${getFlag(item.country)}</span>
-              <span>${item.country}</span>
-            </div>
-          </td>
-          <td>${item.city}</td>
-          <td>${item.currency}</td>
-          <td class="amount">${item.amount}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-
-      statsText.textContent = `סה״כ תוצאות: ${rows.length}`;
-      visibleResults.textContent = rows.length;
-      summaryText.textContent = rows.length === data.length
-        ? "המערכת מציגה את כל היעדים כרגע"
-        : `מוצגות ${rows.length} תוצאות לאחר סינון`;
-
-      if (selectedKey) {
-        const [country, city] = selectedKey.split("__");
-        selectedText.textContent = `נבחר יעד: ${country} / ${city}`;
-      } else {
-        selectedText.textContent = "לא נבחר יעד ספציפי";
-      }
-
-      noResults.style.display = rows.length ? "none" : "block";
-    }
-
-    function renderAll() {
-      const baseRows = getBaseFilteredRows();
-      renderCards(baseRows);
-
-      let tableRows = baseRows;
-      if (selectedKey) {
-        tableRows = baseRows.filter(item => `${item.country}__${item.city}` === selectedKey);
-      }
-
-      renderTable(tableRows);
-    }
-
-    [searchInput, countryFilter, currencyFilter, sortFilter, cardLimit].forEach(control => {
-      control.addEventListener("input", renderAll);
-      control.addEventListener("change", renderAll);
-    });
-
-    populateFilters();
-    updateHeroStats();
-    renderAll();
-  </script>
+populateFilters();
+updateHeroStats();
+renderAll();
+</script>
 </body>
 </html>
