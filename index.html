@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קיץ 2026 | וינה ובודפשט</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:rgba(255,255,255,.94);
+      --text:#182235;
+      --muted:#60708c;
+      --primary:#2750d8;
+      --primary2:#5f7fff;
+      --accent:#16a34a;
+      --gold:#f5c451;
+      --shadow:0 16px 40px rgba(24,34,53,.12);
+      --radius:24px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Heebo",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(95,127,255,.18), transparent 22%),
+        radial-gradient(circle at top left, rgba(245,196,81,.16), transparent 18%),
+        linear-gradient(180deg,#eef3ff 0%,#f7f9fc 42%,#f5f7fb 100%);
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .hero{
+      min-height:92vh;
+      position:relative;
+      display:grid;
+      align-items:center;
+      overflow:hidden;
+      color:#fff;
+      background:
+        linear-gradient(180deg, rgba(10,18,35,.16), rgba(10,18,35,.54)),
+        url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.36));
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      padding:72px 0 54px;
+    }
+
+    .top-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(10px);
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:700;
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0 0 14px;
+      font-size:clamp(40px, 7vw, 74px);
+      line-height:.95;
+      letter-spacing:-1px;
+      font-weight:800;
+      max-width:780px;
+    }
+
+    .hero-subtitle{
+      max-width:760px;
+      font-size:clamp(18px,2.4vw,24px);
+      line-height:1.75;
+      color:rgba(255,255,255,.94);
+      margin-bottom:26px;
+    }
+
+    .hero-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:28px;
+    }
+
+    .pill{
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter:blur(8px);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:14px 20px;
+      border-radius:14px;
+      font-weight:800;
+      transition:.25s ease;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:var(--text);
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+
+    .btn-primary:hover{transform:translateY(-2px)}
+
+    .btn-secondary{
+      color:#fff;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.2);
+      backdrop-filter:blur(8px);
+    }
+
+    .btn-secondary:hover{background:rgba(255,255,255,.18)}
+
+    .floating-summary{
+      position:relative;
+      z-index:2;
+      margin-top:-50px;
+    }
+
+    .summary-card{
+      background:rgba(255,255,255,.84);
+      border:1px solid rgba(255,255,255,.7);
+      backdrop-filter:blur(14px);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:22px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .summary-item{
+      background:rgba(255,255,255,.7);
+      border-radius:18px;
+      padding:18px;
+      text-align:center;
+    }
+
+    .summary-item .label{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:6px;
+    }
+
+    .summary-item .value{
+      font-size:24px;
+      font-weight:800;
+    }
+
+    section{padding:68px 0}
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:18px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+
+    .eyebrow{
+      color:var(--primary);
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    h2{
+      margin:0;
+      font-size:clamp(30px,4vw,46px);
+      line-height:1.05;
+    }
+
+    .section-desc{
+      max-width:740px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:17px;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:22px;
+    }
+
+    .day-card{
+      background:var(--card);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(39,80,216,.08);
+      transition:.28s ease;
+    }
+
+    .day-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 22px 46px rgba(24,34,53,.16);
+    }
+
+    .day-image{
+      height:280px;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+
+    .day-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.28));
+    }
+
+    .day-tag{
+      position:absolute;
+      top:16px;
+      right:16px;
+      z-index:1;
+      background:rgba(255,255,255,.92);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:14px;
+      font-weight:800;
+      color:var(--text);
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .day-content{padding:22px}
+
+    .day-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:8px;
+      flex-wrap:wrap;
+    }
+
+    .day-title h3{
+      margin:0;
+      font-size:25px;
+      line-height:1.2;
+    }
+
+    .city-chip{
+      background:rgba(39,80,216,.08);
+      color:var(--primary);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .day-text{
+      color:var(--muted);
+      line-height:1.85;
+      font-size:16px;
+      margin-bottom:16px;
+    }
+
+    .timeline{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .timeline-item{
+      display:flex;
+      gap:10px;
+      align-items:start;
+      font-size:15.5px;
+      line-height:1.75;
+    }
+
+    .dot{
+      flex:0 0 9px;
+      height:9px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      margin-top:10px;
+      box-shadow:0 0 0 5px rgba(39,80,216,.08);
+    }
+
+    .highlight-box{
+      background:linear-gradient(135deg, rgba(22,163,74,.09), rgba(245,196,81,.12));
+      border:1px solid rgba(22,163,74,.1);
+      border-radius:18px;
+      padding:14px 16px;
+      font-weight:800;
+      color:#1f4f2d;
+      line-height:1.7;
+    }
+
+    .transfer-card{
+      background:linear-gradient(135deg,#243b82,#2f5bff);
+      color:#fff;
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .transfer-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:rgba(255,255,255,.08);
+      top:-60px;
+      left:-60px;
+    }
+
+    .transfer-left,.transfer-right{position:relative;z-index:1}
+
+    .transfer-title{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.1;
+    }
+
+    .transfer-text{
+      color:rgba(255,255,255,.92);
+      line-height:1.8;
+      margin-bottom:18px;
+      font-size:16px;
+    }
+
+    .transfer-points{
+      display:grid;
+      gap:10px;
+    }
+
+    .transfer-points div{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.1);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:700;
+    }
+
+    .route-box{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .route-line{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-size:24px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .route-meta{
+      color:rgba(255,255,255,.9);
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    .tips-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .tip-card{
+      background:var(--card);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(39,80,216,.06);
+    }
+
+    .tip-card h4{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+
+    .tip-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .footer{
+      padding:36px 0 60px;
+      text-align:center;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .credit{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.72);
+      border-radius:999px;
+      padding:10px 14px;
+      box-shadow:0 10px 24px rgba(24,34,53,.08);
+    }
+
+    @media (max-width:980px){
+      .summary-card,
+      .cards-grid,
+      .tips-grid,
+      .transfer-card{
+        grid-template-columns:1fr;
+      }
+
+      .hero{min-height:80vh}
+      .day-image{height:230px}
+    }
+
+    @media (max-width:640px){
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .hero-content{padding-top:58px}
+      .summary-card{padding:14px;gap:12px}
+      .summary-item{padding:16px 14px}
+      .section-desc{font-size:15.5px}
+      .day-content{padding:18px}
+      .transfer-title{font-size:28px}
+      .route-line{font-size:20px}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container hero-content">
+      <div class="top-badge">☀️ קיץ 2026 · טיול משפחתי לארבעה</div>
+      <h1>וינה & בודפשט<br>חופשה משפחתית מושלמת</h1>
+      <div class="hero-subtitle">
+        20–27 באוגוסט 2026 · אבי, אלינור, אלמה ואליאנה · שילוב מדויק של אירופה קלאסית,
+        שוק סופ״ש בוינה, גן חיות, שופינג, שיט ערב וסיור EZRider בבודפשט.
+      </div>
+
+      <div class="hero-pills">
+        <div class="pill">✈️ 20.8 טיסה לוינה ב־06:20</div>
+        <div class="pill">🛍️ 22.8 שוק סופ״ש בוינה</div>
+        <div class="pill">🦁 23.8 גן חיות בוינה</div>
+        <div class="pill">🚄 24.8 רכבת לוינה–בודפשט ב־11:40</div>
+        <div class="pill">🛍️ 26.8 חצי יום שופינג</div>
+        <div class="pill">🛴 26.8 EZRider בערב</div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#itinerary" class="btn btn-primary">לתוכנית המלאה</a>
+        <a href="#tips" class="btn btn-secondary">טיפים חשובים</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container floating-summary">
+    <div class="summary-card">
+      <div class="summary-item">
+        <div class="label">יעדים</div>
+        <div class="value">2 ערים</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">לילות</div>
+        <div class="value">7</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">הרכב</div>
+        <div class="value">4 נפשות</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">סגנון</div>
+        <div class="value">רגוע + חווייתי</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="itinerary">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">המסלול</div>
+          <h2>הלוז המשפחתי</h2>
+        </div>
+        <div class="section-desc">
+          מסלול מאוזן ונעים, עם התחלה רגועה בוינה, שבת שוק כיפית, יום גן חיות, מעבר חלק ברכבת
+          לבודפשט, ואז סיום עם העיר הכי יפה בלילה, שופינג ו-EZRider.
+        </div>
+      </div>
+
+      <div class="cards-grid">
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">20.8 · יום 1</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>נחיתה והתאקלמות בוינה</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              פותחים בנחת: טיסה מוקדמת, הגעה לעיר, התארגנות במלון, וסיבוב ראשון נעים
+              במרכז וינה כדי להרגיש את האווירה בלי לרוץ.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>טיסה ב־06:20 והגעה לוינה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צ'ק־אין / השארת מזוודות ומנוחה קצרה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיבוב ראשון במרכז העיר ובאזור Stephansplatz</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ארוחת ערב רגועה וסיום מוקדם</span></div>
+            </div>
+            <div class="highlight-box">✨ היילייט: התחלה אירופית קלאסית, רגועה ונעימה.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">21.8 · יום 2</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>שנברון + פראטר</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              יום קלאסי שמשלב יופי וינאי עם כיף לילדות: גני Schönbrunn ביום,
+              ופראטר וגלגל ענק בשעות אחר הצהריים והערב.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר בארמון וגני Schönbrunn</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>הליכה נעימה, תמונות וזמן פתוח בגנים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>אחה"צ וערב באזור פראטר</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה רגועה למלון</span></div>
+            </div>
+            <div class="highlight-box">🎡 היילייט: יום מאוזן של תרבות, מרחבים וכיף משפחתי.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">22.8 · יום 3 · שבת</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>שוק סופ״ש + יום חווייתי</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              שבת בוינה בסגנון מושלם: בוקר בשוק סופ״ש, אוכל טוב, דוכנים ואווירה,
+              ובהמשך יום גמיש וקליל לפי החשק והאנרגיות.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר בשוק סופ״ש בוינה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>דוכני אוכל, מתוקים, קפה ושיטוט רגוע</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צהריים קלילים וחזרה למנוחה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>אחה"צ פתוח לפארק / מוזיאון / קינוחים / סיבוב בעיר</span></div>
+            </div>
+            <div class="highlight-box">🛍️ היילייט: אווירת שבת אירופית אמיתית, בלי לחץ ובלי עומס.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">23.8 · יום 4</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>יום גן חיות</h3>
+              <div class="city-chip">וינה 🇦🇹</div>
+            </div>
+            <div class="day-text">
+              זה העוגן הרשמי של חלק וינה: יום רגוע וכיפי בגן החיות של Schönbrunn,
+              עם קצב משפחתי נכון והמון רגעים טובים.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>יציאה נוחה בבוקר לגן החיות</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>מסלול רגוע בין המתחמים המרכזיים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ארוחת צהריים קלילה במקום</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה מוקדמת יחסית למלון וערב רגוע</span></div>
+            </div>
+            <div class="highlight-box">🦁 היילייט: אחד מימי השיא של הטיול מבחינת חוויה משפחתית.</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="transfer-card">
+        <div class="transfer-left">
+          <div class="eyebrow" style="color:#d9e4ff;">מעבר בין ערים</div>
+          <h2 class="transfer-title">מוינה האלגנטית לבודפשט התוססת</h2>
+          <div class="transfer-text">
+            ב־24.8 בבוקר עוזבים את וינה בנחת ועולים על הרכבת לבודפשט.
+            זה מעבר נעים, אלגנטי ולא מעייף, שמחלק מושלם בין שני חלקי הטיול.
+          </div>
+          <div class="transfer-points">
+            <div>🚄 יציאה מוינה: 11:40</div>
+            <div>⏱ נסיעה נוחה של בערך 2:40 שעות</div>
+            <div>🌇 הגעה לבודפשט אחר הצהריים והתחלה רכה של חלק ב׳</div>
+          </div>
+        </div>
+        <div class="transfer-right">
+          <div class="route-box">
+            <div class="route-line">
+              <span>וינה</span>
+              <span>→</span>
+              <span>בודפשט</span>
+            </div>
+            <div class="route-meta">
+              בוקר רגוע, מעבר חלק בין תחנות, והגעה לעיר עם וייב שונה לגמרי —
+              יותר נהר, יותר אורות, יותר בודפשט.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">בודפשט</div>
+          <h2>החלק השני של הטיול</h2>
+        </div>
+        <div class="section-desc">
+          כאן הקצב נשאר נעים, אבל האווירה משתנה: נהר, תצפיות, שיט ערב, שופינג,
+          ואחת מחוויות הסיום הכי כיפיות — EZRider בעיר המוארת.
+        </div>
+      </div>
+
+      <div class="cards-grid">
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">24.8 · יום 5</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>רכבת + הגעה לבודפשט וערב ראשון</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              בוקר רגוע, רכבת ב־11:40, הגעה לעיר, צ'ק־אין למלון,
+              ואז סיבוב ראשון קליל כדי להרגיש את בודפשט.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר רגוע בוינה ויציאה לרכבת</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>רכבת לוינה–בודפשט ב־11:40</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>הגעה למלון והתארגנות</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיבוב ערב ראשון באזור המרכז / הדנובה</span></div>
+            </div>
+            <div class="highlight-box">🌉 היילייט: ערב ראשון שמכניס בדיוק לאווירה של בודפשט.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">25.8 · יום 6</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>בודפשט הקלאסית + שיט ערב</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              היום של בודפשט האייקונית: הפרלמנט, אזור בודה, תצפיות נהדרות,
+              וגולת הכותרת — שיט ערב על הדנובה.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>אזור הפרלמנט והטיילת</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>עלייה לאזור בודה / מצודת הדייגים</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>תמונות משפחתיות ותצפיות יפות</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>שיט ערב בדנובה</span></div>
+            </div>
+            <div class="highlight-box">🚤 היילייט: יום פוטוגני בטירוף, עם ערב שהוא חובה.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">26.8 · יום 7</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>חצי יום שופינג + EZRider בערב</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              בוקר שמוקדש לשופינג נעים וחכם, אחר כך מנוחה,
+              ובערב סיום חווייתי במיוחד עם סיור EZRider בעיר המוארת.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>בוקר שופינג ב־WestEnd / Váci Street</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>צהריים רגועים / בריכה / מנוחה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>ערב EZRider במרכז בודפשט</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>סיום חגיגי של הטיול</span></div>
+            </div>
+            <div class="highlight-box">🛴 היילייט: שופינג בבוקר, אקשן בלילה — שילוב מושלם ליום האחרון המלא.</div>
+          </div>
+        </article>
+
+        <article class="day-card">
+          <div class="day-image" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80');">
+            <div class="day-tag">27.8 · יום 8</div>
+          </div>
+          <div class="day-content">
+            <div class="day-title">
+              <h3>בוקר חזרה הביתה</h3>
+              <div class="city-chip">בודפשט 🇭🇺</div>
+            </div>
+            <div class="day-text">
+              קמים מוקדם, יוצאים לשדה, ומסיימים טיול קיץ אירופי מדויק,
+              נעים ומלא רגעים טובים.
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><span class="dot"></span><span>טיסה חזרה ב־09:20</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>יציאה מוקדמת מהמלון לשדה</span></div>
+              <div class="timeline-item"><span class="dot"></span><span>חזרה עם מלא תמונות, זיכרונות וחשק לעוד</span></div>
+            </div>
+            <div class="highlight-box">✈️ היילייט: סוף נקי, רגוע וחכם לטיול המשפחתי.</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">טיפים קטנים</div>
+          <h2>מה יעשה את הטיול אפילו טוב יותר</h2>
+        </div>
+        <div class="section-desc">
+          כמה עקרונות פשוטים שישמרו את הטיול קליל, נעים ומשפחתי באמת.
+        </div>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h4>🎒 לא לדחוס יותר מדי</h4>
+          <p>
+            היופי במסלול הזה הוא באיזון. בוקר טוב, צהריים רגועים וערב מוצלח
+            שווים יותר מיום עמוס מדי.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🚄 יום מעבר = יום קל</h4>
+          <p>
+            ביום הרכבת עדיף לשמור על קצב רגוע. להתארגן בנחת, להגיע בזמן,
+            ולתת לערב הראשון בבודפשט להיות פשוט ונעים.
+          </p>
+        </div>
+
+        <div class="tip-card">
+          <h4>🛍️ בודפשט לשופינג</h4>
+          <p>
+            חצי יום השופינג בבודפשט יושב בדיוק במקום הנכון — לא על חשבון וינה,
+            ולא במקום חוויות הערב היפות של העיר.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="credit">❤️ Summer 2026 · Vienna & Budapest Family Escape</div>
+    </div>
+  </footer>
+
+</body>
+</html>
