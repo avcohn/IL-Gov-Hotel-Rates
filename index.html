@@ -1,214 +1,242 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>קיץ 2026 | וינה ובודפשט</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Heebo,Arial,sans-serif;background:#f5f7fb;color:#172033}
-.hero{min-height:90vh;background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.55)),url('https://source.unsplash.com/1600x900/?vienna,budapest,travel') center/cover;color:white;display:flex;align-items:center}
-.container{width:min(1150px,calc(100% - 30px));margin:auto}
-h1{font-size:clamp(42px,7vw,78px);line-height:.95;margin:0 0 20px;font-weight:800}
-.subtitle{font-size:clamp(18px,2.5vw,25px);max-width:760px;line-height:1.7}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.badge{background:rgba(255,255,255,.18);padding:10px 15px;border-radius:999px;font-weight:700}
-section{padding:60px 0}.section-title{font-size:42px;margin:0 0 12px}.desc{color:#60708c;font-size:18px;line-height:1.7;margin-bottom:28px}
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Heebo,Arial;
+background:
+radial-gradient(circle at top right, rgba(95,127,255,.18), transparent 22%),
+radial-gradient(circle at top left, rgba(245,196,81,.16), transparent 18%),
+linear-gradient(180deg,#eef3ff,#f5f7fb);
+color:#172033;
+}
+
+.container{width:min(1100px,calc(100% - 30px));margin:auto}
+
+.hero{
+min-height:90vh;
+background:
+linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1516550893923-42d28e5677af");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+color:white;
+}
+
+h1{
+font-size:clamp(40px,7vw,75px);
+margin:0 0 15px;
+line-height:.95;
+font-weight:800;
+}
+
+.subtitle{font-size:20px;max-width:700px;line-height:1.7}
+
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.badge{background:rgba(255,255,255,.2);padding:10px 14px;border-radius:999px;font-weight:700}
+
+section{padding:60px 0}
+
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.card{background:white;border-radius:26px;overflow:hidden;box-shadow:0 16px 40px rgba(20,30,55,.12)}
-.img{height:285px;background-size:cover;background-position:center;position:relative}
-.tag{position:absolute;top:16px;right:16px;background:white;padding:8px 14px;border-radius:999px;font-weight:800}
-.content{padding:24px}h3{font-size:27px;margin:0 0 10px}.city{display:inline-block;background:#eef2ff;color:#2750d8;padding:7px 12px;border-radius:999px;font-weight:800;margin-bottom:12px}
-p{line-height:1.8;color:#60708c}.list{display:grid;gap:9px;margin:18px 0}.item{display:flex;gap:10px;line-height:1.7}.dot{width:9px;height:9px;background:#2750d8;border-radius:50%;margin-top:10px;flex:0 0 9px}
-.highlight{background:#ecfdf3;border-radius:16px;padding:14px 16px;color:#1f6b37;font-weight:800;line-height:1.7}
-.transfer{background:linear-gradient(135deg,#233b86,#315dff);color:white;border-radius:28px;padding:32px;box-shadow:0 16px 40px rgba(20,30,55,.15)}
-.transfer p{color:rgba(255,255,255,.9)}.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.tip{background:white;border-radius:22px;padding:22px;box-shadow:0 12px 30px rgba(20,30,55,.1)}
-footer{text-align:center;color:#60708c;padding:35px}
-@media(max-width:850px){.grid,.tips{grid-template-columns:1fr}.hero{min-height:78vh}.img{height:235px}}
+
+.card{
+background:white;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.img{
+height:260px;
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.tag{
+position:absolute;
+top:15px;
+right:15px;
+background:white;
+padding:8px 14px;
+border-radius:999px;
+font-weight:800;
+}
+
+.content{padding:22px}
+
+h3{margin:0 0 10px;font-size:24px}
+
+.city{
+display:inline-block;
+background:#eef2ff;
+color:#2750d8;
+padding:6px 12px;
+border-radius:999px;
+font-weight:800;
+margin-bottom:10px;
+}
+
+p{color:#60708c;line-height:1.7}
+
+.list{display:grid;gap:8px;margin:15px 0}
+
+.item{display:flex;gap:8px}
+.dot{width:8px;height:8px;background:#2750d8;border-radius:50%;margin-top:8px}
+
+.highlight{
+background:#ecfdf3;
+padding:12px;
+border-radius:12px;
+font-weight:800;
+color:#1f6b37;
+}
+
+/* תמונות */
+.demel{
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/2/23/Demel_Wien_Kohlmarkt.jpg");
+}
+.zoom{
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/6/67/MuseumsQuartier_Wien.jpg");
+}
+.nasch{
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Naschmarkt_Wien.jpg");
+}
+.zoo{
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg");
+}
+.bud1{
+background-image:url("https://images.unsplash.com/photo-1549877452-9c387954fbc2");
+}
+.bud2{
+background-image:url("https://images.unsplash.com/photo-1541849546-216549ae216d");
+}
+.bud3{
+background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f");
+}
+
+@media(max-width:800px){
+.grid{grid-template-columns:1fr}
+.hero{min-height:70vh}
+}
 </style>
 </head>
 
 <body>
 
 <header class="hero">
-  <div class="container">
-    <div class="badge">☀️ קיץ 2026 · משפחת כהן</div>
-    <h1>וינה & בודפשט<br>חופשה משפחתית</h1>
-    <div class="subtitle">
-      20–27 באוגוסט 2026 · אבי, אלינור, אלמה ואליאנה · וינה קלאסית, Demel, ZOOM, Naschmarkt, גן חיות, רכבת לבודפשט, שיט, שופינג ו־EZRider.
-    </div>
-    <div class="badges">
-      <div class="badge">✈️ 20.8 טיסה לוינה 06:20</div>
-      <div class="badge">🚄 24.8 רכבת לבודפשט 11:40</div>
-      <div class="badge">✈️ 27.8 חזרה מבודפשט 09:20</div>
-    </div>
-  </div>
+<div class="container">
+<h1>וינה & בודפשט</h1>
+<div class="subtitle">
+20–27 באוגוסט 2026 · טיול משפחתי מושלם עם ZOOM, שווקים, גן חיות ושופינג
+</div>
+
+<div class="badges">
+<div class="badge">✈️ 20.8 וינה</div>
+<div class="badge">🚄 24.8 בודפשט</div>
+<div class="badge">🦁 23.8 גן חיות</div>
+</div>
+</div>
 </header>
 
 <section>
-  <div class="container">
-    <h2 class="section-title">🇦🇹 וינה</h2>
-    <div class="desc">ארבעה ימים רגועים ומדויקים: פתיחה מתוקה ב־Demel, מוזיאון ZOOM לילדות, שוק Naschmarkt ומרכז קלאסי, ואז גן החיות ושנברון.</div>
+<div class="container">
+<h2>🇦🇹 וינה</h2>
 
-    <div class="grid">
+<div class="grid">
 
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?demel,vienna,cafe');">
-          <div class="tag">20.8 · יום 1</div>
-        </div>
-        <div class="content">
-          <span class="city">וינה 🇦🇹</span>
-          <h3>נחיתה + מרכז העיר + Demel</h3>
-          <p>יום פתיחה רגוע אחרי טיסה מוקדמת: הגעה למלון, מנוחה קצרה, ואז סיבוב מרכזי מתוק וקליל.</p>
-          <div class="list">
-            <div class="item"><span class="dot"></span><span>נחיתה בוינה אחרי טיסה ב־06:20</span></div>
-            <div class="item"><span class="dot"></span><span>הגעה למלון / השארת מזוודות / מנוחה</span></div>
-            <div class="item"><span class="dot"></span><span>סיבוב באזור Stephansplatz ו־Graben</span></div>
-            <div class="item"><span class="dot"></span><span>עצירה מתוקה ב־Demel</span></div>
-          </div>
-          <div class="highlight">🍰 היילייט: פתיחה וינאית קלאסית עם קפה, עוגות ואווירה.</div>
-        </div>
-      </article>
+<div class="card">
+<div class="img demel"><div class="tag">יום 1</div></div>
+<div class="content">
+<span class="city">וינה</span>
+<h3>נחיתה + Demel</h3>
+<p>פתיחה רגועה בעיר עם קפה ועוגות ב־Demel.</p>
+<div class="highlight">🍰 פתיחה מושלמת</div>
+</div>
+</div>
 
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?naschmarkt,vienna,market');">
-          <div class="tag">22.8 · יום 2</div>
-        </div>
-        <div class="content">
-          <span class="city">וינה 🇦🇹</span>
-          <h3>Naschmarkt + מרכז קלאסי</h3>
-          <p>שוק סופ״ש כיפי ואז הליכה דרך וינה האלגנטית: אופרה, Hofburg, Graben ו־Stephansplatz.</p>
-          <div class="list">
-            <div class="item"><span class="dot"></span><span>בוקר ב־Naschmarkt ושוק הפשפשים</span></div>
-            <div class="item"><span class="dot"></span><span>הליכה לכיוון האופרה של וינה</span></div>
-            <div class="item"><span class="dot"></span><span>Hofburg והחצרות היפות</span></div>
-            <div class="item"><span class="dot"></span><span>Graben / Stephansplatz / גלידה או קינוח</span></div>
-          </div>
-          <div class="highlight">🛍️ היילייט: שילוב של שוק תוסס עם וינה הקלאסית.</div>
-        </div>
-      </article>
+<div class="card">
+<div class="img zoom"><div class="tag">יום 2</div></div>
+<div class="content">
+<span class="city">וינה</span>
+<h3>ZOOM + פראטר</h3>
+<p>יום ילדים מושלם + ערב בפראטר.</p>
+<div class="highlight">🎡 כיף לילדות</div>
+</div>
+</div>
 
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?children,museum,vienna');">
-          <div class="tag">21.8 · יום 3</div>
-        </div>
-        <div class="content">
-          <span class="city">וינה 🇦🇹</span>
-          <h3>מוזיאון ZOOM + פראטר</h3>
-          <p>בוקר שמוקדש לילדות במוזיאון ZOOM לפי סלוטים שתזמין מראש, ובהמשך ערב כיפי בפראטר.</p>
-          <div class="list">
-            <div class="item"><span class="dot"></span><span>פעילות מוזמנת מראש ב־ZOOM Children’s Museum</span></div>
-            <div class="item"><span class="dot"></span><span>צהריים באזור MuseumsQuartier</span></div>
-            <div class="item"><span class="dot"></span><span>מנוחה במלון</span></div>
-            <div class="item"><span class="dot"></span><span>ערב בפראטר והגלגל הענק</span></div>
-          </div>
-          <div class="highlight">🎨 היילייט: יום ילדים מושלם — חכם, חווייתי ולא עמוס.</div>
-        </div>
-      </article>
+<div class="card">
+<div class="img nasch"><div class="tag">יום 3</div></div>
+<div class="content">
+<span class="city">וינה</span>
+<h3>Naschmarkt + מרכז</h3>
+<p>שוק סופ"ש + אופרה + Hofburg.</p>
+<div class="highlight">🛍️ חוויה אירופית</div>
+</div>
+</div>
 
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?schonbrunn,zoo,vienna');">
-          <div class="tag">23.8 · יום 4</div>
-        </div>
-        <div class="content">
-          <span class="city">וינה 🇦🇹</span>
-          <h3>גן חיות וינה + שנברון</h3>
-          <p>יום ראשון במתחם שנברון: מתחילים בגן החיות ואז ממשיכים לגנים של הארמון בקצב רגוע.</p>
-          <div class="list">
-            <div class="item"><span class="dot"></span><span>יציאה מוקדמת ל־Tiergarten Schönbrunn</span></div>
-            <div class="item"><span class="dot"></span><span>מסלול רגוע בין המתחמים המרכזיים</span></div>
-            <div class="item"><span class="dot"></span><span>צהריים קליל במקום</span></div>
-            <div class="item"><span class="dot"></span><span>טיול בגני שנברון וסיום רגוע לוינה</span></div>
-          </div>
-          <div class="highlight">🦁 היילייט: גן חיות + שנברון ביום אחד, בלי נסיעות מיותרות.</div>
-        </div>
-      </article>
+<div class="card">
+<div class="img zoo"><div class="tag">יום 4</div></div>
+<div class="content">
+<span class="city">וינה</span>
+<h3>גן חיות + שנברון</h3>
+<p>יום שיא של הטיול.</p>
+<div class="highlight">🦁 יום חזק</div>
+</div>
+</div>
 
-    </div>
-  </div>
+</div>
+</div>
 </section>
 
 <section>
-  <div class="container">
-    <div class="transfer">
-      <h2>🚄 מעבר לבודפשט · 24.8</h2>
-      <p>בוקר רגוע בוינה, רכבת ב־11:40 לבודפשט, הגעה למלון וסיבוב ערב ראשון באזור המרכז או הדנובה.</p>
-    </div>
-  </div>
+<div class="container">
+<h2>🇭🇺 בודפשט</h2>
+
+<div class="grid">
+
+<div class="card">
+<div class="img bud1"></div>
+<div class="content">
+<h3>יום 5</h3>
+<p>הגעה וסיבוב ערב.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="img bud2"></div>
+<div class="content">
+<h3>יום 6</h3>
+<p>פרלמנט + שיט.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="img bud3"></div>
+<div class="content">
+<h3>יום 7</h3>
+<p>שופינג + EZRider.</p>
+</div>
+</div>
+
+</div>
+</div>
 </section>
 
-<section>
-  <div class="container">
-    <h2 class="section-title">🇭🇺 בודפשט</h2>
-    <div class="desc">שלושה ימים עם אווירה אחרת: נהר, תצפיות, שיט ערב, שופינג וסיור EZRider לסיום.</div>
-
-    <div class="grid">
-
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?budapest,danube,evening');">
-          <div class="tag">24.8 · יום 5</div>
-        </div>
-        <div class="content">
-          <span class="city">בודפשט 🇭🇺</span>
-          <h3>הגעה וערב ראשון</h3>
-          <p>צ׳ק אין, התאקלמות וסיבוב ערב קליל ליד הדנובה.</p>
-          <div class="highlight">🌉 היילייט: בודפשט בערב הראשון.</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?budapest,parliament,river');">
-          <div class="tag">25.8 · יום 6</div>
-        </div>
-        <div class="content">
-          <span class="city">בודפשט 🇭🇺</span>
-          <h3>בודפשט הקלאסית + שיט ערב</h3>
-          <p>פרלמנט, אזור בודה, מצודת הדייגים, גשר השלשלאות ושיט ערב בדנובה.</p>
-          <div class="highlight">🚤 היילייט: התמונות הכי יפות של הטיול.</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?budapest,shopping');">
-          <div class="tag">26.8 · יום 7</div>
-        </div>
-        <div class="content">
-          <span class="city">בודפשט 🇭🇺</span>
-          <h3>חצי יום שופינג + EZRider</h3>
-          <p>בוקר שופינג ב־WestEnd או Váci Street, מנוחה בצהריים, ובערב סיור EZRider בעיר המוארת.</p>
-          <div class="highlight">🛴 היילייט: שופינג בבוקר, אקשן בלילה.</div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="img" style="background-image:url('https://source.unsplash.com/1600x900/?airport,travel');">
-          <div class="tag">27.8 · יום 8</div>
-        </div>
-        <div class="content">
-          <span class="city">בודפשט 🇭🇺</span>
-          <h3>חזרה הביתה</h3>
-          <p>טיסה חזרה ב־09:20, יציאה מוקדמת לשדה וסיום הטיול.</p>
-          <div class="highlight">✈️ היילייט: סוף נקי ורגוע.</div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <h2 class="section-title">טיפים קטנים</h2>
-    <div class="tips">
-      <div class="tip"><h3>🎒 קצב רגוע</h3><p>לא לדחוס יותר מדי. בוקר טוב, מנוחה וערב יפה — זה הסוד.</p></div>
-      <div class="tip"><h3>🚄 יום מעבר קל</h3><p>ב־24.8 לא להעמיס. רכבת, מלון וסיבוב ערב בלבד.</p></div>
-      <div class="tip"><h3>🛍️ שופינג בבודפשט</h3><p>בודפשט מתאימה יותר לקניות, לכן זה יושב טוב ביום האחרון המלא.</p></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  ❤️ Summer 2026 · Vienna & Budapest Family Escape
+<footer style="text-align:center;padding:30px;color:#60708c">
+❤️ Summer 2026
 </footer>
 
 </body>
-</html>
+</html> 
