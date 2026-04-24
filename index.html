@@ -12,21 +12,21 @@
 
 body{
 margin:0;
-font-family:Heebo,Arial;
+font-family:Heebo,Arial,sans-serif;
 background:
-radial-gradient(circle at top right, rgba(95,127,255,.18), transparent 22%),
-radial-gradient(circle at top left, rgba(245,196,81,.16), transparent 18%),
-linear-gradient(180deg,#eef3ff,#f5f7fb);
+radial-gradient(circle at top right, rgba(95,127,255,.20), transparent 24%),
+radial-gradient(circle at top left, rgba(245,196,81,.18), transparent 20%),
+linear-gradient(180deg,#eef3ff 0%,#f7f9fc 45%,#f5f7fb 100%);
 color:#172033;
 }
 
 .container{width:min(1100px,calc(100% - 30px));margin:auto}
 
 .hero{
-min-height:90vh;
+min-height:88vh;
 background:
-linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.6)),
-url("https://images.unsplash.com/photo-1516550893923-42d28e5677af");
+linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.62)),
+url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80");
 background-size:cover;
 background-position:center;
 display:flex;
@@ -41,27 +41,37 @@ line-height:.95;
 font-weight:800;
 }
 
-.subtitle{font-size:20px;max-width:700px;line-height:1.7}
+.subtitle{font-size:20px;max-width:760px;line-height:1.7}
 
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.badge{background:rgba(255,255,255,.2);padding:10px 14px;border-radius:999px;font-weight:700}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{background:rgba(255,255,255,.20);padding:10px 14px;border-radius:999px;font-weight:700}
 
 section{padding:60px 0}
+
+h2{font-size:38px;margin:0 0 12px}
+.desc{color:#60708c;font-size:18px;line-height:1.7;margin-bottom:28px}
 
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 
 .card{
 background:white;
-border-radius:22px;
+border-radius:24px;
 overflow:hidden;
-box-shadow:0 12px 30px rgba(0,0,0,.12);
+box-shadow:0 14px 34px rgba(20,30,55,.13);
 }
 
 .img{
-height:260px;
-background-size:cover;
-background-position:center;
+height:270px;
 position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#dbeafe,#fde68a);
+}
+
+.img img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
 }
 
 .tag{
@@ -72,11 +82,12 @@ background:white;
 padding:8px 14px;
 border-radius:999px;
 font-weight:800;
+box-shadow:0 6px 18px rgba(0,0,0,.14);
 }
 
 .content{padding:22px}
 
-h3{margin:0 0 10px;font-size:24px}
+h3{margin:0 0 10px;font-size:25px}
 
 .city{
 display:inline-block;
@@ -88,47 +99,55 @@ font-weight:800;
 margin-bottom:10px;
 }
 
-p{color:#60708c;line-height:1.7}
+p{color:#60708c;line-height:1.75}
 
 .list{display:grid;gap:8px;margin:15px 0}
 
-.item{display:flex;gap:8px}
-.dot{width:8px;height:8px;background:#2750d8;border-radius:50%;margin-top:8px}
+.item{display:flex;gap:8px;line-height:1.65}
+.dot{width:8px;height:8px;background:#2750d8;border-radius:50%;margin-top:9px;flex:0 0 8px}
 
 .highlight{
 background:#ecfdf3;
-padding:12px;
-border-radius:12px;
+padding:13px 14px;
+border-radius:14px;
 font-weight:800;
 color:#1f6b37;
+line-height:1.7;
 }
 
-/* תמונות */
-.demel{
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/2/23/Demel_Wien_Kohlmarkt.jpg");
-}
-.zoom{
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/6/67/MuseumsQuartier_Wien.jpg");
-}
-.nasch{
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Naschmarkt_Wien.jpg");
-}
-.zoo{
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg");
-}
-.bud1{
-background-image:url("https://images.unsplash.com/photo-1549877452-9c387954fbc2");
-}
-.bud2{
-background-image:url("https://images.unsplash.com/photo-1541849546-216549ae216d");
-}
-.bud3{
-background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f");
+.transfer{
+background:linear-gradient(135deg,#233b86,#315dff);
+color:white;
+border-radius:28px;
+padding:30px;
+box-shadow:0 14px 34px rgba(20,30,55,.16);
 }
 
-@media(max-width:800px){
-.grid{grid-template-columns:1fr}
-.hero{min-height:70vh}
+.transfer p{color:rgba(255,255,255,.92)}
+
+.tips{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.tip{
+background:white;
+border-radius:22px;
+padding:22px;
+box-shadow:0 12px 28px rgba(20,30,55,.10);
+}
+
+footer{
+text-align:center;
+padding:35px;
+color:#60708c;
+}
+
+@media(max-width:850px){
+.grid,.tips{grid-template-columns:1fr}
+.hero{min-height:74vh}
+.img{height:235px}
 }
 </style>
 </head>
@@ -137,15 +156,16 @@ background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb172
 
 <header class="hero">
 <div class="container">
+<div class="badge">☀️ קיץ 2026 · טיול משפחתי</div>
 <h1>וינה & בודפשט</h1>
 <div class="subtitle">
-20–27 באוגוסט 2026 · טיול משפחתי מושלם עם ZOOM, שווקים, גן חיות ושופינג
+20–27 באוגוסט 2026 · אבי, אלינור, אלמה ואליאנה · וינה קלאסית, Demel, מוזיאון ZOOM, Naschmarkt, גן החיות ושנברון, רכבת לבודפשט, שיט, שופינג ו־EZRider.
 </div>
 
 <div class="badges">
-<div class="badge">✈️ 20.8 וינה</div>
-<div class="badge">🚄 24.8 בודפשט</div>
-<div class="badge">🦁 23.8 גן חיות</div>
+<div class="badge">✈️ 20.8 טיסה לוינה 06:20</div>
+<div class="badge">🚄 24.8 רכבת לבודפשט 11:40</div>
+<div class="badge">✈️ 27.8 חזרה מבודפשט 09:20</div>
 </div>
 </div>
 </header>
@@ -153,46 +173,85 @@ background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb172
 <section>
 <div class="container">
 <h2>🇦🇹 וינה</h2>
+<div class="desc">
+ארבעה ימים רגועים ומדויקים: פתיחה מתוקה ב־Demel, מוזיאון ZOOM לילדות, שוק Naschmarkt ומרכז קלאסי, ואז גן החיות ושנברון.
+</div>
 
 <div class="grid">
 
 <div class="card">
-<div class="img demel"><div class="tag">יום 1</div></div>
+<div class="img">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Demel_Wien_Kohlmarkt.jpg" alt="Demel Vienna">
+<div class="tag">20.8 · יום 1</div>
+</div>
 <div class="content">
-<span class="city">וינה</span>
-<h3>נחיתה + Demel</h3>
-<p>פתיחה רגועה בעיר עם קפה ועוגות ב־Demel.</p>
-<div class="highlight">🍰 פתיחה מושלמת</div>
+<span class="city">וינה 🇦🇹</span>
+<h3>נחיתה + מרכז העיר + Demel</h3>
+<p>יום פתיחה רגוע אחרי טיסה מוקדמת: הגעה למלון, מנוחה קצרה, ואז סיבוב מרכזי מתוק וקליל.</p>
+<div class="list">
+<div class="item"><span class="dot"></span><span>נחיתה בוינה אחרי טיסה ב־06:20</span></div>
+<div class="item"><span class="dot"></span><span>הגעה למלון / השארת מזוודות / מנוחה</span></div>
+<div class="item"><span class="dot"></span><span>סיבוב באזור Stephansplatz ו־Graben</span></div>
+<div class="item"><span class="dot"></span><span>עצירה מתוקה ב־Demel</span></div>
+</div>
+<div class="highlight">🍰 היילייט: פתיחה וינאית קלאסית עם קפה, עוגות ואווירה.</div>
 </div>
 </div>
 
 <div class="card">
-<div class="img zoom"><div class="tag">יום 2</div></div>
+<div class="img">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/MuseumsQuartier_Wien.jpg" alt="ZOOM Museum Vienna">
+<div class="tag">21.8 · יום 2</div>
+</div>
 <div class="content">
-<span class="city">וינה</span>
-<h3>ZOOM + פראטר</h3>
-<p>יום ילדים מושלם + ערב בפראטר.</p>
-<div class="highlight">🎡 כיף לילדות</div>
+<span class="city">וינה 🇦🇹</span>
+<h3>מוזיאון ZOOM + פראטר</h3>
+<p>יום ילדים מושלם: בוקר במוזיאון ZOOM לפי סלוטים שתזמין מראש, ובהמשך ערב כיפי בפראטר.</p>
+<div class="list">
+<div class="item"><span class="dot"></span><span>פעילות מוזמנת מראש ב־ZOOM Children’s Museum</span></div>
+<div class="item"><span class="dot"></span><span>צהריים באזור MuseumsQuartier</span></div>
+<div class="item"><span class="dot"></span><span>מנוחה במלון</span></div>
+<div class="item"><span class="dot"></span><span>ערב בפראטר והגלגל הענק</span></div>
+</div>
+<div class="highlight">🎨 היילייט: יום חכם, חווייתי ולא עמוס לילדות.</div>
 </div>
 </div>
 
 <div class="card">
-<div class="img nasch"><div class="tag">יום 3</div></div>
+<div class="img">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Naschmarkt_Wien.jpg" alt="Naschmarkt Vienna">
+<div class="tag">22.8 · יום 3</div>
+</div>
 <div class="content">
-<span class="city">וינה</span>
-<h3>Naschmarkt + מרכז</h3>
-<p>שוק סופ"ש + אופרה + Hofburg.</p>
-<div class="highlight">🛍️ חוויה אירופית</div>
+<span class="city">וינה 🇦🇹</span>
+<h3>Naschmarkt + מרכז קלאסי</h3>
+<p>שוק סופ״ש כיפי ואז הליכה דרך וינה האלגנטית: אופרה, Hofburg, Graben ו־Stephansplatz.</p>
+<div class="list">
+<div class="item"><span class="dot"></span><span>בוקר ב־Naschmarkt ושוק הפשפשים</span></div>
+<div class="item"><span class="dot"></span><span>הליכה לכיוון האופרה של וינה</span></div>
+<div class="item"><span class="dot"></span><span>Hofburg והחצרות היפות</span></div>
+<div class="item"><span class="dot"></span><span>Graben / Stephansplatz / גלידה או קינוח</span></div>
+</div>
+<div class="highlight">🛍️ היילייט: שוק תוסס + וינה הקלאסית ביום אחד.</div>
 </div>
 </div>
 
 <div class="card">
-<div class="img zoo"><div class="tag">יום 4</div></div>
+<div class="img">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg" alt="Vienna Zoo">
+<div class="tag">23.8 · יום 4</div>
+</div>
 <div class="content">
-<span class="city">וינה</span>
-<h3>גן חיות + שנברון</h3>
-<p>יום שיא של הטיול.</p>
-<div class="highlight">🦁 יום חזק</div>
+<span class="city">וינה 🇦🇹</span>
+<h3>גן חיות וינה + שנברון</h3>
+<p>יום ראשון במתחם שנברון: מתחילים בגן החיות ואז ממשיכים לגנים של הארמון בקצב רגוע.</p>
+<div class="list">
+<div class="item"><span class="dot"></span><span>יציאה מוקדמת ל־Tiergarten Schönbrunn</span></div>
+<div class="item"><span class="dot"></span><span>מסלול רגוע בין המתחמים המרכזיים</span></div>
+<div class="item"><span class="dot"></span><span>צהריים קליל במקום</span></div>
+<div class="item"><span class="dot"></span><span>טיול בגני שנברון וסיום רגוע לוינה</span></div>
+</div>
+<div class="highlight">🦁 היילייט: גן חיות + שנברון ביום אחד, בלי נסיעות מיותרות.</div>
 </div>
 </div>
 
@@ -202,31 +261,73 @@ background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb172
 
 <section>
 <div class="container">
+<div class="transfer">
+<h2>🚄 מעבר לבודפשט · 24.8</h2>
+<p>
+בוקר רגוע בוינה, רכבת ב־11:40 לבודפשט, הגעה למלון וסיבוב ערב ראשון באזור המרכז או הדנובה.
+</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
 <h2>🇭🇺 בודפשט</h2>
+<div class="desc">
+שלושה ימים עם אווירה אחרת: נהר, תצפיות, שיט ערב, שופינג וסיור EZRider לסיום.
+</div>
 
 <div class="grid">
 
 <div class="card">
-<div class="img bud1"></div>
+<div class="img">
+<img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1400&q=80" alt="Budapest Danube Evening">
+<div class="tag">24.8 · יום 5</div>
+</div>
 <div class="content">
-<h3>יום 5</h3>
-<p>הגעה וסיבוב ערב.</p>
+<span class="city">בודפשט 🇭🇺</span>
+<h3>הגעה וערב ראשון</h3>
+<p>צ׳ק אין, התאקלמות וסיבוב ערב קליל ליד הדנובה.</p>
+<div class="highlight">🌉 היילייט: בודפשט בערב הראשון.</div>
 </div>
 </div>
 
 <div class="card">
-<div class="img bud2"></div>
+<div class="img">
+<img src="https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1400&q=80" alt="Budapest Parliament">
+<div class="tag">25.8 · יום 6</div>
+</div>
 <div class="content">
-<h3>יום 6</h3>
-<p>פרלמנט + שיט.</p>
+<span class="city">בודפשט 🇭🇺</span>
+<h3>בודפשט הקלאסית + שיט ערב</h3>
+<p>פרלמנט, אזור בודה, מצודת הדייגים, גשר השלשלאות ושיט ערב בדנובה.</p>
+<div class="highlight">🚤 היילייט: התמונות הכי יפות של הטיול.</div>
 </div>
 </div>
 
 <div class="card">
-<div class="img bud3"></div>
+<div class="img">
+<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80" alt="Shopping">
+<div class="tag">26.8 · יום 7</div>
+</div>
 <div class="content">
-<h3>יום 7</h3>
-<p>שופינג + EZRider.</p>
+<span class="city">בודפשט 🇭🇺</span>
+<h3>חצי יום שופינג + EZRider</h3>
+<p>בוקר שופינג ב־WestEnd או Váci Street, מנוחה בצהריים, ובערב סיור EZRider בעיר המוארת.</p>
+<div class="highlight">🛴 היילייט: שופינג בבוקר, אקשן בלילה.</div>
+</div>
+</div>
+
+<div class="card">
+<div class="img">
+<img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80" alt="Airport Travel">
+<div class="tag">27.8 · יום 8</div>
+</div>
+<div class="content">
+<span class="city">בודפשט 🇭🇺</span>
+<h3>חזרה הביתה</h3>
+<p>טיסה חזרה ב־09:20, יציאה מוקדמת לשדה וסיום הטיול.</p>
+<div class="highlight">✈️ היילייט: סוף נקי ורגוע.</div>
 </div>
 </div>
 
@@ -234,9 +335,33 @@ background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb172
 </div>
 </section>
 
-<footer style="text-align:center;padding:30px;color:#60708c">
-❤️ Summer 2026
+<section>
+<div class="container">
+<h2>טיפים קטנים</h2>
+<div class="tips">
+
+<div class="tip">
+<h3>🎒 קצב רגוע</h3>
+<p>לא לדחוס יותר מדי. בוקר טוב, מנוחה וערב יפה — זה הסוד.</p>
+</div>
+
+<div class="tip">
+<h3>🚄 יום מעבר קל</h3>
+<p>ב־24.8 לא להעמיס. רכבת, מלון וסיבוב ערב בלבד.</p>
+</div>
+
+<div class="tip">
+<h3>🛍️ שופינג בבודפשט</h3>
+<p>בודפשט מתאימה יותר לקניות, לכן זה יושב טוב ביום האחרון המלא.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<footer>
+❤️ Summer 2026 · Vienna & Budapest Family Escape
 </footer>
 
 </body>
-</html> 
+</html>
