@@ -1,171 +1,291 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vienna & Budapest 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קיץ 2026 | וינה ובודפשט</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Heebo,Arial,sans-serif;background:#07111f;color:white;overflow-x:hidden}
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px;background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.7)),url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80") center/cover;animation:zoomHero 10s infinite alternate}
-@keyframes zoomHero{from{background-size:100%}to{background-size:112%}}
-.hero h1{font-size:clamp(45px,9vw,95px);line-height:.9;margin:0;font-weight:900;animation:pop 1s ease}
-@keyframes pop{from{opacity:0;transform:scale(.8) translateY(40px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.subtitle{font-size:22px;max-width:820px;margin:25px auto;line-height:1.7;color:#dbeafe}
-.btn{display:inline-block;margin-top:20px;padding:16px 28px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ec4899);color:white;font-weight:900;text-decoration:none;box-shadow:0 0 30px #ec489977;transition:.25s}
-.btn:hover{transform:scale(1.08)}
-section{padding:70px 20px}
-.container{max-width:1150px;margin:auto}
-h2{font-size:42px;margin:0 0 30px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.card{position:relative;min-height:360px;border-radius:28px;padding:26px;overflow:hidden;box-shadow:0 20px 50px #0008;transition:.35s;background-size:cover;background-position:center}
-.card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,23,42,.78),rgba(124,58,237,.45));z-index:0}
-.card>*{position:relative;z-index:1}
-.card:hover{transform:translateY(-10px) rotate(-1deg);box-shadow:0 30px 70px #000}
-.date{display:inline-block;background:rgba(255,255,255,.22);padding:8px 14px;border-radius:999px;font-weight:900;margin-bottom:18px}
-.card h3{font-size:31px;margin:0 0 15px}
-.card p,.card li{font-size:17px;line-height:1.8;color:#eef2ff}
-.icon{position:absolute;bottom:20px;left:25px;font-size:72px;opacity:.32}
-.transfer{border-radius:30px;padding:35px;background:linear-gradient(135deg,#0f172a,#2563eb);box-shadow:0 20px 50px #0008}
-.footer{text-align:center;padding:40px 20px;color:#94a3b8}
+    <style>
+        :root {
+            /* משתני צבע לתחזוקה קלה */
+            --primary-color: #2750d8;
+            --primary-light: #eef2ff;
+            --text-dark: #172033;
+            --text-muted: #60708c;
+            --success-bg: #ecfdf3;
+            --success-text: #1f6b37;
+            --card-bg: #ffffff;
+            --bg-gradient: linear-gradient(180deg, #eef3ff 0%, #f7f9fc 45%, #f5f7fb 100%);
+        }
 
-/* תמונות */
-.demel{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Demel_Wien_Kohlmarkt.jpg")}
-.zoom{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/MuseumsQuartier_Wien.jpg")}
-.nasch{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Naschmarkt_Wien.jpg")}
-.zoo{background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg")}
-.bud1{background-image:url("https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1400&q=80")}
-.bud2{background-image:url("https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1400&q=80")}
-.bud3{background-image:url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80")}
-.airport{background-image:url("https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80")}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-@media(max-width:800px){.grid{grid-template-columns:1fr}.hero h1{font-size:52px}.card{min-height:340px}}
-</style>
-</head>
+        html {
+            scroll-behavior: smooth;
+        }
 
-<body>
+        body {
+            font-family: 'Heebo', Arial, sans-serif;
+            background: 
+                radial-gradient(circle at top right, rgba(95,127,255,.15), transparent 24%),
+                radial-gradient(circle at top left, rgba(245,196,81,.15), transparent 20%),
+                var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-<div class="hero">
-<div>
-<h1>וינה & בודפשט<br>2026</h1>
-<div class="subtitle">
-טיול משפחתי לאבי, אלינור, אלמה ואליאנה · 20–27 באוגוסט ·  
-אירופה קלאסית, ZOOM, שווקים, גן חיות, שיט, שופינג ו־EZRider.
-</div>
-<a class="btn" href="#trip">יאללה למסלול ✨</a>
-</div>
-</div>
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
 
-<section id="trip">
-<div class="container">
-<h2>🇦🇹 וינה</h2>
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 88vh;
+            background: 
+                linear-gradient(rgba(0,0,0,.40), rgba(0,0,0,.70)),
+                url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            padding: 40px 0;
+        }
 
-<div class="grid">
+        h1 {
+            font-size: clamp(40px, 7vw, 75px);
+            margin: 15px 0;
+            line-height: 1;
+            font-weight: 800;
+        }
 
-<div class="card demel">
-<span class="date">20.8 · יום 1</span>
-<h3>נחיתה + Demel</h3>
-<p>פתיחה רגועה בוינה אחרי טיסה מוקדמת.</p>
-<ul>
-<li>הגעה למלון ומנוחה</li>
-<li>סיבוב באזור Stephansplatz ו־Graben</li>
-<li>עצירה מתוקה ב־Demel</li>
-</ul>
-<div class="icon">🍰</div>
-</div>
+        .subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            max-width: 760px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
 
-<div class="card zoom">
-<span class="date">21.8 · יום 2</span>
-<h3>ZOOM + פראטר</h3>
-<p>יום ילדים מושלם, לפי סלוטים שתזמין באתר ZOOM.</p>
-<ul>
-<li>בוקר במוזיאון ZOOM</li>
-<li>צהריים באזור MuseumsQuartier</li>
-<li>ערב בפראטר והגלגל הענק</li>
-</ul>
-<div class="icon">🎡</div>
-</div>
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
 
-<div class="card nasch">
-<span class="date">22.8 · יום 3</span>
-<h3>Naschmarkt + מרכז קלאסי</h3>
-<p>שוק סופ״ש ואז וינה האלגנטית ברגל.</p>
-<ul>
-<li>Naschmarkt ושוק פשפשים</li>
-<li>האופרה של וינה</li>
-<li>Hofburg, Graben ו־Stephansplatz</li>
-</ul>
-<div class="icon">🛍️</div>
-</div>
+        .badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-<div class="card zoo">
-<span class="date">23.8 · יום 4</span>
-<h3>גן חיות + שנברון</h3>
-<p>יום משפחתי חזק במתחם שנברון.</p>
-<ul>
-<li>Tiergarten Schönbrunn</li>
-<li>צהריים קליל במקום</li>
-<li>טיול בגני שנברון</li>
-</ul>
-<div class="icon">🦁</div>
-</div>
+        /* --- Sections & Typography --- */
+        section {
+            padding: 80px 0;
+        }
 
-</div>
-</div>
-</section>
+        h2 {
+            font-size: 38px;
+            margin: 0 0 12px;
+            font-weight: 800;
+        }
 
-<section>
-<div class="container">
-<div class="transfer">
-<h2>🚄 מעבר לבודפשט · 24.8</h2>
-<p>רכבת מוינה לבודפשט בשעה 11:40, הגעה למלון וסיבוב ערב רגוע ליד הדנובה.</p>
-</div>
-</div>
-</section>
+        .desc {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
 
-<section>
-<div class="container">
-<h2>🇭🇺 בודפשט</h2>
+        /* --- Grid & Cards --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+        }
 
-<div class="grid">
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(20,30,55,.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-<div class="card bud1">
-<span class="date">24.8 · יום 5</span>
-<h3>ערב ראשון</h3>
-<p>צ׳ק אין, התאקלמות וסיבוב ערב ליד הדנובה.</p>
-<div class="icon">🌉</div>
-</div>
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(20,30,55,.15);
+        }
 
-<div class="card bud2">
-<span class="date">25.8 · יום 6</span>
-<h3>בודפשט הקלאסית</h3>
-<p>פרלמנט, בודה, מצודת הדייגים ושיט ערב בדנובה.</p>
-<div class="icon">🚤</div>
-</div>
+        .img {
+            height: 250px;
+            position: relative;
+            background: linear-gradient(135deg, #dbeafe, #fde68a);
+            overflow: hidden;
+        }
 
-<div class="card bud3">
-<span class="date">26.8 · יום 7</span>
-<h3>שופינג + EZRider</h3>
-<p>חצי יום שופינג, מנוחה, ובערב סיור EZRider.</p>
-<div class="icon">🛴</div>
-</div>
+        .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
 
-<div class="card airport">
-<span class="date">27.8 · יום 8</span>
-<h3>חזרה</h3>
-<p>טיסה חזרה מבודפשט ב־09:20.</p>
-<div class="icon">✈️</div>
-</div>
+        .card:hover .img img {
+            transform: scale(1.05);
+        }
 
-</div>
-</div>
-</section>
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--card-bg);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 6px 18px rgba(0,0,0,.15);
+            color: var(--text-dark);
+        }
 
-<div class="footer">
-❤️ Summer 2026 · Vienna & Budapest Family Escape
-</div>
+        .content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
 
-</body>
-</html>
+        .city {
+            align-self: flex-start;
+            background: var(--primary-light);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* --- Lists --- */
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0 20px;
+            flex-grow: 1;
+        }
+
+        .item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-dark);
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* --- Highlights & Special Components --- */
+        .highlight {
+            background: var(--success-bg);
+            padding: 14px;
+            border-radius: 14px;
+            font-weight: 800;
+            color: var(--success-text);
+            margin-top: auto; /* דוחף את ההיילייט לתחתית הכרטיסייה תמיד */
+        }
+
+        .transfer {
+            background: linear-gradient(135deg, #1e3a8a, var(--primary-color));
+            color: white;
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: 0 14px 34px rgba(39, 80, 216, 0.2);
+            text-align: center;
+        }
+
+        .transfer h2 {
+            margin-bottom: 15px;
+        }
+
+        .transfer p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            margin: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Tips Section --- */
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip {
+            background: var(--card-bg);
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(20,30,55,.06);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .tip:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .tip p {
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        /* --- Media Queries --- */
+        @media(max-width: 768px) {
+            .hero {
+                min-height: 70vh;
