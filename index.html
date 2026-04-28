@@ -50,10 +50,41 @@ background:white;
 border-radius:24px;
 overflow:hidden;
 box-shadow:0 14px 34px rgba(20,30,55,.13);
+transition:.35s ease;
 }
 
-.img{height:270px;position:relative;overflow:hidden;background:linear-gradient(135deg,#dbeafe,#fde68a)}
-.img img{width:100%;height:100%;object-fit:cover;display:block}
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 22px 46px rgba(20,30,55,.20);
+}
+
+.img{
+height:270px;
+position:relative;
+overflow:hidden;
+background:linear-gradient(135deg,#dbeafe,#fde68a);
+}
+
+.img img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition:transform .65s ease, filter .65s ease;
+}
+
+.card:hover .img img{
+transform:scale(1.09);
+filter:saturate(1.08) contrast(1.04);
+}
+
+.img:after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.18));
+pointer-events:none;
+}
 
 .tag{
 position:absolute;
@@ -64,6 +95,7 @@ padding:8px 14px;
 border-radius:999px;
 font-weight:800;
 box-shadow:0 6px 18px rgba(0,0,0,.14);
+z-index:2;
 }
 
 .content{padding:22px}
@@ -99,12 +131,19 @@ color:white;
 border-radius:28px;
 padding:30px;
 box-shadow:0 14px 34px rgba(20,30,55,.16);
+transition:.35s ease;
+}
+
+.transfer:hover{
+transform:translateY(-5px);
+box-shadow:0 22px 46px rgba(20,30,55,.22);
 }
 
 .transfer p{color:rgba(255,255,255,.92)}
 
 .tips{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.tip{background:white;border-radius:22px;padding:22px;box-shadow:0 12px 28px rgba(20,30,55,.10)}
+.tip{background:white;border-radius:22px;padding:22px;box-shadow:0 12px 28px rgba(20,30,55,.10);transition:.3s ease}
+.tip:hover{transform:translateY(-6px)}
 
 footer{text-align:center;padding:35px;color:#60708c}
 
@@ -145,7 +184,7 @@ footer{text-align:center;padding:35px;color:#60708c}
 
 <div class="card">
 <div class="img">
-<img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1400&q=80" alt="Vienna Cafe">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Demel_Wien_Kohlmarkt.jpg/1280px-Demel_Wien_Kohlmarkt.jpg" alt="Demel Vienna" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=80';">
 <div class="tag">20.8 · יום 1</div>
 </div>
 <div class="content">
@@ -183,7 +222,7 @@ footer{text-align:center;padding:35px;color:#60708c}
 
 <div class="card">
 <div class="img">
-<img src="https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=1400&q=80" alt="European Market">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Naschmarkt_Wien.jpg/1280px-Naschmarkt_Wien.jpg" alt="Naschmarkt Vienna" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1528892952291-009c663ce843?auto=format&fit=crop&w=1400&q=80';">
 <div class="tag">22.8 · יום 3</div>
 </div>
 <div class="content">
@@ -202,7 +241,7 @@ footer{text-align:center;padding:35px;color:#60708c}
 
 <div class="card">
 <div class="img">
-<img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80" alt="Zoo Animals">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg/1280px-Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg" alt="Tiergarten Schonbrunn Vienna Zoo" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80';">
 <div class="tag">23.8 · יום 4</div>
 </div>
 <div class="content">
