@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vienna & Budapest | Summer 2026</title>
+<title>קיץ 2026 | וינה ובודפשט</title>
 
+<!-- ✅ פונט פרימיום -->
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -14,105 +15,72 @@ html{scroll-behavior:smooth}
 body{
 margin:0;
 font-family:'Assistant',Arial,sans-serif;
-background:linear-gradient(180deg,#f8fafc,#eef3ff);
-color:#1e293b;
+background:
+radial-gradient(circle at top right, rgba(95,127,255,.20), transparent 24%),
+radial-gradient(circle at top left, rgba(245,196,81,.18), transparent 20%),
+linear-gradient(180deg,#eef3ff 0%,#f7f9fc 45%,#f5f7fb 100%);
+color:#172033;
 }
 
-.container{width:min(1120px,calc(100% - 30px));margin:auto}
+h1,h2,h3{
+font-family:'Playfair Display',serif;
+letter-spacing:-0.5px;
+}
+
+.container{width:min(1100px,calc(100% - 30px));margin:auto}
 
 /* HERO */
 .hero{
-min-height:90vh;
+min-height:88vh;
 background:
-linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.7)),
+linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.62)),
 url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80");
 background-size:cover;
 background-position:center;
 display:flex;
 align-items:center;
 color:white;
-text-align:center;
 }
 
-h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(44px,7vw,82px);
-margin:0;
-line-height:1;
-}
+h1{font-size:clamp(40px,7vw,75px);margin:0 0 15px;line-height:.95;font-weight:800}
+.subtitle{font-size:20px;max-width:760px;line-height:1.7}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{background:rgba(255,255,255,.20);padding:10px 14px;border-radius:999px;font-weight:700}
 
-.subtitle{
-font-size:20px;
-margin-top:20px;
-max-width:800px;
-margin-inline:auto;
-line-height:1.8;
-}
+section{padding:60px 0}
+h2{font-size:38px;margin:0 0 12px}
+.desc{color:#60708c;font-size:18px;line-height:1.7;margin-bottom:28px}
 
-.badges{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
-margin-top:25px;
-}
-
-.badge{
-background:rgba(255,255,255,.2);
-padding:10px 14px;
-border-radius:999px;
-backdrop-filter:blur(6px);
-}
-
-section{padding:70px 0}
-
-h2{
-font-family:'Playfair Display',serif;
-font-size:40px;
-margin-bottom:10px;
-}
-
-.desc{
-color:#64748b;
-font-size:18px;
-margin-bottom:30px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:25px;
-}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
 
 .card{
 background:white;
-border-radius:26px;
+border-radius:24px;
 overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,.08);
-transition:.35s;
+box-shadow:0 14px 34px rgba(20,30,55,.13);
+transition:.35s ease;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 25px 60px rgba(0,0,0,.15);
+transform:translateY(-8px);
+box-shadow:0 22px 46px rgba(20,30,55,.20);
 }
 
 .img{
-height:280px;
-overflow:hidden;
+height:270px;
 position:relative;
+overflow:hidden;
 }
 
 .img img{
 width:100%;
 height:100%;
 object-fit:cover;
-transition:transform .6s;
+display:block;
+transition:transform .6s ease;
 }
 
-.card:hover img{
-transform:scale(1.08);
-}
+.card:hover img{transform:scale(1.08)}
 
 .tag{
 position:absolute;
@@ -121,37 +89,31 @@ right:15px;
 background:white;
 padding:8px 14px;
 border-radius:999px;
-font-weight:700;
+font-weight:800;
 }
 
-.content{padding:24px}
+.content{padding:22px}
 
 .city{
 display:inline-block;
 background:#eef2ff;
+color:#2750d8;
 padding:6px 12px;
 border-radius:999px;
+font-weight:800;
 margin-bottom:10px;
 }
 
-h3{
-font-family:'Playfair Display',serif;
-margin:0 0 10px;
-}
-
-.list{margin:15px 0}
-.item{margin-bottom:8px}
-
 .highlight{
 background:#ecfdf3;
-padding:12px;
-border-radius:12px;
-font-weight:600;
+padding:13px;
+border-radius:14px;
+font-weight:700;
 }
 
 .map-frame{
 width:100%;
-height:320px;
+height:300px;
 border:0;
 border-radius:16px;
 margin-top:15px;
@@ -159,31 +121,20 @@ margin-top:15px;
 
 .map-btn{
 display:inline-block;
-margin-top:12px;
+margin-top:10px;
 padding:12px 18px;
 border-radius:999px;
-background:linear-gradient(135deg,#2563eb,#06b6d4);
+background:linear-gradient(135deg,#3b82f6,#06b6d4);
 color:white;
 text-decoration:none;
 font-weight:700;
 }
 
-.transfer{
-background:linear-gradient(135deg,#1e3a8a,#2563eb);
-color:white;
-padding:35px;
-border-radius:28px;
-text-align:center;
-}
-
-footer{
-text-align:center;
-padding:40px;
-color:#64748b;
-}
+footer{text-align:center;padding:35px;color:#60708c}
 
 @media(max-width:850px){
 .grid{grid-template-columns:1fr}
+.img{height:230px}
 }
 </style>
 </head>
@@ -192,16 +143,9 @@ color:#64748b;
 
 <header class="hero">
 <div class="container">
-<h1>Vienna & Budapest</h1>
+<h1>וינה & בודפשט</h1>
 <div class="subtitle">
-טיול משפחתי קיץ 2026 · אבי, אלינור, אלמה ואליאנה  
-חוויה אירופאית קלאסית עם שווקים, גן חיות, שופינג וסיורי ערב קסומים
-</div>
-
-<div class="badges">
-<div class="badge">✈️ 20.8 וינה</div>
-<div class="badge">🚄 24.8 לבודפשט</div>
-<div class="badge">✈️ 27.8 חזרה</div>
+טיול משפחתי קיץ 2026 · אבי, אלינור, אלמה ואליאנה
 </div>
 </div>
 </header>
@@ -214,97 +158,51 @@ color:#64748b;
 
 <div class="card">
 <div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Demel_Wien_Kohlmarkt.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Demel_Wien_Kohlmarkt.jpg"
+onerror="this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=80'">
 <div class="tag">יום 1</div>
 </div>
 <div class="content">
-<h3>Demel & מרכז העיר</h3>
-<p>יום פתיחה רגוע ומתוק.</p>
+<h3>Demel + מרכז העיר</h3>
+<div class="highlight">פתיחה רגועה ומתוקה</div>
+
 <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Stephansplatz+Vienna&destination=Stephansplatz+Vienna&travelmode=walking&waypoints=Graben+Vienna|Demel+Vienna" target="_blank">ניווט</a>
+
 <iframe class="map-frame" src="https://www.google.com/maps?q=Stephansplatz+Vienna+to+Demel+Vienna&output=embed"></iframe>
+
 </div>
 </div>
 
 <div class="card">
 <div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Wiener_Riesenrad_2017.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Wiener_Riesenrad_2017.jpg"
+onerror="this.src='https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1400&q=80'">
 <div class="tag">יום 2</div>
 </div>
 <div class="content">
 <h3>ZOOM + פראטר</h3>
-<p>יום ילדים מושלם.</p>
 </div>
 </div>
 
 <div class="card">
 <div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Naschmarkt_Wien.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Naschmarkt_Wien.jpg"
+onerror="this.src='https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=1400&q=80'">
 <div class="tag">יום 3</div>
 </div>
 <div class="content">
 <h3>Naschmarkt</h3>
-<p>שוק איכרים קלאסי.</p>
 </div>
 </div>
 
 <div class="card">
 <div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg"
+onerror="this.src='https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80'">
 <div class="tag">יום 4</div>
 </div>
 <div class="content">
 <h3>גן חיות ושנברון</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<section>
-<div class="container">
-<div class="transfer">
-<h2>🚄 מעבר לבודפשט</h2>
-<p>רכבת ב־11:40 · הגעה אחה״צ</p>
-</div>
-</div>
-</section>
-
-<section>
-<div class="container">
-<h2>🇭🇺 בודפשט</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="img">
-<img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2">
-<div class="tag">יום 5</div>
-</div>
-<div class="content">
-<h3>סיור ערב</h3>
-<a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Budapest+Marriott+Hotel&destination=Budapest+Marriott+Hotel&travelmode=walking&waypoints=Chain+Bridge+Budapest|Váci+Street" target="_blank">ניווט</a>
-<iframe class="map-frame" src="https://www.google.com/maps?q=Budapest+Marriott+Hotel+to+Chain+Bridge&output=embed"></iframe>
-</div>
-</div>
-
-<div class="card">
-<div class="img">
-<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
-<div class="tag">יום 6</div>
-</div>
-<div class="content">
-<h3>שופינג + EZRaider</h3>
-</div>
-</div>
-
-<div class="card">
-<div class="img">
-<img src="https://images.unsplash.com/photo-1541849546-216549ae216d">
-<div class="tag">יום 7</div>
-</div>
-<div class="content">
-<h3>בודה + רובע יהודי</h3>
 </div>
 </div>
 
