@@ -238,7 +238,7 @@ footer span{color:var(--gold-light);font-size:16px;margin:0 2px}
       
       <div class="card reveal" id="day2">
         <div class="cimg-w">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Wiener_Riesenrad_2017.jpg/800px-Wiener_Riesenrad_2017.jpg" alt="Vienna Giant Ferris Wheel" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1599818817411-ae5d10d05779?auto=format&fit=crop&w=900&q=80" alt="Vienna Giant Ferris Wheel" loading="lazy">
           <div class="cov"></div>
           <div class="dtag">יום 2<small>21.8</small></div>
         </div>
@@ -402,112 +402,4 @@ footer span{color:var(--gold-light);font-size:16px;margin:0 2px}
           <div class="cov"></div>
           <div class="dtag">יום 8<small>27.8</small></div>
         </div>
-        <div class="cbody">
-          <h3>חוזרים הביתה</h3>
-          <p>טיסה ב-09:20. השכמה מוקדמת, צ'ק-אאוט מהיר מ-Marriott ונסיעה לשדה התעופה.</p>
-          <ul class="acts">
-            <li><span class="dot n"></span>השכמה מוקדמת + ארוחת בוקר ארוזה</li>
-            <li><span class="dot n"></span>צ'ק-אאוט מסודר ואיסוף המזוודות</li>
-            <li><span class="dot n"></span>נסיעה ישירה לשדה התעופה של בודפשט</li>
-          </ul>
-          <div class="hl"><i class="ph ph-airplane-landing"></i> סוף מאורגן ורגוע של טיול חלומי — עד הפעם הבאה!</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="tips">
-  <div class="tips-wrap">
-    <div class="tips-in">
-      <div class="sec-hdr reveal">
-        <h2 class="sec-title">💡 טיפים לטיול משפחתי מושלם</h2>
-        <p class="sec-desc">כמה עקרונות שישמרו על האנרגיות והחיוכים של כולם לאורך כל השבוע.</p>
-      </div>
-      <div class="tips-grid">
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-backpack"></i></div><h3>קצב מחושב</h3></div>
-          <p>לא לדחוס פעילויות. בוקר חוויתי וממוקד, מנוחת צהריים חיונית במלון, וערב נעים — כך כולם מגיעים לסיום היום אנרגטיים.</p>
-        </div>
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-train"></i></div><h3>יום המעבר = יום מנוחה</h3></div>
-          <p>ב-24.8 להתמקד אך ורק בנסיעת הרכבת ובסיבוב ערב נינוח וקליל בבודפשט. אין טעם להוסיף פעילויות מעייפות ביום זה.</p>
-        </div>
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-suitcase-rolling"></i></div><h3>ערב אחרון חכם</h3></div>
-          <p>ב-26.8 תכננו חזרה מוקדמת למלון. אריזה נינוחה ושינה טובה יהפכו את בוקר הטיסה המוקדם להרבה פחות לחוץ.</p>
-        </div>
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-ticket"></i></div><h3>ZOOM — להזמין מראש</h3></div>
-          <p>מוזיאון הילדים ZOOM מאוד פופולרי בקיץ. כדאי מאוד לסגור סלוט מוקדם ככל האפשר כדי להבטיח כניסה בשעה שנוחה לכם.</p>
-        </div>
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-scooter"></i></div><h3>EZRaider — להזמין מראש</h3></div>
-          <p>אל תחכו לרגע האחרון. הזמינו מקומות לסיור מבעוד מועד כדי להבטיח כלים זמינים לכל המשפחה יחד.</p>
-        </div>
-        <div class="tip reveal">
-          <div class="tip-top"><div class="tip-ico"><i class="ph ph-thermometer-hot"></i></div><h3>חום אוגוסט</h3></div>
-          <p>מים, כובעים, קרם הגנה ומנוחת הצהריים במזגן הם לא "בונוס" — הם חלק קריטי ובלתי נפרד מהתכנית שלכם.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div><span>♥</span> קיץ 2026 · וינה ובודפשט · טיול משפחתי</div>
-  <div style="margin-top:10px; opacity: 0.5; font-size: 13px;">נבנה עבור משפחת כהן: אבי, אלינור, אלמה ואליאנה</div>
-</footer>
-
-<script>
-// Progress Bar
-const pb=document.getElementById('pb');
-window.addEventListener('scroll',()=>{
-  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  pb.style.height = scrolled + '%';
-},{passive:true});
-
-// Intersection Observer
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-},{threshold: 0.15});
-document.querySelectorAll('.reveal').forEach((el)=>{obs.observe(el);});
-
-// Weather
-async function fetchWeather() {
-  try {
-    const resV = await fetch('https://api.open-meteo.com/v1/forecast?latitude=48.2082&longitude=16.3738&current_weather=true');
-    const dataV = await resV.json();
-    document.querySelector('#weather-vienna span').innerText = `וינה: ${Math.round(dataV.current_weather.temperature)}°C`;
-    const resB = await fetch('https://api.open-meteo.com/v1/forecast?latitude=47.4979&longitude=19.0402&current_weather=true');
-    const dataB = await resB.json();
-    document.querySelector('#weather-budapest span').innerText = `בודפשט: ${Math.round(dataB.current_weather.temperature)}°C`;
-  } catch(e) { console.log("Weather error"); }
-}
-fetchWeather();
-
-// Active Nav
-const sections = document.querySelectorAll('section[id], header[id], div[id].xfer-wrap');
-const navLinks = document.querySelectorAll('.nav-links a');
-const tsLinks = document.querySelectorAll('.tstrip-in a');
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  const yOffset = window.scrollY + 100; 
-  sections.forEach(section => { if (yOffset >= section.offsetTop) current = section.id; });
-
-  let currentDay = '';
-  document.querySelectorAll('.card[id]').forEach(dayCard => {
-     if (yOffset >= dayCard.offsetTop) currentDay = dayCard.id;
-  });
-
-  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
-  tsLinks.forEach(a => {
-      const href = a.getAttribute('href');
-      a.classList.toggle('active_sec', href === '#' + current || (currentDay && href === '#' + currentDay));
-  });
-},{passive:true});
-</script>
-</body>
-</html>
+        <div class="
