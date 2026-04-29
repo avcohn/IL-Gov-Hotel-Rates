@@ -3,286 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>קיץ 2026 | וינה ובודפשט | משפחת X</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-
+<title>קיץ 2026 | וינה ובודפשט</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --primary: #1a365d; 
-  --accent: #d4a373; 
-  --accent-light: #fefae0;
-  --text-main: #2d3748;
-  --text-muted: #718096;
-  --bg-light: #f7fafc;
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --transition: all 0.3s ease;
+:root{
+  --navy:#0f2240;--navy-mid:#1a3a6b;--gold:#c8963c;--gold-pale:#fdf8ee;
+  --text:#1e2a3a;--muted:#5a6a7e;--border:#e4e9f0;--white:#fff;--bg:#f4f6fa;--bg-b:#fdf0f2;
+  --cv:#1a3a6b;--cb:#8b1a2e;--r:16px;--rl:24px;
 }
-
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  font-family: 'Heebo', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-main);
-  line-height: 1.6;
-  overflow-x: hidden;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
+#pb{position:fixed;top:0;right:0;width:3px;height:0%;background:var(--gold);z-index:9999}
+.nav{position:sticky;top:0;z-index:100;background:rgba(15,34,64,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(200,150,60,.2)}
+.nav-in{max-width:1120px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{color:var(--gold);font-weight:700;font-size:15px;letter-spacing:.5px;text-decoration:none}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:14px;font-weight:500;padding:6px 14px;border-radius:999px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.active{color:var(--navy);background:var(--gold)}
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;background:var(--navy)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,20,42,.45) 0%,rgba(8,20,42,.72) 55%,rgba(8,20,42,.97) 100%),url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat}
+.hero-in{position:relative;z-index:1;max-width:1120px;margin:auto;padding:80px 24px 100px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,150,60,.15);border:1px solid rgba(200,150,60,.4);color:var(--gold);padding:7px 18px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px;animation:fadeUp .6s ease both}
+h1{font-family:'Playfair Display',serif;font-size:clamp(54px,10vw,96px);font-weight:900;color:#fff;line-height:.95;letter-spacing:-2px;margin-bottom:22px;animation:fadeUp .6s .1s ease both}
+h1 span{color:var(--gold)}
+.hero-sub{font-size:20px;color:rgba(255,255,255,.82);font-weight:300;max-width:600px;margin:0 auto 38px;line-height:1.7;animation:fadeUp .6s .2s ease both}
+.hero-sub strong{color:#fff;font-weight:600}
+.flight-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:40px;animation:fadeUp .6s .3s ease both}
+.fchip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);color:#fff;padding:11px 18px;border-radius:14px;font-size:14px;font-weight:500;backdrop-filter:blur(4px)}
+.fchip strong{color:var(--gold);font-weight:700}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .4s ease both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;transition:all .25s;border:2px solid transparent}
+.btn-g{background:var(--gold);color:var(--navy)}.btn-g:hover{background:#daa84a;transform:translateY(-2px)}
+.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}.btn-o:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.tstrip{background:var(--navy);overflow-x:auto;scrollbar-width:none}
+.tstrip::-webkit-scrollbar{display:none}
+.tstrip-in{max-width:1120px;margin:auto;padding:0 20px;display:flex;border-top:1px solid rgba(255,255,255,.07)}
+.ts{flex:1;min-width:80px;padding:13px 8px;text-align:center;color:rgba(255,255,255,.4);font-size:12px;font-weight:500;border-top:3px solid transparent;margin-top:-1px;text-decoration:none;transition:color .2s}
+.ts:hover{color:rgba(255,255,255,.8)}
+.ts.v{border-top-color:#4a7fc1;color:rgba(255,255,255,.58)}
+.ts.tr{border-top-color:var(--gold);color:var(--gold)}
+.ts.b{border-top-color:#d4617a;color:rgba(255,255,255,.58)}
+.ts small{display:block;font-size:11px;opacity:.65;margin-top:2px}
+.wrap{max-width:1120px;margin:auto;padding:80px 24px}
+.sec-hdr{margin-bottom:46px}
+.clbl{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.clbl.v{background:#e8f0fc;color:var(--cv)}.clbl.b{background:#fce8ec;color:var(--cb)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);font-weight:900;color:var(--navy);line-height:1;letter-spacing:-1px;margin-bottom:12px}
+.sec-desc{font-size:18px;color:var(--muted);max-width:680px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+.card{background:#fff;border-radius:var(--rl);border:1px solid var(--border);overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-7px);box-shadow:0 22px 44px rgba(0,0,0,.11)}
+.cimg{height:270px;position:relative;overflow:hidden;background:linear-gradient(135deg,#dbeafe,#fde68a)}
+.cimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s,filter .55s}
+.card:hover .cimg img{transform:scale(1.07);filter:saturate(1.06)}
+.cov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,20,42,.6) 0%,transparent 55%);pointer-events:none}
+.dtag{position:absolute;top:15px;right:15px;background:#fff;color:var(--navy);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:800;line-height:1.2;box-shadow:0 2px 10px rgba(0,0,0,.15);z-index:2}
+.dtag small{display:block;font-weight:500;font-size:11px;color:var(--muted)}
+.cbody{padding:26px;flex-grow:1;display:flex;flex-direction:column}
+.cbody h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25}
+.cbody > p{font-size:15px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.acts{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.acts li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:var(--text);line-height:1.55}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dot.v{background:#4a7fc1}.dot.b{background:#d4617a}.dot.n{background:var(--gold)}
+.hl{margin-top:auto;padding:14px 16px;background:var(--gold-pale);border-right:3px solid var(--gold);border-radius:0 10px 10px 0;font-size:14px;font-weight:600;color:#7a5a1a;line-height:1.55}
+.map-block{margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
+.map-frame{width:100%;height:260px;border:0;border-radius:14px;display:block;background:#f1f5f9}
+.map-btn{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:11px 20px;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;font-size:14px;text-decoration:none;transition:all .25s}
+.map-btn:hover{background:var(--navy-mid);transform:translateX(-3px)}
+.xfer-wrap{background:linear-gradient(135deg,var(--navy-mid),var(--navy))}
+.xfer-in{max-width:1120px;margin:auto;padding:64px 24px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+.xfer-ico{width:88px;height:88px;background:rgba(200,150,60,.15);border:1px solid rgba(200,150,60,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+.xfer-in h2{font-family:'Playfair Display',serif;font-size:32px;color:#fff;margin-bottom:10px}
+.xfer-in p{font-size:17px;color:rgba(255,255,255,.75);line-height:1.75;max-width:680px}
+.xfer-in p strong{color:var(--gold)}
+.tips-wrap{background:var(--navy);padding:80px 0}
+.tips-in{max-width:1120px;margin:auto;padding:0 24px}
+.tips-in .sec-title{color:#fff}.tips-in .sec-desc{color:rgba(255,255,255,.62)}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.tip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--rl);padding:26px;transition:background .2s}
+.tip:hover{background:rgba(255,255,255,.09)}
+.tip-ico{font-size:26px;margin-bottom:12px;display:block}
+.tip h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+.tip p{font-size:14.5px;color:rgba(255,255,255,.6);line-height:1.65}
+footer{background:#080f1e;padding:38px 24px;text-align:center;color:rgba(255,255,255,.3);font-size:14px;line-height:1.9}
+footer span{color:var(--gold)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:860px){
+  .grid{grid-template-columns:1fr}.tips-grid{grid-template-columns:1fr 1fr}
+  .xfer-in{grid-template-columns:1fr;gap:18px}.nav-links a{font-size:12px;padding:5px 9px}
 }
-
-/* Nav */
-.main-nav {
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(5px);
-  padding: 10px 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  border-bottom: 1px solid #e2e8f0;
+@media(max-width:560px){
+  .nav-links{display:none}.cimg{height:210px}.cbody{padding:18px}
+  h1{letter-spacing:-1px}.tips-grid{grid-template-columns:1fr}.wrap{padding:56px 16px}
 }
-.nav-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  max-width: 1120px;
-  margin: auto;
-  padding: 0 15px;
+@media print{
+  .nav,#pb,.btns,.map-block,footer{display:none!important}
+  .hero{min-height:auto;height:240px}.card{break-inside:avoid;margin-bottom:14px}
 }
-.nav-link {
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 700;
-  font-size: 16px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  transition: var(--transition);
-}
-.nav-link:hover {
-  background-color: var(--primary);
-  color: white;
-}
+</style>
+</head>
+<body>
+<div id="pb"></div>
 
-.container { width: min(1120px, calc(100% - 30px)); margin: auto; }
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="nav-brand">✈ קיץ 2026</a>
+    <div class="nav-links">
+      <a href="#vienna">🇦🇹 וינה</a>
+      <a href="#transfer">🚄 מעבר</a>
+      <a href="#budapest">🇭🇺 בודפשט</a>
+      <a href="#tips">💡 טיפים</a>
+    </div>
+  </div>
+</nav>
 
-/* Hero */
-.hero {
-  min-height: 80vh; 
-  background:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
-    url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80");
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-.hero .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-h1 { font-size: clamp(48px, 8vw, 86px); margin: 10px 0 20px; line-height: 0.9; font-weight: 900; letter-spacing: -2px; }
-.subtitle { font-size: 22px; max-width: 700px; line-height: 1.6; font-weight: 300; opacity: 0.9; }
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div class="eyebrow">☀ קיץ 2026 · טיול משפחתי</div>
+    <h1>וינה &<br><span>בודפשט</span></h1>
+    <p class="hero-sub">20–27 באוגוסט 2026<br><strong>אבי, אלינור, אלמה ואליאנה</strong></p>
+    <div class="flight-row">
+      <div class="fchip">✈ <strong>20.8</strong> טיסה לוינה 06:20</div>
+      <div class="fchip">🚄 <strong>24.8</strong> רכבת לבודפשט 11:40</div>
+      <div class="fchip">✈ <strong>27.8</strong> חזרה מבודפשט 09:20</div>
+    </div>
+    <div class="btns">
+      <a class="btn btn-g" href="#vienna">🏔 גלו את וינה</a>
+      <a class="btn btn-o" href="#budapest">🏰 גלו את בודפשט</a>
+    </div>
+  </div>
+</header>
 
-.main-badge {
-  background-color: var(--accent);
-  color: var(--primary);
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
-}
+<div class="tstrip">
+  <div class="tstrip-in">
+    <a href="#vienna" class="ts v">יום 1<small>20.8</small></a>
+    <a href="#vienna" class="ts v">יום 2<small>21.8</small></a>
+    <a href="#vienna" class="ts v">יום 3<small>22.8</small></a>
+    <a href="#vienna" class="ts v">יום 4<small>23.8</small></a>
+    <a href="#transfer" class="ts tr">מעבר<small>24.8</small></a>
+    <a href="#budapest" class="ts b">יום 5<small>24.8</small></a>
+    <a href="#budapest" class="ts b">יום 6<small>25.8</small></a>
+    <a href="#budapest" class="ts b">יום 7<small>26.8</small></a>
+    <a href="#budapest" class="ts b">יום 8<small>27.8</small></a>
+  </div>
+</div>
 
-.flight-badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; justify-content: center; }
-.f-badge {
-  background: rgba(255,255,255,0.15);
-  padding: 12px 18px;
-  border-radius: 12px;
-  font-weight: 500;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  font-size: 15px;
-}
-.f-badge strong { font-weight: 800; color: var(--accent-light); }
+<!-- VIENNA -->
+<section id="vienna">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <div class="clbl v">🇦🇹 אוסטריה · 4 ימים</div>
+      <h2 class="sec-title">וינה הקלאסית</h2>
+      <p class="sec-desc">Demel, ZOOM, Naschmarkt וגן החיות של שנברון — ארבעה ימים בקצב מחושב.</p>
+    </div>
+    <div class="grid">
 
-.hero-actions { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 40px; }
-.hero-btn {
-  display: inline-block;
-  padding: 15px 30px;
-  border-radius: 999px;
-  background: white;
-  color: var(--primary);
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition);
-  font-size: 18px;
-}
-.hero-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
-.hero-btn.alt { background: transparent; color: white; border: 2px solid white; }
-.hero-btn.alt:hover { background: white; color: var(--primary); }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Demel_Wien_Kohlmarkt.jpg/1280px-Demel_Wien_Kohlmarkt.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=900&q=80'" alt="Demel Vienna" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 1<small>20 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>נחיתה, מרכז העיר ו-Demel</h3>
+          <p>יום פתיחה רגוע אחרי טיסה מוקדמת — סיבוב היכרות ועצירה מתוקה.</p>
+          <ul class="acts">
+            <li><span class="dot v"></span>נחיתה · הגעה למלון / השארת מזוודות</li>
+            <li><span class="dot v"></span>מנוחה קלה והתרעננות</li>
+            <li><span class="dot v"></span>סיור רגלי ב-Stephansplatz ורחוב Graben</li>
+            <li><span class="dot v"></span>עצירת חובה לקפה ועוגה ב-Demel</li>
+          </ul>
+          <div class="hl">🍰 פתיחה וינאית קלאסית עם קפה, עוגות ואווירה</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Stephansplatz+Vienna&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=Stephansplatz+Vienna&destination=Demel+Vienna&travelmode=walking&waypoints=Graben+Vienna">
+              🗺 ניווט מסלול יום 1
+            </a>
+          </div>
+        </div>
+      </div>
 
-section { padding: 80px 0; }
-h2 { font-size: 48px; margin: 0 0 15px; font-weight: 900; color: var(--primary); letter-spacing: -1px; }
-.desc { color: var(--text-muted); font-size: 20px; line-height: 1.6; max-width: 800px; margin-bottom: 50px; }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Wiener_Riesenrad_2017.jpg" alt="Prater Vienna Ferris Wheel" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 2<small>21 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>מוזיאון ZOOM + פראטר</h3>
+          <p>בוקר אינטראקטיבי למשפחה כולה, וערב של אדרנלין בפארק האגדי.</p>
+          <ul class="acts">
+            <li><span class="dot v"></span>ZOOM Children's Museum · לסגור סלוט מראש!</li>
+            <li><span class="dot v"></span>צהריים נינוחים ב-MuseumsQuartier</li>
+            <li><span class="dot v"></span>מנוחת צהריים חיונית במלון</li>
+            <li><span class="dot v"></span>אחה"צ וערב: פראטר + גלגל הענק ההיסטורי</li>
+          </ul>
+          <div class="hl">🎡 שילוב מושלם: למידה חוויתית בבוקר, כיף טהור בערב</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Prater+Vienna&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=ZOOM+Kindermuseum+Vienna&destination=Prater+Vienna&travelmode=transit">
+              🗺 ניווט יום 2: ZOOM → פראטר
+            </a>
+          </div>
+        </div>
+      </div>
 
-.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Naschmarkt_Wien.jpg" alt="Naschmarkt Vienna Farmers Market" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 3<small>22 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>Naschmarkt + וינה האימפריאלית</h3>
+          <p>שוק תוסס בבוקר ולאחריו האופרה, Hofburg ו-Graben.</p>
+          <ul class="acts">
+            <li><span class="dot v"></span>בוקר: Naschmarkt + שוק פשפשים</li>
+            <li><span class="dot v"></span>הליכה לכיוון בית האופרה</li>
+            <li><span class="dot v"></span>מתחם Hofburg וחצרותיו</li>
+            <li><span class="dot v"></span>סיום בגלידה / קפה ב-Graben</li>
+          </ul>
+          <div class="hl">🛍 טעמים מקומיים + האלגנטיות של ארמונות הקיסר</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Naschmarkt+Vienna&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=Naschmarkt+Vienna&destination=Hofburg+Vienna&travelmode=walking&waypoints=Vienna+State+Opera">
+              🗺 ניווט יום 3: Naschmarkt → Hofburg
+            </a>
+          </div>
+        </div>
+      </div>
 
-/* Cards */
-.card {
-  background: white;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #edf2f7;
-}
-.card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg/1280px-Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=80'" alt="Tiergarten Schonbrunn" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 4<small>23 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>גן חיות שנברון + גנים מלכותיים</h3>
+          <p>גן החיות העתיק בעולם ולאחריו הגנים המלכותיים ותצפית מהגלורייט.</p>
+          <ul class="acts">
+            <li><span class="dot v"></span>יציאה מוקדמת ל-Tiergarten Schönbrunn</li>
+            <li><span class="dot v"></span>סיור בין המתחמים בקצב רגוע</li>
+            <li><span class="dot v"></span>צהריים קליל בתוך המתחם</li>
+            <li><span class="dot v"></span>טיול בגנים ותצפית מהגלורייט</li>
+          </ul>
+          <div class="hl">🦁 גן חיות ייחודי על רקע ארמון קיסרי</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Tiergarten+Schonbrunn+Vienna&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&destination=Tiergarten+Schonbrunn&travelmode=transit">
+              🗺 ניווט ל-Tiergarten Schönbrunn
+            </a>
+          </div>
+        </div>
+      </div>
 
-.img-wrapper { height: 280px; position: relative; overflow: hidden; }
-.img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-.card:hover .img-wrapper img { transform: scale(1.05); }
+    </div>
+  </div>
+</section>
 
-.day-tag {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: var(--primary);
-  color: white;
-  padding: 10px 18px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 16px;
-  z-index: 2;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+<!-- TRANSFER -->
+<div id="transfer" class="xfer-wrap">
+  <div class="xfer-in">
+    <div class="xfer-ico">🚄</div>
+    <div class="reveal">
+      <h2>יום המעבר לבודפשט</h2>
+      <p><strong>24 באוגוסט, 11:40</strong> — נפרדים מוינה ועולים על הרכבת. נסיעה נוחה של כשעתיים וחצי. הגעה לבודפשט, צ'ק-אין במלון סביב 16:00, והתארגנות לסיבוב ערב ראשון על הדנובה.</p>
+    </div>
+  </div>
+</div>
 
-.card-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-h3 { margin: 0 0 15px; font-size: 28px; font-weight: 800; line-height: 1.2; color: var(--primary); }
+<!-- BUDAPEST -->
+<section id="budapest" style="background:var(--bg-b)">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <div class="clbl b">🇭🇺 הונגריה · 3 ימים</div>
+      <h2 class="sec-title">בודפשט התוססת</h2>
+      <p class="sec-desc">דנובה מוארת, Arena Mall, EZRaider, מצודת הדייגים והרובע היהודי.</p>
+    </div>
+    <div class="grid">
 
-.city-badge {
-  display: inline-block;
-  background: var(--accent-light);
-  color: #976738;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 15px;
-  align-self: flex-start;
-}
-.card-text { color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; font-size: 16px; }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=900&q=80" alt="Budapest Danube" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 5<small>24 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>הגעה + ערב ראשון על הדנובה</h3>
+          <p>אחרי הצ'ק-אין — סיבוב ערב רגוע ויפה לאורך הדנובה.</p>
+          <ul class="acts">
+            <li><span class="dot b"></span>יציאה מהמלון לטיילת הדנובה (Dunakorzó)</li>
+            <li><span class="dot b"></span>הליכה לכיוון גשר השלשלאות</li>
+            <li><span class="dot b"></span>כיכר Vörösmarty ורחוב Váci Street</li>
+            <li><span class="dot b"></span>חזרה למלון לסיום ערב נינוח</li>
+          </ul>
+          <div class="hl">🌉 בודפשט מוארת — כבר בערב הראשון</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Chain+Bridge+Budapest&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=Budapest+Marriott+Hotel&destination=Budapest+Marriott+Hotel&travelmode=walking&waypoints=Chain+Bridge+Budapest|Vorosmarty+Square+Budapest|Vaci+Street+Budapest">
+              🗺 ניווט מסלול ערב בודפשט
+            </a>
+          </div>
+        </div>
+      </div>
 
-.list { display: grid; gap: 12px; margin: 0 0 25px 0; padding: 0; }
-.item { display: flex; align-items: flex-start; gap: 12px; line-height: 1.6; color: var(--text-main); }
-.icon-dot {
-  width: 10px; height: 10px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  margin-top: 8px;
-  flex-shrink: 0;
-}
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Shopping Budapest" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 6<small>25 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>Arena Mall + Primark + EZRaider</h3>
+          <p>שופינג בבוקר, מנוחה בצהריים, ואקשן אמיתי בערב.</p>
+          <ul class="acts">
+            <li><span class="dot b"></span>10:00–13:30 · Arena Mall + Primark!</li>
+            <li><span class="dot b"></span>צהריים קליל בקניון</li>
+            <li><span class="dot b"></span>חזרה למלון · מנוחה</li>
+            <li><span class="dot b"></span>17:30–19:00 · סיור EZRaider · להזמין מראש</li>
+          </ul>
+          <div class="hl">🛴 שופינג בבוקר, אקשן בערב — הניגוד הכיפי</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Arena+Mall+Budapest&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=Arena+Mall+Budapest&destination=Budapest+city+center&travelmode=transit">
+              🗺 ניווט ל-Arena Mall
+            </a>
+          </div>
+        </div>
+      </div>
 
-.highlight-box {
-  background: #fdfaf0;
-  padding: 20px;
-  border-radius: 16px;
-  font-weight: 600;
-  color: #976738;
-  line-height: 1.6;
-  margin-top: auto; 
-  border-right: 4px solid var(--accent);
-}
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=900&q=80" alt="Buda Castle" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 7<small>26 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>בודה + הרובע היהודי + ערב מוקדם</h3>
+          <p>יום אחרון רגוע: בוקר בתצפיות בודה, אחה"צ ברובע היהודי — ואז חזרה לאריזות.</p>
+          <ul class="acts">
+            <li><span class="dot b"></span>בוקר: Fisherman's Bastion, Matthias Church, Buda Castle</li>
+            <li><span class="dot b"></span>צהריים + מנוחה קלה</li>
+            <li><span class="dot b"></span>אחה"צ: Dohány Street Synagogue + חצרות Gozsdu</li>
+            <li><span class="dot b"></span>19:30 חזרה למלון · אריזות + שינה מוקדמת</li>
+          </ul>
+          <div class="hl">✡ נופי גלויה מבודה + סיום תרבותי ברובע היהודי</div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps?q=Fisherman%27s+Bastion+Budapest&output=embed"></iframe>
+            <a class="map-btn" target="_blank"
+              href="https://www.google.com/maps/dir/?api=1&origin=Fishermans+Bastion+Budapest&destination=Dohany+Street+Synagogue+Budapest&travelmode=transit&waypoints=Buda+Castle">
+              🗺 ניווט יום 7: בודה → רובע יהודי
+            </a>
+          </div>
+        </div>
+      </div>
 
-/* Maps */
-.map-section { margin-top: 25px; padding-top: 25px; border-top: 1px solid #edf2f7; }
-.map-frame {
-  width: 100%;
-  height: 250px;
-  border: 0;
-  border-radius: 16px;
-  margin-bottom: 15px;
-  background-color: #f1f5f9; 
-}
-.map-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: var(--primary);
-  color: white;
-  font-weight: 700;
-  text-decoration: none;
-  transition: var(--transition);
-  font-size: 15px;
-}
-.map-btn:hover { background: #2a5288; transform: translateX(-5px); }
+      <div class="card reveal">
+        <div class="cimg">
+          <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80" alt="Airport" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 8<small>27 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>חוזרים הביתה</h3>
+          <p>טיסה ב-09:20. השכמה מוקדמת, צ'ק-אאוט ונסיעה לשדה התעופה.</p>
+          <ul class="acts">
+            <li><span class="dot n"></span>השכמה מוקדמת + ארוחת בוקר קלה</li>
+            <li><span class="dot n"></span>צ'ק-אאוט ואיסוף המזוודות</li>
+            <li><span class="dot n"></span>נסיעה לשדה Budapest Ferenc Liszt</li>
+          </ul>
+          <div class="hl">✈ סוף נקי ורגוע — עד הטיול הבא!</div>
+        </div>
+      </div>
 
-/* Transfer */
-.transfer-banner {
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-  color: white;
-  border-radius: 24px;
-  padding: 50px;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-.transfer-banner h2 { color: white; margin: 0 0 10px 0; font-size: 36px; }
-.transfer-banner p { margin: 0; font-size: 18px; opacity: 0.9; line-height: 1.7; }
-.transfer-icon { font-size: 60px; }
+    </div>
+  </div>
+</section>
 
-/* Tips */
-.tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
-.tip-card {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  border: 1px solid #edf2f7;
-}
-.tip-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-.tip-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--primary); }
-.tip-card p { color: var(--text-muted); margin: 0; font-size: 16px; }
+<!-- TIPS -->
+<section id="tips">
+  <div class="tips-wrap">
+    <div class="tips-in">
+      <div class="sec-hdr reveal">
+        <h2 class="sec-title">💡 טיפים לטיול מושלם</h2>
+        <p class="sec-desc">כמה עקרונות פשוטים שהופכים טיול משפחתי לחוויה של כולם.</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip reveal"><span class="tip-ico">🎒</span><h3>קצב מחושב</h3><p>לא לדחוס. בוקר חוויתי, מנוחה בצהריים, ערב נעים — כך כולם מגיעים לסיום מחויכים.</p></div>
+        <div class="tip reveal"><span class="tip-ico">🚄</span><h3>יום המעבר = יום מנוחה</h3><p>ב-24.8 להתמקד רק בנסיעה ובסיבוב ערב נינוח. אין צורך בפעילויות גדולות.</p></div>
+        <div class="tip reveal"><span class="tip-ico">🧳</span><h3>ערב אחרון חכם</h3><p>ב-26.8 חזרה מוקדמת — אריזה נינוחה ושינה טובה יהפכו את בוקר הטיסה להרבה יותר נעים.</p></div>
+        <div class="tip reveal"><span class="tip-ico">📍</span><h3>ZOOM — להזמין מראש</h3><p>מאוד פופולרי בקיץ. כדאי לסגור סלוט מוקדם ככל האפשר.</p></div>
+        <div class="tip reveal"><span class="tip-ico">🛴</span><h3>EZRaider — גם כן מראש</h3><p>הזמינו מקומות לסיור מבעוד מועד — במיוחד לקבוצות.</p></div>
+        <div class="tip reveal"><span class="tip-ico">🌡</span><h3>חום אוגוסט</h3><p>מים, כובעים ומנוחת הצהריים במזגן הם לא בונוס — הם חלק מהתכנית.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-footer {
-  text-align: center;
-  padding: 50px;
-  color: var(--text-muted);
-  background-color: white;
-  border-top: 1px solid #edf2f7;
-  margin-top: 50px;
-  font-weight: 500;
-}
+<footer>
+  <div><span>♥</span> Summer 2026 · Vienna & Budapest · Family Escape</div>
+  <div style="margin-top:6px;opacity:.45;font-size:12px">נבנה באהבה עבור אבי, אלינור, אלמה ואליאנה</div>
+</footer>
 
-/* Responsive */
-@media(max-width: 900px) {
-  .grid, .tips-grid { grid-template-columns: 1fr; }
-  h2 { font-size: 36px; }
-  .hero { min-height: 70vh; }
-  .transfer-banner { flex-direction: column; text-align: center; padding: 30px; }
-  .nav-link { padding: 8px 10px; font-size: 14px; }
-}
+<script>
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{
+  pb.style.height=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';
+},{passive:true});
 
-@media(max-width: 600px) {
-  h1 { font-size: 40px; }
-  .subtitle { font-size: 18px; }
-  .card-content { padding: 20px; }
-  .img-wrapper { height: 200px; }
-  .nav-container { gap: 5px; flex-wrap: wrap; }
-}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  const sib=el.parentElement.querySelectorAll('.reveal');
+  if(sib.length>1) el.style.transitionDelay=([...sib].indexOf(el)%2)*0.1+'s';
+  obs.observe(el);
+});
 
-/* Print */
-@media print {
-  .main-nav,
+const secs=document.querySelectorAll('section[id],div[id]');
+const lnks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id;});
+  lnks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>
