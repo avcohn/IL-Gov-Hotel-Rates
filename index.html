@@ -3,216 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>קיץ 2026 | וינה ובודפשט</title>
-
-<!-- ✅ פונט פרימיום -->
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:wght@500;700;900&display=swap" rel="stylesheet">
-
+<title>קיץ 2026 | וינה ובודפשט - מסלול משפחתי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-body{
-margin:0;
-font-family:'Assistant',Arial,sans-serif;
-background:
-radial-gradient(circle at top right, rgba(95,127,255,.20), transparent 24%),
-radial-gradient(circle at top left, rgba(245,196,81,.18), transparent 20%),
-linear-gradient(180deg,#eef3ff 0%,#f7f9fc 45%,#f5f7fb 100%);
-color:#172033;
+:root{
+  --navy:#0f2240;--navy-mid:#1a3a6b;--navy-light:#2a4d85;--gold:#c8963c;--gold-light:#e2b057;--gold-pale:#fdf8ee;
+  --text:#1e2a3a;--muted:#5a6a7e;--border:#e1e8f0;--white:#fff;--bg:#f8fafc;--bg-b:#fef2f4;
+  --cv:#4a7fc1;--cb:#d4617a;--r:16px;--rl:24px;--transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:60px;font-size:16px}
+body{font-family:'Assistant',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-h1,h2,h3{
-font-family:'Playfair Display',serif;
-letter-spacing:-0.5px;
+/* Progress Bar */
+#pb{position:fixed;top:0;right:0;width:4px;height:0%;background:linear-gradient(to bottom, var(--gold-light), var(--gold));z-index:9999;border-radius:0 0 2px 2px}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(15,34,64,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,150,60,.15);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.nav-in{max-width:1200px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{color:var(--gold);font-weight:800;font-size:17px;letter-spacing:.5px;text-decoration:none;display:flex;align-items:center;gap:6px}
+.nav-links{display:flex;gap:6px}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:14.5px;font-weight:600;padding:8px 16px;border-radius:999px;transition:var(--transition)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-links a.active{color:var(--navy);background:var(--gold);box-shadow:inset 0 2px 4px rgba(0,0,0,0.1)}
+
+/* Hero */
+.hero{position:relative;min-height:95vh;display:flex;align-items:center;background:var(--navy);overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,20,42,.3) 0%,rgba(8,20,42,.7) 50%,rgba(8,20,42,.98) 100%),url('https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;transform:scale(1.03);animation:heroZoom 20s infinite alternate}
+@keyframes heroZoom {from{transform:scale(1.03)}to{transform:scale(1.1)}}
+.hero-in{position:relative;z-index:1;max-width:1120px;margin:auto;padding:100px 24px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,150,60,.12);border:1px solid rgba(200,150,60,.3);color:var(--gold-light);padding:8px 20px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px;box-shadow:0 2px 10px rgba(0,0,0,0.2)}
+h1{font-family:'Playfair Display',serif;font-size:clamp(58px,11vw,100px);font-weight:900;color:#fff;line-height:.9;letter-spacing:-3px;margin-bottom:24px;text-shadow:0 4px 12px rgba(0,0,0,0.3)}
+h1 span{color:var(--gold);position:relative;display:inline-block}
+h1 span::after{content:'';position:absolute;bottom:10px;right:0;width:100%;height:4px;background:var(--gold);border-radius:2px;opacity:0.6}
+.hero-sub{font-size:22px;color:rgba(255,255,255,.85);font-weight:300;max-width:650px;margin:0 auto 40px;line-height:1.6}
+.hero-sub strong{color:#fff;font-weight:700}
+.flight-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:48px}
+.fchip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;padding:12px 20px;border-radius:14px;font-size:14.5px;font-weight:500;backdrop-filter:blur(5px);box-shadow:0 4px 6px rgba(0,0,0,0.1);transition:var(--transition)}
+.fchip:hover{border-color:var(--gold);transform:translateY(-2px)}
+.fchip strong{color:var(--gold-light);font-weight:700}
+.btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none;transition:var(--transition);border:2px solid transparent;box-shadow:0 4px 15px rgba(0,0,0,0.2)}
+.btn-g{background:var(--gold);color:var(--navy)}.btn-g:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 6px 20px rgba(200,150,60,0.4)}
+.btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}.btn-o:hover{background:rgba(255,255,255,.08);border-color:#fff;transform:translateY(-3px)}
+
+/* Time Strip */
+.tstrip{background:var(--navy);overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.05)}
+.tstrip::-webkit-scrollbar{display:none}
+.tstrip-in{max-width:1200px;margin:auto;padding:0 20px;display:flex;position:relative}
+.ts{flex:1;min-width:90px;padding:16px 10px;text-align:center;color:rgba(255,255,255,.45);font-size:12.5px;font-weight:600;border-top:3px solid transparent;margin-top:-1px;text-decoration:none;transition:var(--transition)}
+.ts:hover{color:#fff;background:rgba(255,255,255,.03)}
+.ts.v{border-top-color:rgba(74, 127, 193, 0.4)}
+.ts.v:hover, .ts.v.active_sec{border-top-color:var(--cv);color:#fff}
+.ts.tr{border-top-color:rgba(200, 150, 60, 0.4);color:rgba(200, 150, 60, 0.7)}
+.ts.tr:hover, .ts.tr.active_sec{border-top-color:var(--gold);color:var(--gold-light)}
+.ts.b{border-top-color:rgba(212, 97, 122, 0.4)}
+.ts.b:hover, .ts.b.active_sec{border-top-color:var(--cb);color:#fff}
+.ts small{display:block;font-size:11px;opacity:.7;margin-top:3px;font-weight:400}
+
+/* Main Content */
+.wrap{max-width:1200px;margin:auto;padding:90px 24px}
+.sec-hdr{margin-bottom:56px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.clbl{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;font-size:12.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;box-shadow:0 2px 5px rgba(0,0,0,0.05)}
+.clbl.v{background:#e8f0fc;color:var(--cv)}.clbl.b{background:#fce8ec;color:var(--cb)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,56px);font-weight:900;color:var(--navy);line-height:1.1;letter-spacing:-1.5px;margin-bottom:16px}
+.sec-desc{font-size:19px;color:var(--muted);max-width:700px;line-height:1.7;font-weight:300}
+
+/* Grid & Cards */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.card{background:#fff;border-radius:var(--rl);border:1px solid var(--border);overflow:hidden;transition:var(--transition);display:flex;flex-direction:column;box-shadow:0 4px 6px rgba(0,0,0,0.02)}
+.card:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(15,34,64,0.12);border-color:transparent}
+.cimg-w{position:relative;height:280px;overflow:hidden;background:#e2e8f0}
+.cimg-w img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)}
+.card:hover .cimg-w img{transform:scale(1.08)}
+.cov{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,34,64,0.7) 0%,rgba(15,34,64,0.2) 50%,transparent 100%);pointer-events:none}
+.dtag{position:absolute;top:20px;right:20px;background:var(--white);color:var(--navy);padding:10px 16px;border-radius:12px;font-size:13.5px;font-weight:800;line-height:1.2;box-shadow:0 4px 15px rgba(0,0,0,0.15);z-index:2;border:1px solid var(--border)}
+.dtag small{display:block;font-weight:500;font-size:11.5px;color:var(--muted);margin-top:1px}
+.cbody{padding:30px;flex-grow:1;display:flex;flex-direction:column}
+.cbody h3{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.2;letter-spacing:-0.5px}
+.cbody > p{font-size:15.5px;color:var(--muted);line-height:1.7;margin-bottom:22px;font-weight:400}
+.acts{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.acts li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px;position:relative}
+.dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:inherit;opacity:0.3}
+.dot.v{background:var(--cv)}.dot.b{background:var(--cb)}.dot.n{background:var(--gold)}
+.hl{margin-top:auto;padding:16px 20px;background:var(--gold-pale);border-right:4px solid var(--gold);border-radius:8px 0 0 8px;font-size:14.5px;font-weight:600;color:#7a5a1a;line-height:1.5;display:flex;align-items:start;gap:10px}
+.hl-ico{margin-top:2px}
+
+/* Map Block */
+.map-block{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.map-frame{width:100%;height:250px;border:0;border-radius:14px;display:block;background:#f1f5f9;box-shadow:inset 0 2px 4px rgba(0,0,0,0.05)}
+.map-btn{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:12px 24px;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;font-size:14px;text-decoration:none;transition:var(--transition);box-shadow:0 3px 6px rgba(0,0,0,0.1)}
+.map-btn:hover{background:var(--navy-mid);transform:translateX(-4px);box-shadow:0 5px 12px rgba(0,0,0,0.15)}
+
+/* Transfer */
+.xfer-wrap{background:linear-gradient(135deg, #112951 0%, #080f1e 100%);position:relative;overflow:hidden}
+.xfer-wrap::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><g fill="%23fff" fill-opacity="0.03" fill-rule="evenodd"><circle cx="3" cy="3" r="3"/><circle cx="13" cy="13" r="3"/></g></svg>');opacity:0.5}
+.xfer-in{max-width:1120px;margin:auto;padding:80px 24px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;position:relative;z-index:1}
+.xfer-ico{width:100px;height:100px;background:rgba(200,150,60,.1);border:1px solid rgba(200,150,60,.25);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:48px;flex-shrink:0;box-shadow:0 8px 20px rgba(0,0,0,0.2);animation:trainShake 4s infinite ease-in-out}
+@keyframes trainShake {0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg) translateY(-2px)}75%{transform:rotate(3deg) translateY(2px)}}
+.xfer-info h2{font-family:'Playfair Display',serif;font-size:36px;color:#fff;margin-bottom:12px;letter-spacing:-1px}
+.xfer-info p{font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;max-width:720px;font-weight:300}
+.xfer-info p strong{color:var(--gold-light);font-weight:600}
+
+/* Tips */
+.tips-wrap{background:var(--navy);padding:100px 0;position:relative}
+.tips-wrap::before{content:'';position:absolute;top:0;left:0;width:100%;height:10px;background:linear-gradient(to right, var(--cv), var(--gold), var(--cb))}
+.tips-in{max-width:1200px;margin:auto;padding:0 24px}
+.tips-in .sec-title{color:#fff}.tips-in .sec-desc{color:rgba(255,255,255,.65)}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.tip{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:30px;transition:var(--transition);display:flex;flex-direction:column;gap:15px}
+.tip:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);transform:translateY(-5px)}
+.tip-top{display:flex;align-items:center;gap:14px}
+.tip-ico{font-size:28px;width:50px;height:50px;background:rgba(255,255,255,.06);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.tip h3{font-size:19px;font-weight:700;color:#fff;letter-spacing:-0.3px}
+.tip p{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;font-weight:400}
+
+/* Footer */
+footer{background:#060b14;padding:50px 24px;text-align:center;color:rgba(255,255,255,.35);font-size:14px;line-height:1.8;border-top:1px solid rgba(255,255,255,.03)}
+footer span{color:var(--gold-light);font-size:16px;margin:0 2px}
+footer .credits{margin-top:10px;opacity:.5;font-size:12.5px;font-weight:300}
+
+/* Animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Media Queries */
+@media(max-width:1000px){
+  .grid{gap:20px}.tips-grid{grid-template-columns:repeat(2,1fr)}
+  .cimg-w{height:220px}.cbody{padding:22px}
 }
-
-.container{width:min(1100px,calc(100% - 30px));margin:auto}
-
-/* HERO */
-.hero{
-min-height:88vh;
-background:
-linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.62)),
-url("https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1600&q=80");
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-color:white;
+@media(max-width:860px){
+  .grid{grid-template-columns:1fr}
+  .xfer-in{grid-template-columns:1fr;text-align:center;justify-items:center;gap:25px}
+  .nav-links a{font-size:13px;padding:7px 12px}
+  .ts{min-width:75px;font-size:11.5px;padding:14px 6px}
 }
-
-h1{font-size:clamp(40px,7vw,75px);margin:0 0 15px;line-height:.95;font-weight:800}
-.subtitle{font-size:20px;max-width:760px;line-height:1.7}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.badge{background:rgba(255,255,255,.20);padding:10px 14px;border-radius:999px;font-weight:700}
-
-section{padding:60px 0}
-h2{font-size:38px;margin:0 0 12px}
-.desc{color:#60708c;font-size:18px;line-height:1.7;margin-bottom:28px}
-
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-
-.card{
-background:white;
-border-radius:24px;
-overflow:hidden;
-box-shadow:0 14px 34px rgba(20,30,55,.13);
-transition:.35s ease;
+@media(max-width:600px){
+  html{font-size:15px}
+  .nav-in{padding:0 15px} .nav-brand{font-size:15px} .nav-links{gap:2px} .nav-links a{padding:6px 9px; font-size:12px}
+  .eyebrow{padding:6px 16px; font-size:12px}
+  h1{letter-spacing:-1.5px}
+  .flight-row{gap:8px}.fchip{padding:10px 16px; font-size:13px; border-radius:10px}
+  .btns{gap:10px}.btn{padding:14px 24px; font-size:15px}
+  .wrap{padding:60px 16px}
+  .ts{min-width:65px; font-size:11px}
+  .tips-grid{grid-template-columns:1fr; gap:16px}
 }
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 22px 46px rgba(20,30,55,.20);
+@media(max-width:480px){
+  .nav-links{display:none} /* Hide nav links on very small screens for UX */
+  .nav-in{justify-content:center}
+  .cimg-w{height:190px}
 }
-
-.img{
-height:270px;
-position:relative;
-overflow:hidden;
-}
-
-.img img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-transition:transform .6s ease;
-}
-
-.card:hover img{transform:scale(1.08)}
-
-.tag{
-position:absolute;
-top:15px;
-right:15px;
-background:white;
-padding:8px 14px;
-border-radius:999px;
-font-weight:800;
-}
-
-.content{padding:22px}
-
-.city{
-display:inline-block;
-background:#eef2ff;
-color:#2750d8;
-padding:6px 12px;
-border-radius:999px;
-font-weight:800;
-margin-bottom:10px;
-}
-
-.highlight{
-background:#ecfdf3;
-padding:13px;
-border-radius:14px;
-font-weight:700;
-}
-
-.map-frame{
-width:100%;
-height:300px;
-border:0;
-border-radius:16px;
-margin-top:15px;
-}
-
-.map-btn{
-display:inline-block;
-margin-top:10px;
-padding:12px 18px;
-border-radius:999px;
-background:linear-gradient(135deg,#3b82f6,#06b6d4);
-color:white;
-text-decoration:none;
-font-weight:700;
-}
-
-footer{text-align:center;padding:35px;color:#60708c}
-
-@media(max-width:850px){
-.grid{grid-template-columns:1fr}
-.img{height:230px}
+@media print{
+  .nav,#pb,.btns,.map-block,footer,.tstrip{display:none!important}
+  .hero{min-height:auto;height:250px;background:#fff;color:var(--navy)}
+  .hero-bg{display:none} .hero-in, h1, .hero-sub, .fchip{color:var(--navy)!important; text-shadow:none!important}
+  .card{break-inside:avoid;margin-bottom:20px;border:1px solid #ccc!important;box-shadow:none!important}
+  body{background:#fff} .wrap{padding:20px 0}
 }
 </style>
 </head>
-
 <body>
+<div id="pb"></div>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="nav-brand"><span>✈</span> קיץ 2026</a>
+    <div class="nav-links">
+      <a href="#vienna">🇦🇹 וינה</a>
+      <a href="#transfer">🚄 מעבר</a>
+      <a href="#budapest">🇭🇺 בודפשט</a>
+      <a href="#tips">💡 טיפים</a>
+    </div>
+  </div>
+</nav>
 
 <header class="hero">
-<div class="container">
-<h1>וינה & בודפשט</h1>
-<div class="subtitle">
-טיול משפחתי קיץ 2026 · אבי, אלינור, אלמה ואליאנה
-</div>
-</div>
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div class="eyebrow reveal">☀ קיץ 2026 · טיול משפחתי</div>
+    <h1 class="reveal">וינה & <span>בודפשט</span></h1>
+    <p class="hero-sub reveal"><strong>20–27 באוגוסט 2026</strong><br>אבי, אלינור, אלמה ואליאנה</p>
+    <div class="flight-row reveal">
+      <div class="fchip">✈ <strong>20.8</strong> טיסה לוינה 06:20</div>
+      <div class="fchip">🚄 <strong>24.8</strong> רכבת לבודפשט 11:40</div>
+      <div class="fchip">✈ <strong>27.8</strong> חזרה מבודפשט 09:20</div>
+    </div>
+    <div class="btns reveal">
+      <a class="btn btn-g" href="#vienna">🏔 גלו את וינה</a>
+      <a class="btn btn-o" href="#budapest">🏰 גלו את בודפשט</a>
+    </div>
+  </div>
 </header>
 
-<section>
-<div class="container">
-<h2>🇦🇹 וינה</h2>
-
-<div class="grid">
-
-<div class="card">
-<div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Demel_Wien_Kohlmarkt.jpg"
-onerror="this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1400&q=80'">
-<div class="tag">יום 1</div>
-</div>
-<div class="content">
-<h3>Demel + מרכז העיר</h3>
-<div class="highlight">פתיחה רגועה ומתוקה</div>
-
-<a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=Stephansplatz+Vienna&destination=Stephansplatz+Vienna&travelmode=walking&waypoints=Graben+Vienna|Demel+Vienna" target="_blank">ניווט</a>
-
-<iframe class="map-frame" src="https://www.google.com/maps?q=Stephansplatz+Vienna+to+Demel+Vienna&output=embed"></iframe>
-
-</div>
+<div class="tstrip">
+  <div class="tstrip-in">
+    <a href="#vienna" class="ts v active_sec">יום 1<small>20.8</small></a>
+    <a href="#day2" class="ts v">יום 2<small>21.8</small></a>
+    <a href="#day3" class="ts v">יום 3<small>22.8</small></a>
+    <a href="#day4" class="ts v">יום 4<small>23.8</small></a>
+    <a href="#transfer" class="ts tr">מעבר<small>24.8</small></a>
+    <a href="#budapest" class="ts b">יום 5<small>24.8</small></a>
+    <a href="#day6" class="ts b">יום 6<small>25.8</small></a>
+    <a href="#day7" class="ts b">יום 7<small>26.8</small></a>
+    <a href="#day8" class="ts b">יום 8<small>27.8</small></a>
+  </div>
 </div>
 
-<div class="card">
-<div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Wiener_Riesenrad_2017.jpg"
-onerror="this.src='https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1400&q=80'">
-<div class="tag">יום 2</div>
-</div>
-<div class="content">
-<h3>ZOOM + פראטר</h3>
-</div>
-</div>
+<section id="vienna">
+  <div class="wrap">
+    <div class="sec-hdr reveal">
+      <div class="clbl v">🇦🇹 אוסטריה · 4 ימים</div>
+      <h2 class="sec-title">וינה הקלאסית</h2>
+      <p class="sec-desc">Demel, ZOOM, Naschmarkt וגן החיות של שנברון — ארבעה ימים בקצב מחושב.</p>
+    </div>
+    <div class="grid">
 
-<div class="card">
-<div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Naschmarkt_Wien.jpg"
-onerror="this.src='https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=1400&q=80'">
-<div class="tag">יום 3</div>
-</div>
-<div class="content">
-<h3>Naschmarkt</h3>
-</div>
-</div>
-
-<div class="card">
-<div class="img">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Tiergarten_Sch%C3%B6nbrunn_Eingang.jpg"
-onerror="this.src='https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1400&q=80'">
-<div class="tag">יום 4</div>
-</div>
-<div class="content">
-<h3>גן חיות ושנברון</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<footer>
-✨ Summer 2026 ✨
-</footer>
-
-</body>
-</html>
+      <div class="card reveal" id="day1">
+        <div class="cimg-w">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Demel_Wien_Kohlmarkt.jpg/1280px-Demel_Wien_Kohlmarkt.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=900&q=80'" alt="Demel Vienna" loading="lazy">
+          <div class="cov"></div>
+          <div class="dtag">יום 1<small>20 באוגוסט</small></div>
+        </div>
+        <div class="cbody">
+          <h3>נחיתה, מרכז העיר ו-Demel</h3>
+          <p>יום פתיחה רגוע אחרי טיסה מוקדמת — סיבוב היכרות ועצירה מתוקה בלב הוינאי.</p>
+          <ul class="acts">
+            <li><span class="dot v"></span>נחיתה · הגעה למלון / השארת מזוודות</li>
+            <li><span class="dot v"></span>מנוחה קלה והתרעננות חיונית</li>
+            <li><span class="dot v"></span>סיור רגלי ב-Stephansplatz ורחוב Graben</li>
+            <li><span class="dot v"></span>עצירת חובה לקפה ועוגה ב-Demel המפורסם</li>
+          </ul>
+          <div class="hl">
+            <span class="hl-ico">🍰</span>
+            <span>פתיחה וינאית קלאסית עם קפה משובח, עוגות מדהימות ואווירה אימפריאלית.</span>
+          </div>
+          <div class="map-block">
+            <iframe class="map-frame" loading="lazy" allowfullscreen
+              src="
