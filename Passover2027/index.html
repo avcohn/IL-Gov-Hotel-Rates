@@ -1,247 +1,375 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>פסח 2026 – וינה, זלצבורג, מינכן</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פסח 2026 – וינה, זלצבורג, מינכן</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ff7e5f;
+            --bg-color: #f4f7f6;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --radius: 20px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+        }
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Assistant', sans-serif;
-    background: #f5f7fa;
-    direction: rtl;
-}
+        body {
+            margin: 0;
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-header {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    padding: 60px 20px;
-}
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
 
-header h1 {
-    margin: 0;
-    font-size: 38px;
-}
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
 
-nav {
-    position: sticky;
-    top: 0;
-    background: white;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 999;
-}
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            font-weight: 400;
+        }
 
-nav a {
-    text-decoration: none;
-    color: #2a5298;
-    font-weight: 600;
-}
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            z-index: 999;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-}
+        nav::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
 
-.day {
-    background: white;
-    margin-bottom: 30px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
+        .nav-inner {
+            display: flex;
+            gap: 15px;
+            margin: 0 auto;
+        }
 
-.day:hover {
-    transform: translateY(-5px);
-}
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 30px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
 
-.day img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-}
+        nav a:hover, nav a:active {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
 
-.content {
-    padding: 20px;
-}
+        /* Layout Grid */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
-h2 {
-    margin-top: 0;
-}
+        /* Day Cards */
+        .day {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
 
-ul {
-    padding-right: 20px;
-}
+        .day:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
 
-.backTop {
-    display: block;
-    text-align: center;
-    margin: 40px auto;
-    padding: 12px 20px;
-    width: 200px;
-    background: #2a5298;
-    color: white;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-}
+        .img-wrapper {
+            position: relative;
+        }
 
-@media(max-width: 600px){
-    header h1 { font-size: 26px; }
-    .day img { height: 200px; }
-}
-</style>
+        .day img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .date-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.4);
+        }
+
+        .content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            margin: 0 0 15px 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+        }
+
+        ul {
+            padding-right: 20px;
+            margin: 0;
+            color: var(--text-light);
+            flex-grow: 1;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer / Back to top */
+        .footer-area {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .backTop {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .backTop:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Adjustments */
+        @media(max-width: 768px){
+            header h1 { font-size: 2.2rem; }
+            .container { margin: 20px auto; gap: 20px; }
+            nav { padding: 10px; }
+            .day img { height: 200px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<h1>פסח 2026 ✈️<br>וינה | זלצבורג | מינכן</h1>
-<p>טיול משפחתי – אלמה & אליאנה</p>
+    <h1>פסח 2026 ✈️</h1>
+    <p>וינה | זלצבורג והאגמים | מינכן<br>הטיול המשפחתי של אלמה ואליאנה</p>
 </header>
 
 <nav>
-<a href="#d1">20.4</a>
-<a href="#d2">21.4</a>
-<a href="#d3">22.4</a>
-<a href="#d4">23.4</a>
-<a href="#d5">24.4</a>
-<a href="#d6">25.4</a>
-<a href="#d7">26.4</a>
-<a href="#d8">27.4</a>
-<a href="#d9">28.4</a>
+    <div class="nav-inner">
+        <a href="#d1">20.4 וינה</a>
+        <a href="#d2">21.4 לאגמים</a>
+        <a href="#d3">22.4 זלצבורג</a>
+        <a href="#d4">23.4 שוקולד</a>
+        <a href="#d5">24.4 הלשטאט</a>
+        <a href="#d6">25.4 טבע</a>
+        <a href="#d7">26.4 למינכן</a>
+        <a href="#d8">27.4 מינכן</a>
+        <a href="#d9">28.4 סיום</a>
+    </div>
 </nav>
 
 <div class="container">
 
-<!-- DAY 1 -->
-<div class="day" id="d1">
-<img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da">
-<div class="content">
-<h2>20.4 – נחיתה בוינה</h2>
-<ul>
-<li>נחיתה והתארגנות</li>
-<li>צ'ק אין במלון ליד השדה</li>
-<li>ארוחה קלה והתאוששות</li>
-</ul>
-</div>
+    <div class="day" id="d1">
+        <div class="img-wrapper">
+            <span class="date-badge">20.4 | יום ב'</span>
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=600&q=80" alt="וינה" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>נחיתה בווינה 🇦🇹</h2>
+            <ul>
+                <li>נחיתה בשדה התעופה של וינה והתארגנות ברכב.</li>
+                <li>צ'ק אין במלון סמוך לשדה (נוח לטיסות ערב).</li>
+                <li>ארוחת ערב קלילה במסעדה מקומית והתאוששות.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d2">
+        <div class="img-wrapper">
+            <span class="date-badge">21.4 | יום ג'</span>
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80" alt="אגמים אוסטריה" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>הדרך לאזור האגמים 🚗</h2>
+            <ul>
+                <li>נסיעה מערבה אל נופי האלפים המדהימים.</li>
+                <li>עצירה בדרך להתרעננות (מומלץ במנזר מלק או באמסטטן).</li>
+                <li>הגעה למלון באזור האגמים (Wolfgangsee/Mondsee) ופרוק מזוודות.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d3">
+        <div class="img-wrapper">
+            <span class="date-badge">22.4 | יום ד'</span>
+            <img src="https://images.unsplash.com/photo-1549893075-7c8a9f62f0b5?auto=format&fit=crop&w=600&q=80" alt="זלצבורג" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>קסם בעיר זלצבורג 🥨</h2>
+            <ul>
+                <li>טיול בגני מיראבל המרהיבים.</li>
+                <li>שיטוט בעיר העתיקה, סמטאות ציוריות ושופינג.</li>
+                <li><strong>המלצה לילדות:</strong> ארמון הלברון (Hellbrunn) ומזרקות הפלא המשעשעות.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d4">
+        <div class="img-wrapper">
+            <span class="date-badge">23.4 | יום ה'</span>
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="שוקולד" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>שוקולד וחוויות 🍫</h2>
+            <ul>
+                <li>נסיעה למפעל השוקולד Loacker (לחלופין: מוזיאון הטבע המדהים בזלצבורג - Haus der Natur).</li>
+                <li>סדנת שוקולד וטעימות שילדים אוהבים.</li>
+                <li>קניות בחנות המפעל וזמן חופשי.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d5">
+        <div class="img-wrapper">
+            <span class="date-badge">24.4 | יום ו'</span>
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="הלשטאט" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>גלויות מהלשטאט 🛶</h2>
+            <ul>
+                <li>טיול בוקר בעיירה המפורסמת בעולם.</li>
+                <li>עלייה ברכבל לתצפית Skywalk או תצפית 5 האצבעות.</li>
+                <li>שייט רגוע באגם היפהפה בין ההרים.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d6">
+        <div class="img-wrapper">
+            <span class="date-badge">25.4 | שבת</span>
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80" alt="טבע משפחתי" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>טבע, אקשן ורוגע 🌲</h2>
+            <ul>
+                <li>פעילות כיפית: מגלשות הרים ב-Abtenau או ב-St. Gilgen.</li>
+                <li>פיקניק משפחתי על שפת אחד האגמים באזור.</li>
+                <li>חזרה מוקדמת למלון לקפיצה לבריכה ומנוחה.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d7">
+        <div class="img-wrapper">
+            <span class="date-badge">26.4 | יום א'</span>
+            <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=600&q=80" alt="רכבת למינכן" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>מעבר למינכן 🇩🇪</h2>
+            <ul>
+                <li>נסיעת רכבת נוחה (או רכב) מזלצבורג למינכן.</li>
+                <li>הגעה לעיר וצ'ק אין במלון החדש.</li>
+                <li>סיבוב ערב ראשון בעיר, אזור כיכר מריאנפלאץ (Marienplatz).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d8">
+        <div class="img-wrapper">
+            <span class="date-badge">27.4 | יום ב'</span>
+            <img src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=600&q=80" alt="חיות מינכן" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>אטרקציות במינכן 🐘</h2>
+            <ul>
+                <li>ביקור בגן החיות האקולוגי הלאברון (Hellabrunn).</li>
+                <li>הפארק האנגלי (Englischer Garten) - צפייה בגולשי הגלים בנהר.</li>
+                <li>ארוחת ערב באווירה בווארית קלאסית.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="day" id="d9">
+        <div class="img-wrapper">
+            <span class="date-badge">28.4 | יום ג'</span>
+            <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=600&q=80" alt="שופינג טיסה" loading="lazy">
+        </div>
+        <div class="content">
+            <h2>שופינג וסיום 🛍️</h2>
+            <ul>
+                <li>קניות במדרחוב המרכזי של מינכן (Kaufingerstraße).</li>
+                <li>עצירה אחרונה בבתי קפה ופינוקים מתוקים.</li>
+                <li>סגירת הטיול ונסיעה לשדה התעופה לטיסה חזרה הביתה.</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
-<!-- DAY 2 -->
-<div class="day" id="d2">
-<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
-<div class="content">
-<h2>21.4 – נסיעה לזלצבורג</h2>
-<ul>
-<li>עצירה ב-Amstetten לקפה והתרעננות</li>
-<li>נסיעה דרך נופים אלפיניים</li>
-<li>הגעה למלון ליד האגם</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 3 -->
-<div class="day" id="d3">
-<img src="https://images.unsplash.com/photo-1549893075-7c8a9f62f0b5">
-<div class="content">
-<h2>22.4 – זלצבורג</h2>
-<ul>
-<li>עיר עתיקה</li>
-<li>גני מיראבל</li>
-<li>שופינג קל וגלידות</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 4 -->
-<div class="day" id="d4">
-<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
-<div class="content">
-<h2>23.4 – מפעל Loacker</h2>
-<ul>
-<li>נסיעה להרים</li>
-<li>טעימות שוקולד 🍫</li>
-<li>חנות מפעל</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 5 -->
-<div class="day" id="d5">
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb">
-<div class="content">
-<h2>24.4 – הלשטאט</h2>
-<ul>
-<li>טיול בעיירה</li>
-<li>תצפית מרהיבה</li>
-<li>שייט באגם</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 6 -->
-<div class="day" id="d6">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-<div class="content">
-<h2>25.4 – יום טבע רגוע</h2>
-<ul>
-<li>טיול סביב האגם</li>
-<li>פיקניק משפחתי</li>
-<li>בריכה במלון</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 7 -->
-<div class="day" id="d7">
-<img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439">
-<div class="content">
-<h2>26.4 – מעבר למינכן</h2>
-<ul>
-<li>רכבת נוחה</li>
-<li>צ'ק אין במלון</li>
-<li>סיבוב ערב בעיר</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 8 -->
-<div class="day" id="d8">
-<img src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3">
-<div class="content">
-<h2>27.4 – מינכן</h2>
-<ul>
-<li>גן חיות 🐘</li>
-<li>גן אנגלי</li>
-<li>זמן משפחתי</li>
-</ul>
-</div>
-</div>
-
-<!-- DAY 9 -->
-<div class="day" id="d9">
-<img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba">
-<div class="content">
-<h2>28.4 – שופינג וסיום</h2>
-<ul>
-<li>קניות</li>
-<li>בתי קפה</li>
-<li>סגירת טיול רגועה</li>
-</ul>
-</div>
-</div>
-
-<a href="#" class="backTop">⬆ חזרה למעלה</a>
-
+<div class="footer-area">
+    <a href="#" class="backTop">⬆ חזרה למעלה</a>
 </div>
 
 </body>
